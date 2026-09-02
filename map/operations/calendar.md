@@ -1,0 +1,70 @@
+<!-- Generated file — do not edit; regenerated with the SDK. -->
+
+# Calendar — operations
+
+Accessor: `client.calendar` · Source: `src/resources/calendar.ts` · 3 operations · Request types: namespace `Calendar`
+
+**Type sources**: every type an operation names, with the file that declares it and the schema value exported beside it. Import every name from `finnhub-api`; the `Source` path is where to **read** the shape, never what to import. `ResponseError` and the runtime error family are excluded — see sdk-map.md.
+
+### earningsCalendar
+
+- **Signature**: `earningsCalendar(request: Calendar.EarningsCalendarRequest, options?: RequestOptions): ApiPromise<EarningsCalendar, ResponseError>`
+- **Wire**: `GET /calendar/earnings`
+- **Auth**: `apiKey`
+- **Request body**: none — no `Content-Type` header is sent
+- **Returns**: `EarningsCalendar`
+- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+
+**Fields** — `Calendar.EarningsCalendarRequest` (4):
+
+| Field | Channel | Type | Req |
+| --- | --- | --- | --- |
+| `from` | `query` | `string` (date) | no |
+| `to` | `query` | `string` (date) | no |
+| `symbol` | `query` | `string` | no |
+| `international` | `query` | `boolean` | no |
+
+| Type | Schema value | Source |
+| --- | --- | --- |
+| `EarningsCalendar` | `earningsCalendarSchema` | `src/models/earnings-calendar.ts` |
+
+### economicCalendar
+
+- **Signature**: `economicCalendar(request: Calendar.EconomicCalendarRequest, options?: RequestOptions): ApiPromise<EconomicCalendar, ResponseError>`
+- **Wire**: `GET /calendar/economic`
+- **Auth**: `apiKey`
+- **Request body**: none — no `Content-Type` header is sent
+- **Returns**: `EconomicCalendar`
+- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+
+**Fields** — `Calendar.EconomicCalendarRequest` (2):
+
+| Field | Channel | Type | Req |
+| --- | --- | --- | --- |
+| `from` | `query` | `string` (date) | no |
+| `to` | `query` | `string` (date) | no |
+
+| Type | Schema value | Source |
+| --- | --- | --- |
+| `EconomicCalendar` | `economicCalendarSchema` | `src/models/economic-calendar.ts` |
+
+### ipoCalendar
+
+- **Signature**: `ipoCalendar(request: Calendar.IpoCalendarRequest, options?: RequestOptions): ApiPromise<IpoCalendar, ResponseError>`
+- **Wire**: `GET /calendar/ipo`
+- **Auth**: `apiKey`
+- **Request body**: none — no `Content-Type` header is sent
+- **Returns**: `IpoCalendar`
+- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+
+**Fields** — `Calendar.IpoCalendarRequest` (2):
+
+| Field | Channel | Type | Req |
+| --- | --- | --- | --- |
+| `from` | `query` | `string` (date) | yes |
+| `to` | `query` | `string` (date) | yes |
+
+| Type | Schema value | Source |
+| --- | --- | --- |
+| `IpoCalendar` | `ipoCalendarSchema` | `src/models/ipo-calendar.ts` |
+
