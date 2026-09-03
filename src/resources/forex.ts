@@ -1,6 +1,9 @@
 import type { AuthSchemes } from "../auth-schemes.js";
-import type { ApiPromise, RawClient, RequestOptions } from "../core/index.js";
-import { ResponseError, s } from "../core/index.js";
+import type { ApiPromise } from "../core/api-promise.js";
+import type { RequestOptions } from "../core/api-request.js";
+import type { RawClient } from "../core/raw-client.js";
+import { ResponseError } from "../core/response-error.js";
+import * as s from "../core/validation/index.js";
 import { forexCandlesSchema, type ForexCandles } from "../models/forex-candles.js";
 import { forexSymbolSchema, type ForexSymbol } from "../models/forex-symbol.js";
 import { forexratesSchema, type Forexrates } from "../models/forexrates.js";

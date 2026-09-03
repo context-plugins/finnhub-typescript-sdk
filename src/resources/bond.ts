@@ -1,6 +1,9 @@
 import type { AuthSchemes } from "../auth-schemes.js";
-import type { ApiPromise, RawClient, RequestOptions } from "../core/index.js";
-import { ResponseError, s } from "../core/index.js";
+import type { ApiPromise } from "../core/api-promise.js";
+import type { RequestOptions } from "../core/api-request.js";
+import type { RawClient } from "../core/raw-client.js";
+import { ResponseError } from "../core/response-error.js";
+import * as s from "../core/validation/index.js";
 import { bondCandlesSchema, type BondCandles } from "../models/bond-candles.js";
 import { bondProfileSchema, type BondProfile } from "../models/bond-profile.js";
 import { bondTickDataSchema, type BondTickData } from "../models/bond-tick-data.js";

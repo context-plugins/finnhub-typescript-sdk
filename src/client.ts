@@ -1,6 +1,6 @@
 import { buildAuthSchemes, type AuthSchemes } from "./auth-schemes.js";
 import { DEFAULT_CLIENT_OPTIONS, type ClientOptions } from "./client-options.js";
-import { RawClient } from "./core/index.js";
+import { RawClient } from "./core/raw-client.js";
 import { Bond } from "./resources/bond.js";
 import { Calendar } from "./resources/calendar.js";
 import { CorporateActions } from "./resources/corporate-actions.js";

@@ -33,6 +33,8 @@
   "files": [
     "dist",
     "src",
+    "tsconfig.json",
+    "tsconfig.tshy.json",
     "README.md",
     "api-reference.md",
     "sdk-map.md",
@@ -43,6 +45,7 @@
     "node": ">=20"
   },
   "scripts": {
+    "prepare": "tshy",
     "build": "tshy",
     "smoke": "node -e \"require('finnhub-api')\" && node --input-type=module -e \"import('finnhub-api')\"",
     "typecheck": "tsc --noEmit",

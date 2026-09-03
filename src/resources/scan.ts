@@ -1,6 +1,9 @@
 import type { AuthSchemes } from "../auth-schemes.js";
-import type { ApiPromise, RawClient, RequestOptions } from "../core/index.js";
-import { ResponseError, s } from "../core/index.js";
+import type { ApiPromise } from "../core/api-promise.js";
+import type { RequestOptions } from "../core/api-request.js";
+import type { RawClient } from "../core/raw-client.js";
+import { ResponseError } from "../core/response-error.js";
+import * as s from "../core/validation/index.js";
 import { aggregateIndicatorsSchema, type AggregateIndicators } from "../models/aggregate-indicators.js";
 import { patternRecognitionSchema, type PatternRecognition } from "../models/pattern-recognition.js";
 import { supportResistanceSchema, type SupportResistance } from "../models/support-resistance.js";
