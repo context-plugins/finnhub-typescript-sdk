@@ -3,8 +3,11 @@ import type { Schema } from "../core/validation/schema.js";
 import { earningsEstimatesInfoSchema, type EarningsEstimatesInfo } from "./earnings-estimates-info.js";
 
 export type EarningsEstimates = {
+  /** List of estimates */
   data?: EarningsEstimatesInfo[];
+  /** Frequency: annual or quarterly. */
   freq?: string;
+  /** Company symbol. */
   symbol?: string;
 };
 

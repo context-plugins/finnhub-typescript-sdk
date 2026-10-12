@@ -3,7 +3,9 @@ import type { Schema } from "../core/validation/schema.js";
 import { usaSpendingSchema, type UsaSpending } from "./usa-spending.js";
 
 export type UsaSpendingResult = {
+  /** Symbol. */
   symbol?: string;
+  /** Array of government's spending data points. */
   data?: UsaSpending[];
 };
 

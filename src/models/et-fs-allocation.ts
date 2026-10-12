@@ -3,6 +3,7 @@ import type { Schema } from "../core/validation/schema.js";
 import { etfAllocationDataSchema, type EtfAllocationData } from "./etf-allocation-data.js";
 
 export type EtFsAllocation = {
+  /** ETF symbol. */
   symbol?: string;
   data?: EtfAllocationData;
 };

@@ -2,14 +2,23 @@ import * as s from "../core/validation/index.js";
 import type { Schema } from "../core/validation/schema.js";
 
 export type InternationalFiling = {
+  /** Symbol. */
   symbol?: string;
+  /** Company name. */
   companyName?: string;
+  /** Filed date <code>%Y-%m-%d %H:%M:%S</code>. */
   filedDate?: string;
+  /** Category. */
   category?: string;
+  /** Document's title. */
   title?: string;
+  /** Document's description. */
   description?: string;
+  /** Url. */
   url?: string;
+  /** Language. */
   language?: string;
+  /** Country. */
   country?: string;
 };
 

@@ -4,16 +4,16 @@
 
 Accessor: `client.stockEstimates` · Source: `src/resources/stock-estimates.ts` · 18 operations · Request types: namespace `StockEstimates`
 
-**Type sources**: every type an operation names, with the file that declares it and the schema value exported beside it. Import every name from `finnhub-api`; the `Source` path is where to **read** the shape, never what to import. `ResponseError` and the runtime error family are excluded — see sdk-map.md.
+**Type sources**: every type an operation names, with the file that declares it and the schema value exported beside it. Import every name from `finnhub-api`; the `Source` path is where to **read** the shape, never what to import. `ApiError`, the runtime error family and the file vocabulary are excluded — see sdk-map.md.
 
 ### companyCapexEstimates
 
-- **Signature**: `companyCapexEstimates(request: StockEstimates.CompanyCapexEstimatesRequest, options?: RequestOptions): ApiPromise<CapexEstimates, ResponseError>`
+- **Signature**: `companyCapexEstimates(request: StockEstimates.CompanyCapexEstimatesRequest, options?: RequestOptions): ApiPromise<CapexEstimates, ApiError>`
 - **Wire**: `GET /stock/capex-estimate`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `CapexEstimates`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockEstimates.CompanyCapexEstimatesRequest` (2):
 
@@ -28,12 +28,12 @@ Accessor: `client.stockEstimates` · Source: `src/resources/stock-estimates.ts` 
 
 ### companyDpsEstimates
 
-- **Signature**: `companyDpsEstimates(request: StockEstimates.CompanyDpsEstimatesRequest, options?: RequestOptions): ApiPromise<DpsEstimates, ResponseError>`
+- **Signature**: `companyDpsEstimates(request: StockEstimates.CompanyDpsEstimatesRequest, options?: RequestOptions): ApiPromise<DpsEstimates, ApiError>`
 - **Wire**: `GET /stock/dps-estimate`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `DpsEstimates`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockEstimates.CompanyDpsEstimatesRequest` (2):
 
@@ -48,12 +48,12 @@ Accessor: `client.stockEstimates` · Source: `src/resources/stock-estimates.ts` 
 
 ### companyEarnings
 
-- **Signature**: `companyEarnings(request: StockEstimates.CompanyEarningsRequest, options?: RequestOptions): ApiPromise<EarningResult[], ResponseError>`
+- **Signature**: `companyEarnings(request: StockEstimates.CompanyEarningsRequest, options?: RequestOptions): ApiPromise<EarningResult[], ApiError>`
 - **Wire**: `GET /stock/earnings`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `EarningResult[]` — a bare `application/json` array; the success type *is* the array, not a wrapper model
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockEstimates.CompanyEarningsRequest` (2):
 
@@ -68,12 +68,12 @@ Accessor: `client.stockEstimates` · Source: `src/resources/stock-estimates.ts` 
 
 ### companyEarningsQualityScore
 
-- **Signature**: `companyEarningsQualityScore(request: StockEstimates.CompanyEarningsQualityScoreRequest, options?: RequestOptions): ApiPromise<CompanyEarningsQualityScore, ResponseError>`
+- **Signature**: `companyEarningsQualityScore(request: StockEstimates.CompanyEarningsQualityScoreRequest, options?: RequestOptions): ApiPromise<CompanyEarningsQualityScore, ApiError>`
 - **Wire**: `GET /stock/earnings-quality-score`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `CompanyEarningsQualityScore`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockEstimates.CompanyEarningsQualityScoreRequest` (2):
 
@@ -88,12 +88,12 @@ Accessor: `client.stockEstimates` · Source: `src/resources/stock-estimates.ts` 
 
 ### companyEbitEstimates
 
-- **Signature**: `companyEbitEstimates(request: StockEstimates.CompanyEbitEstimatesRequest, options?: RequestOptions): ApiPromise<EbitEstimates, ResponseError>`
+- **Signature**: `companyEbitEstimates(request: StockEstimates.CompanyEbitEstimatesRequest, options?: RequestOptions): ApiPromise<EbitEstimates, ApiError>`
 - **Wire**: `GET /stock/ebit-estimate`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `EbitEstimates`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockEstimates.CompanyEbitEstimatesRequest` (2):
 
@@ -108,12 +108,12 @@ Accessor: `client.stockEstimates` · Source: `src/resources/stock-estimates.ts` 
 
 ### companyEbitdaEstimates
 
-- **Signature**: `companyEbitdaEstimates(request: StockEstimates.CompanyEbitdaEstimatesRequest, options?: RequestOptions): ApiPromise<EbitdaEstimates, ResponseError>`
+- **Signature**: `companyEbitdaEstimates(request: StockEstimates.CompanyEbitdaEstimatesRequest, options?: RequestOptions): ApiPromise<EbitdaEstimates, ApiError>`
 - **Wire**: `GET /stock/ebitda-estimate`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `EbitdaEstimates`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockEstimates.CompanyEbitdaEstimatesRequest` (2):
 
@@ -128,12 +128,12 @@ Accessor: `client.stockEstimates` · Source: `src/resources/stock-estimates.ts` 
 
 ### companyEpsEstimates
 
-- **Signature**: `companyEpsEstimates(request: StockEstimates.CompanyEpsEstimatesRequest, options?: RequestOptions): ApiPromise<EarningsEstimates, ResponseError>`
+- **Signature**: `companyEpsEstimates(request: StockEstimates.CompanyEpsEstimatesRequest, options?: RequestOptions): ApiPromise<EarningsEstimates, ApiError>`
 - **Wire**: `GET /stock/eps-estimate`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `EarningsEstimates`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockEstimates.CompanyEpsEstimatesRequest` (2):
 
@@ -148,12 +148,12 @@ Accessor: `client.stockEstimates` · Source: `src/resources/stock-estimates.ts` 
 
 ### companyFcfEstimates
 
-- **Signature**: `companyFcfEstimates(request: StockEstimates.CompanyFcfEstimatesRequest, options?: RequestOptions): ApiPromise<FcfEstimates, ResponseError>`
+- **Signature**: `companyFcfEstimates(request: StockEstimates.CompanyFcfEstimatesRequest, options?: RequestOptions): ApiPromise<FcfEstimates, ApiError>`
 - **Wire**: `GET /stock/fcf-estimate`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `FcfEstimates`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockEstimates.CompanyFcfEstimatesRequest` (2):
 
@@ -168,12 +168,12 @@ Accessor: `client.stockEstimates` · Source: `src/resources/stock-estimates.ts` 
 
 ### companyGrossIncomeEstimates
 
-- **Signature**: `companyGrossIncomeEstimates(request: StockEstimates.CompanyGrossIncomeEstimatesRequest, options?: RequestOptions): ApiPromise<GrossIncomeEstimates, ResponseError>`
+- **Signature**: `companyGrossIncomeEstimates(request: StockEstimates.CompanyGrossIncomeEstimatesRequest, options?: RequestOptions): ApiPromise<GrossIncomeEstimates, ApiError>`
 - **Wire**: `GET /stock/gross-income-estimate`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `GrossIncomeEstimates`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockEstimates.CompanyGrossIncomeEstimatesRequest` (2):
 
@@ -188,12 +188,12 @@ Accessor: `client.stockEstimates` · Source: `src/resources/stock-estimates.ts` 
 
 ### companyNetIncomeEstimates
 
-- **Signature**: `companyNetIncomeEstimates(request: StockEstimates.CompanyNetIncomeEstimatesRequest, options?: RequestOptions): ApiPromise<NetIncomeEstimates, ResponseError>`
+- **Signature**: `companyNetIncomeEstimates(request: StockEstimates.CompanyNetIncomeEstimatesRequest, options?: RequestOptions): ApiPromise<NetIncomeEstimates, ApiError>`
 - **Wire**: `GET /stock/net-income-estimate`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `NetIncomeEstimates`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockEstimates.CompanyNetIncomeEstimatesRequest` (2):
 
@@ -208,12 +208,12 @@ Accessor: `client.stockEstimates` · Source: `src/resources/stock-estimates.ts` 
 
 ### companyOcfEstimates
 
-- **Signature**: `companyOcfEstimates(request: StockEstimates.CompanyOcfEstimatesRequest, options?: RequestOptions): ApiPromise<OcfEstimates, ResponseError>`
+- **Signature**: `companyOcfEstimates(request: StockEstimates.CompanyOcfEstimatesRequest, options?: RequestOptions): ApiPromise<OcfEstimates, ApiError>`
 - **Wire**: `GET /stock/ocf-estimate`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `OcfEstimates`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockEstimates.CompanyOcfEstimatesRequest` (2):
 
@@ -228,12 +228,12 @@ Accessor: `client.stockEstimates` · Source: `src/resources/stock-estimates.ts` 
 
 ### companyPretaxIncomeEstimates
 
-- **Signature**: `companyPretaxIncomeEstimates(request: StockEstimates.CompanyPretaxIncomeEstimatesRequest, options?: RequestOptions): ApiPromise<PretaxIncomeEstimates, ResponseError>`
+- **Signature**: `companyPretaxIncomeEstimates(request: StockEstimates.CompanyPretaxIncomeEstimatesRequest, options?: RequestOptions): ApiPromise<PretaxIncomeEstimates, ApiError>`
 - **Wire**: `GET /stock/pretax-income-estimate`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `PretaxIncomeEstimates`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockEstimates.CompanyPretaxIncomeEstimatesRequest` (2):
 
@@ -248,12 +248,12 @@ Accessor: `client.stockEstimates` · Source: `src/resources/stock-estimates.ts` 
 
 ### companyRevenueEstimates
 
-- **Signature**: `companyRevenueEstimates(request: StockEstimates.CompanyRevenueEstimatesRequest, options?: RequestOptions): ApiPromise<RevenueEstimates, ResponseError>`
+- **Signature**: `companyRevenueEstimates(request: StockEstimates.CompanyRevenueEstimatesRequest, options?: RequestOptions): ApiPromise<RevenueEstimates, ApiError>`
 - **Wire**: `GET /stock/revenue-estimate`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `RevenueEstimates`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockEstimates.CompanyRevenueEstimatesRequest` (2):
 
@@ -268,12 +268,12 @@ Accessor: `client.stockEstimates` · Source: `src/resources/stock-estimates.ts` 
 
 ### priceTarget
 
-- **Signature**: `priceTarget(request: StockEstimates.PriceTargetRequest, options?: RequestOptions): ApiPromise<PriceTarget, ResponseError>`
+- **Signature**: `priceTarget(request: StockEstimates.PriceTargetRequest, options?: RequestOptions): ApiPromise<PriceTarget, ApiError>`
 - **Wire**: `GET /stock/price-target`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `PriceTarget`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockEstimates.PriceTargetRequest` (1):
 
@@ -287,12 +287,12 @@ Accessor: `client.stockEstimates` · Source: `src/resources/stock-estimates.ts` 
 
 ### recommendationTrends
 
-- **Signature**: `recommendationTrends(request: StockEstimates.RecommendationTrendsRequest, options?: RequestOptions): ApiPromise<RecommendationTrend[], ResponseError>`
+- **Signature**: `recommendationTrends(request: StockEstimates.RecommendationTrendsRequest, options?: RequestOptions): ApiPromise<RecommendationTrend[], ApiError>`
 - **Wire**: `GET /stock/recommendation`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `RecommendationTrend[]` — a bare `application/json` array; the success type *is* the array, not a wrapper model
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockEstimates.RecommendationTrendsRequest` (1):
 
@@ -306,12 +306,12 @@ Accessor: `client.stockEstimates` · Source: `src/resources/stock-estimates.ts` 
 
 ### revenueBreakdown
 
-- **Signature**: `revenueBreakdown(request: StockEstimates.RevenueBreakdownRequest, options?: RequestOptions): ApiPromise<RevenueBreakdown, ResponseError>`
+- **Signature**: `revenueBreakdown(request: StockEstimates.RevenueBreakdownRequest, options?: RequestOptions): ApiPromise<RevenueBreakdown, ApiError>`
 - **Wire**: `GET /stock/revenue-breakdown`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `RevenueBreakdown`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockEstimates.RevenueBreakdownRequest` (2):
 
@@ -326,12 +326,12 @@ Accessor: `client.stockEstimates` · Source: `src/resources/stock-estimates.ts` 
 
 ### revenueBreakdown2
 
-- **Signature**: `revenueBreakdown2(request: StockEstimates.RevenueBreakdown2Request, options?: RequestOptions): ApiPromise<RevenueBreakdown2, ResponseError>`
+- **Signature**: `revenueBreakdown2(request: StockEstimates.RevenueBreakdown2Request, options?: RequestOptions): ApiPromise<RevenueBreakdown2, ApiError>`
 - **Wire**: `GET /stock/revenue-breakdown2`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `RevenueBreakdown2`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockEstimates.RevenueBreakdown2Request` (1):
 
@@ -345,12 +345,12 @@ Accessor: `client.stockEstimates` · Source: `src/resources/stock-estimates.ts` 
 
 ### upgradeDowngrade
 
-- **Signature**: `upgradeDowngrade(request: StockEstimates.UpgradeDowngradeRequest, options?: RequestOptions): ApiPromise<UpgradeDowngrade[], ResponseError>`
+- **Signature**: `upgradeDowngrade(request: StockEstimates.UpgradeDowngradeRequest, options?: RequestOptions): ApiPromise<UpgradeDowngrade[], ApiError>`
 - **Wire**: `GET /stock/upgrade-downgrade`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `UpgradeDowngrade[]` — a bare `application/json` array; the success type *is* the array, not a wrapper model
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockEstimates.UpgradeDowngradeRequest` (3):
 

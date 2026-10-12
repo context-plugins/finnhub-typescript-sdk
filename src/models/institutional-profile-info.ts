@@ -2,11 +2,17 @@ import * as s from "../core/validation/index.js";
 import type { Schema } from "../core/validation/schema.js";
 
 export type InstitutionalProfileInfo = {
+  /** Investor's company CIK. */
   cik?: string;
+  /** Firm type. */
   firmType?: string;
+  /** Manager. */
   manager?: string;
+  /** Investing philosophy. */
   philosophy?: string;
+  /** Profile info. */
   profile?: string;
+  /** Profile image. */
   profileImg?: string;
 };
 

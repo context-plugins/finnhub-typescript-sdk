@@ -4,16 +4,16 @@
 
 Accessor: `client.crypto` · Source: `src/resources/crypto.ts` · 4 operations · Request types: namespace `Crypto`
 
-**Type sources**: every type an operation names, with the file that declares it and the schema value exported beside it. Import every name from `finnhub-api`; the `Source` path is where to **read** the shape, never what to import. `ResponseError` and the runtime error family are excluded — see sdk-map.md.
+**Type sources**: every type an operation names, with the file that declares it and the schema value exported beside it. Import every name from `finnhub-api`; the `Source` path is where to **read** the shape, never what to import. `ApiError`, the runtime error family and the file vocabulary are excluded — see sdk-map.md.
 
 ### cryptoCandles
 
-- **Signature**: `cryptoCandles(request: Crypto.CryptoCandlesRequest, options?: RequestOptions): ApiPromise<CryptoCandles, ResponseError>`
+- **Signature**: `cryptoCandles(request: Crypto.CryptoCandlesRequest, options?: RequestOptions): ApiPromise<CryptoCandles, ApiError>`
 - **Wire**: `GET /crypto/candle`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `CryptoCandles`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `Crypto.CryptoCandlesRequest` (4):
 
@@ -30,21 +30,21 @@ Accessor: `client.crypto` · Source: `src/resources/crypto.ts` · 4 operations �
 
 ### cryptoExchanges
 
-- **Signature**: `cryptoExchanges(options?: RequestOptions): ApiPromise<string[], ResponseError>`
+- **Signature**: `cryptoExchanges(options?: RequestOptions): ApiPromise<string[], ApiError>`
 - **Wire**: `GET /crypto/exchange`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `string[]` — a bare `application/json` array; the success type *is* the array, not a wrapper model
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 ### cryptoProfile
 
-- **Signature**: `cryptoProfile(request: Crypto.CryptoProfileRequest, options?: RequestOptions): ApiPromise<CryptoProfile, ResponseError>`
+- **Signature**: `cryptoProfile(request: Crypto.CryptoProfileRequest, options?: RequestOptions): ApiPromise<CryptoProfile, ApiError>`
 - **Wire**: `GET /crypto/profile`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `CryptoProfile`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `Crypto.CryptoProfileRequest` (1):
 
@@ -58,12 +58,12 @@ Accessor: `client.crypto` · Source: `src/resources/crypto.ts` · 4 operations �
 
 ### cryptoSymbols
 
-- **Signature**: `cryptoSymbols(request: Crypto.CryptoSymbolsRequest, options?: RequestOptions): ApiPromise<CryptoSymbol[], ResponseError>`
+- **Signature**: `cryptoSymbols(request: Crypto.CryptoSymbolsRequest, options?: RequestOptions): ApiPromise<CryptoSymbol[], ApiError>`
 - **Wire**: `GET /crypto/symbol`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `CryptoSymbol[]` — a bare `application/json` array; the success type *is* the array, not a wrapper model
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `Crypto.CryptoSymbolsRequest` (1):
 

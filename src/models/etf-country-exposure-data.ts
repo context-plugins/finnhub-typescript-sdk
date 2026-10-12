@@ -2,11 +2,13 @@ import * as s from "../core/validation/index.js";
 import type { Schema } from "../core/validation/schema.js";
 
 export type EtfCountryExposureData = {
+  /** Country */
   country?: string;
+  /** Percent of exposure. */
   exposure?: number;
 };
 
 export const etfCountryExposureDataSchema: Schema<EtfCountryExposureData> = s.object<EtfCountryExposureData>({
   country: s.optional(s.string()),
-  exposure: s.optional(s.number()),
+  exposure: s.optional(s.float64()),
 });

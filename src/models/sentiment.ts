@@ -7,6 +7,6 @@ export type Sentiment = {
 };
 
 export const sentimentSchema: Schema<Sentiment> = s.object<Sentiment>({
-  bearishPercent: s.optional(s.number()),
-  bullishPercent: s.optional(s.number()),
+  bearishPercent: s.optional(s.float64()),
+  bullishPercent: s.optional(s.float64()),
 });

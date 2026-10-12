@@ -2,10 +2,15 @@ import * as s from "../core/validation/index.js";
 import type { Schema } from "../core/validation/schema.js";
 
 export type BankBranchData = {
+  /** Branch ID */
   branchId?: string;
+  /** Branch address */
   address?: string;
+  /** State */
   state?: string;
+  /** Zip code */
   zipCode?: string;
+  /** Date opened */
   date?: string;
 };
 

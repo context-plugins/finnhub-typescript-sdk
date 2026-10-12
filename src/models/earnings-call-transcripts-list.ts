@@ -3,7 +3,9 @@ import type { Schema } from "../core/validation/schema.js";
 import { stockTranscriptsSchema, type StockTranscripts } from "./stock-transcripts.js";
 
 export type EarningsCallTranscriptsList = {
+  /** Company symbol. */
   symbol?: string;
+  /** Array of transcripts' metadata */
   transcripts?: StockTranscripts[];
 };
 

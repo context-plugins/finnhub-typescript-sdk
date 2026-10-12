@@ -3,7 +3,9 @@ import type { Schema } from "../core/validation/schema.js";
 import { sentimentContentSchema, type SentimentContent } from "./sentiment-content.js";
 
 export type SocialSentiment = {
+  /** Company symbol. */
   symbol?: string;
+  /** Sentiment data. */
   data?: SentimentContent[];
 };
 

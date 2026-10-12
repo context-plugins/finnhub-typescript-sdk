@@ -3,6 +3,7 @@ import type { Schema } from "../core/validation/schema.js";
 import { ipoEventSchema, type IpoEvent } from "./ipo-event.js";
 
 export type IpoCalendar = {
+  /** Array of IPO events. */
   ipoCalendar?: IpoEvent[];
 };
 

@@ -3,7 +3,9 @@ import type { Schema } from "../core/validation/schema.js";
 import { developmentSchema, type Development } from "./development.js";
 
 export type PressRelease = {
+  /** Company symbol. */
   symbol?: string;
+  /** Array of major developments. */
   majorDevelopment?: Development[];
 };
 

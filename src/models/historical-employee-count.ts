@@ -3,7 +3,9 @@ import type { Schema } from "../core/validation/schema.js";
 import { employeeCountSchema, type EmployeeCount } from "./employee-count.js";
 
 export type HistoricalEmployeeCount = {
+  /** Array of market data. */
   data?: EmployeeCount[];
+  /** Symbol */
   symbol?: string;
 };
 

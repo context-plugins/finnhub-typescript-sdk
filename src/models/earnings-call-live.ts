@@ -3,6 +3,7 @@ import type { Schema } from "../core/validation/schema.js";
 import { earningsCallLiveResultSchema, type EarningsCallLiveResult } from "./earnings-call-live-result.js";
 
 export type EarningsCallLive = {
+  /** Array of earnings call events that support live streaming. */
   event?: EarningsCallLiveResult[];
 };
 

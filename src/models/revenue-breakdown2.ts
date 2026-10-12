@@ -2,8 +2,11 @@ import * as s from "../core/validation/index.js";
 import type { Schema } from "../core/validation/schema.js";
 
 export type RevenueBreakdown2 = {
+  /** Symbol */
   symbol?: string;
+  /** currency */
   currency?: string;
+  /** Revenue breakdown data. */
   data?: Record<string, unknown>;
 };
 

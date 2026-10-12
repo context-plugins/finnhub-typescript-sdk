@@ -6,8 +6,11 @@ import {
 } from "./indices-constituents-breakdown.js";
 
 export type IndicesConstituents = {
+  /** Index's symbol. */
   symbol?: string;
+  /** Array of constituents. */
   constituents?: string[];
+  /** Array of constituents' details. */
   constituentsBreakdown?: IndicesConstituentsBreakdown[];
 };
 

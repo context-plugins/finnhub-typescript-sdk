@@ -6,8 +6,11 @@ import {
 } from "./gross-income-estimates-info.js";
 
 export type GrossIncomeEstimates = {
+  /** List of estimates */
   data?: GrossIncomeEstimatesInfo[];
+  /** Frequency: annual or quarterly. */
   freq?: string;
+  /** Company symbol. */
   symbol?: string;
 };
 

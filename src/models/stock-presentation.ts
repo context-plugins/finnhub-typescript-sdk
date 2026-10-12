@@ -3,7 +3,9 @@ import type { Schema } from "../core/validation/schema.js";
 import { presentationDataSchema, type PresentationData } from "./presentation-data.js";
 
 export type StockPresentation = {
+  /** Company symbol. */
   symbol?: string;
+  /** Presentation data. */
   res?: PresentationData[];
 };
 

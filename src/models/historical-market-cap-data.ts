@@ -3,8 +3,11 @@ import type { Schema } from "../core/validation/schema.js";
 import { marketCapDataSchema, type MarketCapData } from "./market-cap-data.js";
 
 export type HistoricalMarketCapData = {
+  /** Array of market data. */
   data?: MarketCapData[];
+  /** Symbol */
   symbol?: string;
+  /** Currency */
   currency?: string;
 };
 

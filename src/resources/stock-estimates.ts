@@ -1,8 +1,8 @@
 import type { AuthSchemes } from "../auth-schemes.js";
+import { ApiError } from "../core/api-error.js";
 import type { ApiPromise } from "../core/api-promise.js";
 import type { RequestOptions } from "../core/api-request.js";
 import type { RawClient } from "../core/raw-client.js";
-import { ResponseError } from "../core/response-error.js";
 import * as s from "../core/validation/index.js";
 import { capexEstimatesSchema, type CapexEstimates } from "../models/capex-estimates.js";
 import {
@@ -30,6 +30,9 @@ import { revenueEstimatesSchema, type RevenueEstimates } from "../models/revenue
 import { upgradeDowngradeSchema, type UpgradeDowngrade } from "../models/upgrade-downgrade.js";
 import type { Servers } from "../servers.js";
 
+/**
+ * Analyst estimates, earnings, price targets, recommendations and revenue breakdowns
+ */
 export class StockEstimates {
   readonly #rawClient: RawClient;
   readonly #servers: Servers;
@@ -41,407 +44,652 @@ export class StockEstimates {
     this.#auth = auth;
   }
 
+  /**
+   * Get company's capital expenditure estimates.
+   *
+   * @returns successful operation
+   *
+   * @throws {@link ApiError} when the API answers with an error status
+   *
+   * @throws {@link FinnhubApiError} when no usable response was produced: a connection failure, a
+   * timeout, a body that would not decode, a value that would not encode, or a credential that
+   * could not be obtained
+   */
   companyCapexEstimates(
     request: StockEstimates.CompanyCapexEstimatesRequest,
     options?: RequestOptions,
-  ): ApiPromise<CapexEstimates, ResponseError> {
-    return this.#rawClient.execute<CapexEstimates, ResponseError>(
+  ): ApiPromise<CapexEstimates, ApiError> {
+    return this.#rawClient.execute(
       {
         method: "GET",
-        url: this.#servers.default("/stock/capex-estimate"),
+        urlTemplate: this.#servers.default("/stock/capex-estimate"),
         auth: this.#auth.apiKey,
+        pathParams: [],
         query: [
           { name: "symbol", value: request.symbol, schema: s.string() },
           { name: "freq", value: request.freq, schema: s.optional(s.string()) },
         ],
+        headers: [],
         body: { kind: "empty" },
       },
       {
         success: { kind: "json", schema: capexEstimatesSchema },
-        errorFactory: ResponseError,
+        errorFactory: ApiError,
       },
       options,
     );
   }
 
+  /**
+   * Get company's Dividend per Share estimates.
+   *
+   * @returns successful operation
+   *
+   * @throws {@link ApiError} when the API answers with an error status
+   *
+   * @throws {@link FinnhubApiError} when no usable response was produced: a connection failure, a
+   * timeout, a body that would not decode, a value that would not encode, or a credential that
+   * could not be obtained
+   */
   companyDpsEstimates(
     request: StockEstimates.CompanyDpsEstimatesRequest,
     options?: RequestOptions,
-  ): ApiPromise<DpsEstimates, ResponseError> {
-    return this.#rawClient.execute<DpsEstimates, ResponseError>(
+  ): ApiPromise<DpsEstimates, ApiError> {
+    return this.#rawClient.execute(
       {
         method: "GET",
-        url: this.#servers.default("/stock/dps-estimate"),
+        urlTemplate: this.#servers.default("/stock/dps-estimate"),
         auth: this.#auth.apiKey,
+        pathParams: [],
         query: [
           { name: "symbol", value: request.symbol, schema: s.string() },
           { name: "freq", value: request.freq, schema: s.optional(s.string()) },
         ],
+        headers: [],
         body: { kind: "empty" },
       },
       {
         success: { kind: "json", schema: dpsEstimatesSchema },
-        errorFactory: ResponseError,
+        errorFactory: ApiError,
       },
       options,
     );
   }
 
+  /**
+   * Get company historical quarterly earnings surprise going back to 2000.
+   *
+   * @returns successful operation
+   *
+   * @throws {@link ApiError} when the API answers with an error status
+   *
+   * @throws {@link FinnhubApiError} when no usable response was produced: a connection failure, a
+   * timeout, a body that would not decode, a value that would not encode, or a credential that
+   * could not be obtained
+   */
   companyEarnings(
     request: StockEstimates.CompanyEarningsRequest,
     options?: RequestOptions,
-  ): ApiPromise<EarningResult[], ResponseError> {
-    return this.#rawClient.execute<EarningResult[], ResponseError>(
+  ): ApiPromise<EarningResult[], ApiError> {
+    return this.#rawClient.execute(
       {
         method: "GET",
-        url: this.#servers.default("/stock/earnings"),
+        urlTemplate: this.#servers.default("/stock/earnings"),
         auth: this.#auth.apiKey,
+        pathParams: [],
         query: [
           { name: "symbol", value: request.symbol, schema: s.string() },
-          { name: "limit", value: request.limit, schema: s.optional(s.number()) },
+          { name: "limit", value: request.limit, schema: s.optional(s.int()) },
         ],
+        headers: [],
         body: { kind: "empty" },
       },
       {
         success: { kind: "json", schema: s.array(s.lazy(() => earningResultSchema)) },
-        errorFactory: ResponseError,
+        errorFactory: ApiError,
       },
       options,
     );
   }
 
+  /**
+   * <p>This endpoint provides Earnings Quality Score for global companies.</p><p> Earnings quality
+   * refers to the extent to which current earnings predict future earnings. "High-quality" earnings
+   * are expected to persist, while "low-quality" earnings do not. A higher score means a higher
+   * earnings quality</p><p>Finnhub uses a proprietary model which takes into consideration 4
+   * criteria:</p> <ul style="list-style-type: unset; margin-left:
+   * 30px;"><li>Profitability</li><li>Growth</li><li>Cash Generation & Capital
+   * Allocation</li><li>Leverage</li></ul><br/><p>We then compare the metrics of each company in
+   * each category against its peers in the same industry to gauge how quality its earnings is.</p>
+   *
+   * @returns successful operation
+   *
+   * @throws {@link ApiError} when the API answers with an error status
+   *
+   * @throws {@link FinnhubApiError} when no usable response was produced: a connection failure, a
+   * timeout, a body that would not decode, a value that would not encode, or a credential that
+   * could not be obtained
+   */
   companyEarningsQualityScore(
     request: StockEstimates.CompanyEarningsQualityScoreRequest,
     options?: RequestOptions,
-  ): ApiPromise<CompanyEarningsQualityScore, ResponseError> {
-    return this.#rawClient.execute<CompanyEarningsQualityScore, ResponseError>(
+  ): ApiPromise<CompanyEarningsQualityScore, ApiError> {
+    return this.#rawClient.execute(
       {
         method: "GET",
-        url: this.#servers.default("/stock/earnings-quality-score"),
+        urlTemplate: this.#servers.default("/stock/earnings-quality-score"),
         auth: this.#auth.apiKey,
+        pathParams: [],
         query: [
           { name: "symbol", value: request.symbol, schema: s.string() },
           { name: "freq", value: request.freq, schema: s.string() },
         ],
+        headers: [],
         body: { kind: "empty" },
       },
       {
         success: { kind: "json", schema: companyEarningsQualityScoreSchema },
-        errorFactory: ResponseError,
+        errorFactory: ApiError,
       },
       options,
     );
   }
 
+  /**
+   * Get company's ebit estimates.
+   *
+   * @returns successful operation
+   *
+   * @throws {@link ApiError} when the API answers with an error status
+   *
+   * @throws {@link FinnhubApiError} when no usable response was produced: a connection failure, a
+   * timeout, a body that would not decode, a value that would not encode, or a credential that
+   * could not be obtained
+   */
   companyEbitEstimates(
     request: StockEstimates.CompanyEbitEstimatesRequest,
     options?: RequestOptions,
-  ): ApiPromise<EbitEstimates, ResponseError> {
-    return this.#rawClient.execute<EbitEstimates, ResponseError>(
+  ): ApiPromise<EbitEstimates, ApiError> {
+    return this.#rawClient.execute(
       {
         method: "GET",
-        url: this.#servers.default("/stock/ebit-estimate"),
+        urlTemplate: this.#servers.default("/stock/ebit-estimate"),
         auth: this.#auth.apiKey,
+        pathParams: [],
         query: [
           { name: "symbol", value: request.symbol, schema: s.string() },
           { name: "freq", value: request.freq, schema: s.optional(s.string()) },
         ],
+        headers: [],
         body: { kind: "empty" },
       },
       {
         success: { kind: "json", schema: ebitEstimatesSchema },
-        errorFactory: ResponseError,
+        errorFactory: ApiError,
       },
       options,
     );
   }
 
+  /**
+   * Get company's ebitda estimates.
+   *
+   * @returns successful operation
+   *
+   * @throws {@link ApiError} when the API answers with an error status
+   *
+   * @throws {@link FinnhubApiError} when no usable response was produced: a connection failure, a
+   * timeout, a body that would not decode, a value that would not encode, or a credential that
+   * could not be obtained
+   */
   companyEbitdaEstimates(
     request: StockEstimates.CompanyEbitdaEstimatesRequest,
     options?: RequestOptions,
-  ): ApiPromise<EbitdaEstimates, ResponseError> {
-    return this.#rawClient.execute<EbitdaEstimates, ResponseError>(
+  ): ApiPromise<EbitdaEstimates, ApiError> {
+    return this.#rawClient.execute(
       {
         method: "GET",
-        url: this.#servers.default("/stock/ebitda-estimate"),
+        urlTemplate: this.#servers.default("/stock/ebitda-estimate"),
         auth: this.#auth.apiKey,
+        pathParams: [],
         query: [
           { name: "symbol", value: request.symbol, schema: s.string() },
           { name: "freq", value: request.freq, schema: s.optional(s.string()) },
         ],
+        headers: [],
         body: { kind: "empty" },
       },
       {
         success: { kind: "json", schema: ebitdaEstimatesSchema },
-        errorFactory: ResponseError,
+        errorFactory: ApiError,
       },
       options,
     );
   }
 
+  /**
+   * Get company's EPS estimates.
+   *
+   * @returns successful operation
+   *
+   * @throws {@link ApiError} when the API answers with an error status
+   *
+   * @throws {@link FinnhubApiError} when no usable response was produced: a connection failure, a
+   * timeout, a body that would not decode, a value that would not encode, or a credential that
+   * could not be obtained
+   */
   companyEpsEstimates(
     request: StockEstimates.CompanyEpsEstimatesRequest,
     options?: RequestOptions,
-  ): ApiPromise<EarningsEstimates, ResponseError> {
-    return this.#rawClient.execute<EarningsEstimates, ResponseError>(
+  ): ApiPromise<EarningsEstimates, ApiError> {
+    return this.#rawClient.execute(
       {
         method: "GET",
-        url: this.#servers.default("/stock/eps-estimate"),
+        urlTemplate: this.#servers.default("/stock/eps-estimate"),
         auth: this.#auth.apiKey,
+        pathParams: [],
         query: [
           { name: "symbol", value: request.symbol, schema: s.string() },
           { name: "freq", value: request.freq, schema: s.optional(s.string()) },
         ],
+        headers: [],
         body: { kind: "empty" },
       },
       {
         success: { kind: "json", schema: earningsEstimatesSchema },
-        errorFactory: ResponseError,
+        errorFactory: ApiError,
       },
       options,
     );
   }
 
+  /**
+   * Get company's free cash flow estimates.
+   *
+   * @returns successful operation
+   *
+   * @throws {@link ApiError} when the API answers with an error status
+   *
+   * @throws {@link FinnhubApiError} when no usable response was produced: a connection failure, a
+   * timeout, a body that would not decode, a value that would not encode, or a credential that
+   * could not be obtained
+   */
   companyFcfEstimates(
     request: StockEstimates.CompanyFcfEstimatesRequest,
     options?: RequestOptions,
-  ): ApiPromise<FcfEstimates, ResponseError> {
-    return this.#rawClient.execute<FcfEstimates, ResponseError>(
+  ): ApiPromise<FcfEstimates, ApiError> {
+    return this.#rawClient.execute(
       {
         method: "GET",
-        url: this.#servers.default("/stock/fcf-estimate"),
+        urlTemplate: this.#servers.default("/stock/fcf-estimate"),
         auth: this.#auth.apiKey,
+        pathParams: [],
         query: [
           { name: "symbol", value: request.symbol, schema: s.string() },
           { name: "freq", value: request.freq, schema: s.optional(s.string()) },
         ],
+        headers: [],
         body: { kind: "empty" },
       },
       {
         success: { kind: "json", schema: fcfEstimatesSchema },
-        errorFactory: ResponseError,
+        errorFactory: ApiError,
       },
       options,
     );
   }
 
+  /**
+   * Get company's gross income estimates.
+   *
+   * @returns successful operation
+   *
+   * @throws {@link ApiError} when the API answers with an error status
+   *
+   * @throws {@link FinnhubApiError} when no usable response was produced: a connection failure, a
+   * timeout, a body that would not decode, a value that would not encode, or a credential that
+   * could not be obtained
+   */
   companyGrossIncomeEstimates(
     request: StockEstimates.CompanyGrossIncomeEstimatesRequest,
     options?: RequestOptions,
-  ): ApiPromise<GrossIncomeEstimates, ResponseError> {
-    return this.#rawClient.execute<GrossIncomeEstimates, ResponseError>(
+  ): ApiPromise<GrossIncomeEstimates, ApiError> {
+    return this.#rawClient.execute(
       {
         method: "GET",
-        url: this.#servers.default("/stock/gross-income-estimate"),
+        urlTemplate: this.#servers.default("/stock/gross-income-estimate"),
         auth: this.#auth.apiKey,
+        pathParams: [],
         query: [
           { name: "symbol", value: request.symbol, schema: s.string() },
           { name: "freq", value: request.freq, schema: s.optional(s.string()) },
         ],
+        headers: [],
         body: { kind: "empty" },
       },
       {
         success: { kind: "json", schema: grossIncomeEstimatesSchema },
-        errorFactory: ResponseError,
+        errorFactory: ApiError,
       },
       options,
     );
   }
 
+  /**
+   * Get company's net income estimates.
+   *
+   * @returns successful operation
+   *
+   * @throws {@link ApiError} when the API answers with an error status
+   *
+   * @throws {@link FinnhubApiError} when no usable response was produced: a connection failure, a
+   * timeout, a body that would not decode, a value that would not encode, or a credential that
+   * could not be obtained
+   */
   companyNetIncomeEstimates(
     request: StockEstimates.CompanyNetIncomeEstimatesRequest,
     options?: RequestOptions,
-  ): ApiPromise<NetIncomeEstimates, ResponseError> {
-    return this.#rawClient.execute<NetIncomeEstimates, ResponseError>(
+  ): ApiPromise<NetIncomeEstimates, ApiError> {
+    return this.#rawClient.execute(
       {
         method: "GET",
-        url: this.#servers.default("/stock/net-income-estimate"),
+        urlTemplate: this.#servers.default("/stock/net-income-estimate"),
         auth: this.#auth.apiKey,
+        pathParams: [],
         query: [
           { name: "symbol", value: request.symbol, schema: s.string() },
           { name: "freq", value: request.freq, schema: s.optional(s.string()) },
         ],
+        headers: [],
         body: { kind: "empty" },
       },
       {
         success: { kind: "json", schema: netIncomeEstimatesSchema },
-        errorFactory: ResponseError,
+        errorFactory: ApiError,
       },
       options,
     );
   }
 
+  /**
+   * Get company's operating cash flow estimates.
+   *
+   * @returns successful operation
+   *
+   * @throws {@link ApiError} when the API answers with an error status
+   *
+   * @throws {@link FinnhubApiError} when no usable response was produced: a connection failure, a
+   * timeout, a body that would not decode, a value that would not encode, or a credential that
+   * could not be obtained
+   */
   companyOcfEstimates(
     request: StockEstimates.CompanyOcfEstimatesRequest,
     options?: RequestOptions,
-  ): ApiPromise<OcfEstimates, ResponseError> {
-    return this.#rawClient.execute<OcfEstimates, ResponseError>(
+  ): ApiPromise<OcfEstimates, ApiError> {
+    return this.#rawClient.execute(
       {
         method: "GET",
-        url: this.#servers.default("/stock/ocf-estimate"),
+        urlTemplate: this.#servers.default("/stock/ocf-estimate"),
         auth: this.#auth.apiKey,
+        pathParams: [],
         query: [
           { name: "symbol", value: request.symbol, schema: s.string() },
           { name: "freq", value: request.freq, schema: s.optional(s.string()) },
         ],
+        headers: [],
         body: { kind: "empty" },
       },
       {
         success: { kind: "json", schema: ocfEstimatesSchema },
-        errorFactory: ResponseError,
+        errorFactory: ApiError,
       },
       options,
     );
   }
 
+  /**
+   * Get company's pretax income estimates.
+   *
+   * @returns successful operation
+   *
+   * @throws {@link ApiError} when the API answers with an error status
+   *
+   * @throws {@link FinnhubApiError} when no usable response was produced: a connection failure, a
+   * timeout, a body that would not decode, a value that would not encode, or a credential that
+   * could not be obtained
+   */
   companyPretaxIncomeEstimates(
     request: StockEstimates.CompanyPretaxIncomeEstimatesRequest,
     options?: RequestOptions,
-  ): ApiPromise<PretaxIncomeEstimates, ResponseError> {
-    return this.#rawClient.execute<PretaxIncomeEstimates, ResponseError>(
+  ): ApiPromise<PretaxIncomeEstimates, ApiError> {
+    return this.#rawClient.execute(
       {
         method: "GET",
-        url: this.#servers.default("/stock/pretax-income-estimate"),
+        urlTemplate: this.#servers.default("/stock/pretax-income-estimate"),
         auth: this.#auth.apiKey,
+        pathParams: [],
         query: [
           { name: "symbol", value: request.symbol, schema: s.string() },
           { name: "freq", value: request.freq, schema: s.optional(s.string()) },
         ],
+        headers: [],
         body: { kind: "empty" },
       },
       {
         success: { kind: "json", schema: pretaxIncomeEstimatesSchema },
-        errorFactory: ResponseError,
+        errorFactory: ApiError,
       },
       options,
     );
   }
 
+  /**
+   * Get company's revenue estimates.
+   *
+   * @returns successful operation
+   *
+   * @throws {@link ApiError} when the API answers with an error status
+   *
+   * @throws {@link FinnhubApiError} when no usable response was produced: a connection failure, a
+   * timeout, a body that would not decode, a value that would not encode, or a credential that
+   * could not be obtained
+   */
   companyRevenueEstimates(
     request: StockEstimates.CompanyRevenueEstimatesRequest,
     options?: RequestOptions,
-  ): ApiPromise<RevenueEstimates, ResponseError> {
-    return this.#rawClient.execute<RevenueEstimates, ResponseError>(
+  ): ApiPromise<RevenueEstimates, ApiError> {
+    return this.#rawClient.execute(
       {
         method: "GET",
-        url: this.#servers.default("/stock/revenue-estimate"),
+        urlTemplate: this.#servers.default("/stock/revenue-estimate"),
         auth: this.#auth.apiKey,
+        pathParams: [],
         query: [
           { name: "symbol", value: request.symbol, schema: s.string() },
           { name: "freq", value: request.freq, schema: s.optional(s.string()) },
         ],
+        headers: [],
         body: { kind: "empty" },
       },
       {
         success: { kind: "json", schema: revenueEstimatesSchema },
-        errorFactory: ResponseError,
+        errorFactory: ApiError,
       },
       options,
     );
   }
 
+  /**
+   * Get latest price target consensus.
+   *
+   * @returns successful operation
+   *
+   * @throws {@link ApiError} when the API answers with an error status
+   *
+   * @throws {@link FinnhubApiError} when no usable response was produced: a connection failure, a
+   * timeout, a body that would not decode, a value that would not encode, or a credential that
+   * could not be obtained
+   */
   priceTarget(
     request: StockEstimates.PriceTargetRequest,
     options?: RequestOptions,
-  ): ApiPromise<PriceTarget, ResponseError> {
-    return this.#rawClient.execute<PriceTarget, ResponseError>(
+  ): ApiPromise<PriceTarget, ApiError> {
+    return this.#rawClient.execute(
       {
         method: "GET",
-        url: this.#servers.default("/stock/price-target"),
+        urlTemplate: this.#servers.default("/stock/price-target"),
         auth: this.#auth.apiKey,
+        pathParams: [],
         query: [{ name: "symbol", value: request.symbol, schema: s.string() }],
+        headers: [],
         body: { kind: "empty" },
       },
       {
         success: { kind: "json", schema: priceTargetSchema },
-        errorFactory: ResponseError,
+        errorFactory: ApiError,
       },
       options,
     );
   }
 
+  /**
+   * Get latest analyst recommendation trends for a company.
+   *
+   * @returns successful operation
+   *
+   * @throws {@link ApiError} when the API answers with an error status
+   *
+   * @throws {@link FinnhubApiError} when no usable response was produced: a connection failure, a
+   * timeout, a body that would not decode, a value that would not encode, or a credential that
+   * could not be obtained
+   */
   recommendationTrends(
     request: StockEstimates.RecommendationTrendsRequest,
     options?: RequestOptions,
-  ): ApiPromise<RecommendationTrend[], ResponseError> {
-    return this.#rawClient.execute<RecommendationTrend[], ResponseError>(
+  ): ApiPromise<RecommendationTrend[], ApiError> {
+    return this.#rawClient.execute(
       {
         method: "GET",
-        url: this.#servers.default("/stock/recommendation"),
+        urlTemplate: this.#servers.default("/stock/recommendation"),
         auth: this.#auth.apiKey,
+        pathParams: [],
         query: [{ name: "symbol", value: request.symbol, schema: s.string() }],
+        headers: [],
         body: { kind: "empty" },
       },
       {
         success: { kind: "json", schema: s.array(s.lazy(() => recommendationTrendSchema)) },
-        errorFactory: ResponseError,
+        errorFactory: ApiError,
       },
       options,
     );
   }
 
+  /**
+   * <p>Get revenue breakdown as-reporetd by product and geography. Users on personal plans can
+   * access data for US companies which disclose their revenue breakdown in the annual or quarterly
+   * reports.</p><p>Global standardized revenue breakdown/segments data is available for Enterprise
+   * users. <a href="mailto:support@finnhub.io">Contact us</a> to inquire about the access for
+   * Global standardized data.</p>
+   *
+   * @returns successful operation
+   *
+   * @throws {@link ApiError} when the API answers with an error status
+   *
+   * @throws {@link FinnhubApiError} when no usable response was produced: a connection failure, a
+   * timeout, a body that would not decode, a value that would not encode, or a credential that
+   * could not be obtained
+   */
   revenueBreakdown(
     request: StockEstimates.RevenueBreakdownRequest,
     options?: RequestOptions,
-  ): ApiPromise<RevenueBreakdown, ResponseError> {
-    return this.#rawClient.execute<RevenueBreakdown, ResponseError>(
+  ): ApiPromise<RevenueBreakdown, ApiError> {
+    return this.#rawClient.execute(
       {
         method: "GET",
-        url: this.#servers.default("/stock/revenue-breakdown"),
+        urlTemplate: this.#servers.default("/stock/revenue-breakdown"),
         auth: this.#auth.apiKey,
+        pathParams: [],
         query: [
           { name: "symbol", value: request.symbol, schema: s.optional(s.string()) },
           { name: "cik", value: request.cik, schema: s.optional(s.string()) },
         ],
+        headers: [],
         body: { kind: "empty" },
       },
       {
         success: { kind: "json", schema: revenueBreakdownSchema },
-        errorFactory: ResponseError,
+        errorFactory: ApiError,
       },
       options,
     );
   }
 
+  /**
+   * <p>Get standardized revenue breakdown and KPIs data for 30,000+ global companies.</p>
+   *
+   * @returns successful operation
+   *
+   * @throws {@link ApiError} when the API answers with an error status
+   *
+   * @throws {@link FinnhubApiError} when no usable response was produced: a connection failure, a
+   * timeout, a body that would not decode, a value that would not encode, or a credential that
+   * could not be obtained
+   */
   revenueBreakdown2(
     request: StockEstimates.RevenueBreakdown2Request,
     options?: RequestOptions,
-  ): ApiPromise<RevenueBreakdown2, ResponseError> {
-    return this.#rawClient.execute<RevenueBreakdown2, ResponseError>(
+  ): ApiPromise<RevenueBreakdown2, ApiError> {
+    return this.#rawClient.execute(
       {
         method: "GET",
-        url: this.#servers.default("/stock/revenue-breakdown2"),
+        urlTemplate: this.#servers.default("/stock/revenue-breakdown2"),
         auth: this.#auth.apiKey,
+        pathParams: [],
         query: [{ name: "symbol", value: request.symbol, schema: s.string() }],
+        headers: [],
         body: { kind: "empty" },
       },
       {
         success: { kind: "json", schema: revenueBreakdown2Schema },
-        errorFactory: ResponseError,
+        errorFactory: ApiError,
       },
       options,
     );
   }
 
+  /**
+   * Get latest stock upgrade and downgrade.
+   *
+   * @returns successful operation
+   *
+   * @throws {@link ApiError} when the API answers with an error status
+   *
+   * @throws {@link FinnhubApiError} when no usable response was produced: a connection failure, a
+   * timeout, a body that would not decode, a value that would not encode, or a credential that
+   * could not be obtained
+   */
   upgradeDowngrade(
     request: StockEstimates.UpgradeDowngradeRequest,
     options?: RequestOptions,
-  ): ApiPromise<UpgradeDowngrade[], ResponseError> {
-    return this.#rawClient.execute<UpgradeDowngrade[], ResponseError>(
+  ): ApiPromise<UpgradeDowngrade[], ApiError> {
+    return this.#rawClient.execute(
       {
         method: "GET",
-        url: this.#servers.default("/stock/upgrade-downgrade"),
+        urlTemplate: this.#servers.default("/stock/upgrade-downgrade"),
         auth: this.#auth.apiKey,
+        pathParams: [],
         query: [
           { name: "symbol", value: request.symbol, schema: s.optional(s.string()) },
           { name: "from", value: request.from, schema: s.optional(s.dateOnly()) },
           { name: "to", value: request.to, schema: s.optional(s.dateOnly()) },
         ],
+        headers: [],
         body: { kind: "empty" },
       },
       {
         success: { kind: "json", schema: s.array(s.lazy(() => upgradeDowngradeSchema)) },
-        errorFactory: ResponseError,
+        errorFactory: ApiError,
       },
       options,
     );
@@ -450,90 +698,160 @@ export class StockEstimates {
 
 export namespace StockEstimates {
   export type CompanyCapexEstimatesRequest = {
+    /** Symbol of the company: AAPL. */
     symbol: string;
+    /**
+     * Can take 1 of the following values: <code>annual, quarterly</code>. Default to
+     * <code>quarterly</code>
+     */
     freq?: string;
   };
 
   export type CompanyDpsEstimatesRequest = {
+    /** Symbol of the company: AAPL. */
     symbol: string;
+    /**
+     * Can take 1 of the following values: <code>annual, quarterly</code>. Default to
+     * <code>quarterly</code>
+     */
     freq?: string;
   };
 
   export type CompanyEarningsRequest = {
+    /** Symbol of the company: AAPL. */
     symbol: string;
+    /** Limit number of period returned. Leave blank to get the full history. */
     limit?: number;
   };
 
   export type CompanyEarningsQualityScoreRequest = {
+    /** Symbol. */
     symbol: string;
+    /** Frequency. Currently support <code>annual</code> and <code>quarterly</code> */
     freq: string;
   };
 
   export type CompanyEbitEstimatesRequest = {
+    /** Symbol of the company: AAPL. */
     symbol: string;
+    /**
+     * Can take 1 of the following values: <code>annual, quarterly</code>. Default to
+     * <code>quarterly</code>
+     */
     freq?: string;
   };
 
   export type CompanyEbitdaEstimatesRequest = {
+    /** Symbol of the company: AAPL. */
     symbol: string;
+    /**
+     * Can take 1 of the following values: <code>annual, quarterly</code>. Default to
+     * <code>quarterly</code>
+     */
     freq?: string;
   };
 
   export type CompanyEpsEstimatesRequest = {
+    /** Symbol of the company: AAPL. */
     symbol: string;
+    /**
+     * Can take 1 of the following values: <code>annual, quarterly</code>. Default to
+     * <code>quarterly</code>
+     */
     freq?: string;
   };
 
   export type CompanyFcfEstimatesRequest = {
+    /** Symbol of the company: AAPL. */
     symbol: string;
+    /**
+     * Can take 1 of the following values: <code>annual, quarterly</code>. Default to
+     * <code>quarterly</code>
+     */
     freq?: string;
   };
 
   export type CompanyGrossIncomeEstimatesRequest = {
+    /** Symbol of the company: AAPL. */
     symbol: string;
+    /**
+     * Can take 1 of the following values: <code>annual, quarterly</code>. Default to
+     * <code>quarterly</code>
+     */
     freq?: string;
   };
 
   export type CompanyNetIncomeEstimatesRequest = {
+    /** Symbol of the company: AAPL. */
     symbol: string;
+    /**
+     * Can take 1 of the following values: <code>annual, quarterly</code>. Default to
+     * <code>quarterly</code>
+     */
     freq?: string;
   };
 
   export type CompanyOcfEstimatesRequest = {
+    /** Symbol of the company: AAPL. */
     symbol: string;
+    /**
+     * Can take 1 of the following values: <code>annual, quarterly</code>. Default to
+     * <code>quarterly</code>
+     */
     freq?: string;
   };
 
   export type CompanyPretaxIncomeEstimatesRequest = {
+    /** Symbol of the company: AAPL. */
     symbol: string;
+    /**
+     * Can take 1 of the following values: <code>annual, quarterly</code>. Default to
+     * <code>quarterly</code>
+     */
     freq?: string;
   };
 
   export type CompanyRevenueEstimatesRequest = {
+    /** Symbol of the company: AAPL. */
     symbol: string;
+    /**
+     * Can take 1 of the following values: <code>annual, quarterly</code>. Default to
+     * <code>quarterly</code>
+     */
     freq?: string;
   };
 
   export type PriceTargetRequest = {
+    /** Symbol of the company: AAPL. */
     symbol: string;
   };
 
   export type RecommendationTrendsRequest = {
+    /** Symbol of the company: AAPL. */
     symbol: string;
   };
 
   export type RevenueBreakdownRequest = {
+    /** Symbol. */
     symbol?: string;
+    /** CIK. */
     cik?: string;
   };
 
   export type RevenueBreakdown2Request = {
+    /** Symbol. */
     symbol: string;
   };
 
   export type UpgradeDowngradeRequest = {
+    /**
+     * Symbol of the company: AAPL. If left blank, the API will return latest stock
+     * upgrades/downgrades.
+     */
     symbol?: string;
+    /** From date: 2000-03-15. */
     from?: string;
+    /** To date: 2020-03-16. */
     to?: string;
   };
 }

@@ -6,8 +6,11 @@ import {
 } from "./institutional-portfolio-group.js";
 
 export type InstitutionalPortfolio = {
+  /** Investor's name. */
   name?: string;
+  /** CIK. */
   cik?: string;
+  /** Array of positions. */
   data?: InstitutionalPortfolioGroup[];
 };
 

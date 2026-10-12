@@ -2,7 +2,9 @@ import * as s from "../core/validation/index.js";
 import type { Schema } from "../core/validation/schema.js";
 
 export type FinancialStatements = {
+  /** Symbol of the company. */
   symbol?: string;
+  /** An array of map of key, value pairs containing the data for each period. */
   financials?: Record<string, unknown>[];
 };
 

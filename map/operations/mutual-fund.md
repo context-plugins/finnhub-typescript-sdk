@@ -4,16 +4,16 @@
 
 Accessor: `client.mutualFund` · Source: `src/resources/mutual-fund.ts` · 6 operations · Request types: namespace `MutualFund`
 
-**Type sources**: every type an operation names, with the file that declares it and the schema value exported beside it. Import every name from `finnhub-api`; the `Source` path is where to **read** the shape, never what to import. `ResponseError` and the runtime error family are excluded — see sdk-map.md.
+**Type sources**: every type an operation names, with the file that declares it and the schema value exported beside it. Import every name from `finnhub-api`; the `Source` path is where to **read** the shape, never what to import. `ApiError`, the runtime error family and the file vocabulary are excluded — see sdk-map.md.
 
 ### mutualFundCountryExposure
 
-- **Signature**: `mutualFundCountryExposure(request: MutualFund.MutualFundCountryExposureRequest, options?: RequestOptions): ApiPromise<MutualFundCountryExposure, ResponseError>`
+- **Signature**: `mutualFundCountryExposure(request: MutualFund.MutualFundCountryExposureRequest, options?: RequestOptions): ApiPromise<MutualFundCountryExposure, ApiError>`
 - **Wire**: `GET /mutual-fund/country`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `MutualFundCountryExposure`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `MutualFund.MutualFundCountryExposureRequest` (2):
 
@@ -28,12 +28,12 @@ Accessor: `client.mutualFund` · Source: `src/resources/mutual-fund.ts` · 6 ope
 
 ### mutualFundEet
 
-- **Signature**: `mutualFundEet(request: MutualFund.MutualFundEetRequest, options?: RequestOptions): ApiPromise<MutualFundEet, ResponseError>`
+- **Signature**: `mutualFundEet(request: MutualFund.MutualFundEetRequest, options?: RequestOptions): ApiPromise<MutualFundEet, ApiError>`
 - **Wire**: `GET /mutual-fund/eet`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `MutualFundEet`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `MutualFund.MutualFundEetRequest` (1):
 
@@ -47,12 +47,12 @@ Accessor: `client.mutualFund` · Source: `src/resources/mutual-fund.ts` · 6 ope
 
 ### mutualFundEetPai
 
-- **Signature**: `mutualFundEetPai(request: MutualFund.MutualFundEetPaiRequest, options?: RequestOptions): ApiPromise<MutualFundEetPai, ResponseError>`
+- **Signature**: `mutualFundEetPai(request: MutualFund.MutualFundEetPaiRequest, options?: RequestOptions): ApiPromise<MutualFundEetPai, ApiError>`
 - **Wire**: `GET /mutual-fund/eet-pai`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `MutualFundEetPai`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `MutualFund.MutualFundEetPaiRequest` (1):
 
@@ -66,12 +66,12 @@ Accessor: `client.mutualFund` · Source: `src/resources/mutual-fund.ts` · 6 ope
 
 ### mutualFundHoldings
 
-- **Signature**: `mutualFundHoldings(request: MutualFund.MutualFundHoldingsRequest, options?: RequestOptions): ApiPromise<MutualFundHoldings, ResponseError>`
+- **Signature**: `mutualFundHoldings(request: MutualFund.MutualFundHoldingsRequest, options?: RequestOptions): ApiPromise<MutualFundHoldings, ApiError>`
 - **Wire**: `GET /mutual-fund/holdings`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `MutualFundHoldings`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `MutualFund.MutualFundHoldingsRequest` (3):
 
@@ -87,12 +87,12 @@ Accessor: `client.mutualFund` · Source: `src/resources/mutual-fund.ts` · 6 ope
 
 ### mutualFundProfile
 
-- **Signature**: `mutualFundProfile(request: MutualFund.MutualFundProfileRequest, options?: RequestOptions): ApiPromise<MutualFundProfile, ResponseError>`
+- **Signature**: `mutualFundProfile(request: MutualFund.MutualFundProfileRequest, options?: RequestOptions): ApiPromise<MutualFundProfile, ApiError>`
 - **Wire**: `GET /mutual-fund/profile`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `MutualFundProfile`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `MutualFund.MutualFundProfileRequest` (2):
 
@@ -107,12 +107,12 @@ Accessor: `client.mutualFund` · Source: `src/resources/mutual-fund.ts` · 6 ope
 
 ### mutualFundSectorExposure
 
-- **Signature**: `mutualFundSectorExposure(request: MutualFund.MutualFundSectorExposureRequest, options?: RequestOptions): ApiPromise<MutualFundSectorExposure, ResponseError>`
+- **Signature**: `mutualFundSectorExposure(request: MutualFund.MutualFundSectorExposureRequest, options?: RequestOptions): ApiPromise<MutualFundSectorExposure, ApiError>`
 - **Wire**: `GET /mutual-fund/sector`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `MutualFundSectorExposure`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `MutualFund.MutualFundSectorExposureRequest` (2):
 

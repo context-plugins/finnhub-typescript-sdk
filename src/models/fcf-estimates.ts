@@ -3,8 +3,11 @@ import type { Schema } from "../core/validation/schema.js";
 import { fcfEstimatesInfoSchema, type FcfEstimatesInfo } from "./fcf-estimates-info.js";
 
 export type FcfEstimates = {
+  /** List of estimates */
   data?: FcfEstimatesInfo[];
+  /** Frequency: annual or quarterly. */
   freq?: string;
+  /** Company symbol. */
   symbol?: string;
 };
 

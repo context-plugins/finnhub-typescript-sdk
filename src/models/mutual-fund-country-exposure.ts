@@ -6,7 +6,9 @@ import {
 } from "./mutual-fund-country-exposure-data.js";
 
 export type MutualFundCountryExposure = {
+  /** Symbol. */
   symbol?: string;
+  /** Array of countries and and exposure levels. */
   countryExposure?: MutualFundCountryExposureData[];
 };
 

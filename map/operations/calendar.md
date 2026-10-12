@@ -4,16 +4,16 @@
 
 Accessor: `client.calendar` · Source: `src/resources/calendar.ts` · 3 operations · Request types: namespace `Calendar`
 
-**Type sources**: every type an operation names, with the file that declares it and the schema value exported beside it. Import every name from `finnhub-api`; the `Source` path is where to **read** the shape, never what to import. `ResponseError` and the runtime error family are excluded — see sdk-map.md.
+**Type sources**: every type an operation names, with the file that declares it and the schema value exported beside it. Import every name from `finnhub-api`; the `Source` path is where to **read** the shape, never what to import. `ApiError`, the runtime error family and the file vocabulary are excluded — see sdk-map.md.
 
 ### earningsCalendar
 
-- **Signature**: `earningsCalendar(request: Calendar.EarningsCalendarRequest, options?: RequestOptions): ApiPromise<EarningsCalendar, ResponseError>`
+- **Signature**: `earningsCalendar(request: Calendar.EarningsCalendarRequest, options?: RequestOptions): ApiPromise<EarningsCalendar, ApiError>`
 - **Wire**: `GET /calendar/earnings`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `EarningsCalendar`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `Calendar.EarningsCalendarRequest` (4):
 
@@ -30,12 +30,12 @@ Accessor: `client.calendar` · Source: `src/resources/calendar.ts` · 3 operatio
 
 ### economicCalendar
 
-- **Signature**: `economicCalendar(request: Calendar.EconomicCalendarRequest, options?: RequestOptions): ApiPromise<EconomicCalendar, ResponseError>`
+- **Signature**: `economicCalendar(request: Calendar.EconomicCalendarRequest, options?: RequestOptions): ApiPromise<EconomicCalendar, ApiError>`
 - **Wire**: `GET /calendar/economic`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `EconomicCalendar`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `Calendar.EconomicCalendarRequest` (2):
 
@@ -50,12 +50,12 @@ Accessor: `client.calendar` · Source: `src/resources/calendar.ts` · 3 operatio
 
 ### ipoCalendar
 
-- **Signature**: `ipoCalendar(request: Calendar.IpoCalendarRequest, options?: RequestOptions): ApiPromise<IpoCalendar, ResponseError>`
+- **Signature**: `ipoCalendar(request: Calendar.IpoCalendarRequest, options?: RequestOptions): ApiPromise<IpoCalendar, ApiError>`
 - **Wire**: `GET /calendar/ipo`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `IpoCalendar`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `Calendar.IpoCalendarRequest` (2):
 

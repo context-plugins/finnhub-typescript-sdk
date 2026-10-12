@@ -6,8 +6,11 @@ import {
 } from "./company-earnings-quality-score-data.js";
 
 export type CompanyEarningsQualityScore = {
+  /** Symbol */
   symbol?: string;
+  /** Frequency */
   freq?: string;
+  /** Array of earnings quality score. */
   data?: CompanyEarningsQualityScoreData[];
 };
 

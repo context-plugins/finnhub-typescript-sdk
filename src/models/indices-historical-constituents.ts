@@ -6,7 +6,9 @@ import {
 } from "./index-historical-constituent.js";
 
 export type IndicesHistoricalConstituents = {
+  /** Index's symbol. */
   symbol?: string;
+  /** Array of historical constituents. */
   historicalConstituents?: IndexHistoricalConstituent[];
 };
 

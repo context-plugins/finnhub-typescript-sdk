@@ -3,8 +3,11 @@ import type { Schema } from "../core/validation/schema.js";
 import { reportSchema, type Report } from "./report.js";
 
 export type FinancialsAsReported = {
+  /** Symbol */
   symbol?: string;
+  /** CIK */
   cik?: string;
+  /** Array of filings. */
   data?: Report[];
 };
 

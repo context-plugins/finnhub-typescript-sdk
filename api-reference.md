@@ -7,7 +7,7 @@
 > Source: [Bond](src/resources/bond.ts)
 
 <details>
-<summary><code>bondPrice(request: Bond.BondPriceRequest, options?: RequestOptions): ApiPromise&lt;BondCandles, ResponseError&gt;</code></summary>
+<summary><code>bondPrice(request: Bond.BondPriceRequest, options?: RequestOptions): ApiPromise&lt;BondCandles, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -52,17 +52,35 @@
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.bond.bondPrice({ isin, from, to });
+  const response = await client.bond.bondPrice({ isin: "some example string", from: 1, to: 1 });
   // TODO: Handle 'response' of type BondCandles
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.bond.bondPrice({ isin: "some example string", from: 1, to: 1 }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type BondCandles
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -88,9 +106,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[BondCandles](src/models/bond-candles.ts)</code>
+**Direct**: `await client.bond.bondPrice(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[BondCandles](src/models/bond-candles.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.bond.bondPrice(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;BondCandles, ApiError&gt;</code>, with `result.value` of type <code>[BondCandles](src/models/bond-candles.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -101,7 +127,7 @@ try {
 </details>
 
 <details>
-<summary><code>bondProfile(request: Bond.BondProfileRequest, options?: RequestOptions): ApiPromise&lt;BondProfile, ResponseError&gt;</code></summary>
+<summary><code>bondProfile(request: Bond.BondProfileRequest, options?: RequestOptions): ApiPromise&lt;BondProfile, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -116,7 +142,7 @@ Get general information of a bond. You can query by FIGI, ISIN or CUSIP. A list 
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -126,7 +152,25 @@ try {
   const response = await client.bond.bondProfile();
   // TODO: Handle 'response' of type BondProfile
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.bond.bondProfile().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type BondProfile
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -152,9 +196,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[BondProfile](src/models/bond-profile.ts)</code>
+**Direct**: `await client.bond.bondProfile(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[BondProfile](src/models/bond-profile.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.bond.bondProfile(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;BondProfile, ApiError&gt;</code>, with `result.value` of type <code>[BondProfile](src/models/bond-profile.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -165,7 +217,7 @@ try {
 </details>
 
 <details>
-<summary><code>bondTick(request: Bond.BondTickRequest, options?: RequestOptions): ApiPromise&lt;BondTickData, ResponseError&gt;</code></summary>
+<summary><code>bondTick(request: Bond.BondTickRequest, options?: RequestOptions): ApiPromise&lt;BondTickData, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -200,17 +252,47 @@ try {
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.bond.bondTick({ isin, date, limit, skip, exchange });
+  const response = await client.bond.bondTick({
+    isin: "some example string",
+    date: "2024-01-15",
+    limit: 1,
+    skip: 1,
+    exchange: "some example string",
+  });
   // TODO: Handle 'response' of type BondTickData
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.bond.bondTick({
+  isin: "some example string",
+  date: "2024-01-15",
+  limit: 1,
+  skip: 1,
+  exchange: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type BondTickData
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -238,9 +320,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[BondTickData](src/models/bond-tick-data.ts)</code>
+**Direct**: `await client.bond.bondTick(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[BondTickData](src/models/bond-tick-data.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.bond.bondTick(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;BondTickData, ApiError&gt;</code>, with `result.value` of type <code>[BondTickData](src/models/bond-tick-data.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -251,7 +341,7 @@ try {
 </details>
 
 <details>
-<summary><code>bondYieldCurve(request: Bond.BondYieldCurveRequest, options?: RequestOptions): ApiPromise&lt;BondYieldCurve, ResponseError&gt;</code></summary>
+<summary><code>bondYieldCurve(request: Bond.BondYieldCurveRequest, options?: RequestOptions): ApiPromise&lt;BondYieldCurve, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -266,17 +356,35 @@ Get yield curve data for Treasury bonds.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.bond.bondYieldCurve({ code });
+  const response = await client.bond.bondYieldCurve({ code: "some example string" });
   // TODO: Handle 'response' of type BondYieldCurve
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.bond.bondYieldCurve({ code: "some example string" }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type BondYieldCurve
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -300,9 +408,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[BondYieldCurve](src/models/bond-yield-curve.ts)</code>
+**Direct**: `await client.bond.bondYieldCurve(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[BondYieldCurve](src/models/bond-yield-curve.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.bond.bondYieldCurve(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;BondYieldCurve, ApiError&gt;</code>, with `result.value` of type <code>[BondYieldCurve](src/models/bond-yield-curve.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -317,7 +433,7 @@ try {
 > Source: [Calendar](src/resources/calendar.ts)
 
 <details>
-<summary><code>earningsCalendar(request: Calendar.EarningsCalendarRequest, options?: RequestOptions): ApiPromise&lt;EarningsCalendar, ResponseError&gt;</code></summary>
+<summary><code>earningsCalendar(request: Calendar.EarningsCalendarRequest, options?: RequestOptions): ApiPromise&lt;EarningsCalendar, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -332,7 +448,7 @@ Get historical and coming earnings release. EPS and Revenue in this endpoint are
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -342,7 +458,25 @@ try {
   const response = await client.calendar.earningsCalendar();
   // TODO: Handle 'response' of type EarningsCalendar
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.calendar.earningsCalendar().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type EarningsCalendar
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -369,9 +503,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[EarningsCalendar](src/models/earnings-calendar.ts)</code>
+**Direct**: `await client.calendar.earningsCalendar(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[EarningsCalendar](src/models/earnings-calendar.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.calendar.earningsCalendar(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;EarningsCalendar, ApiError&gt;</code>, with `result.value` of type <code>[EarningsCalendar](src/models/earnings-calendar.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -382,7 +524,7 @@ try {
 </details>
 
 <details>
-<summary><code>economicCalendar(request: Calendar.EconomicCalendarRequest, options?: RequestOptions): ApiPromise&lt;EconomicCalendar, ResponseError&gt;</code></summary>
+<summary><code>economicCalendar(request: Calendar.EconomicCalendarRequest, options?: RequestOptions): ApiPromise&lt;EconomicCalendar, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -397,7 +539,7 @@ try {
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -407,7 +549,25 @@ try {
   const response = await client.calendar.economicCalendar();
   // TODO: Handle 'response' of type EconomicCalendar
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.calendar.economicCalendar().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type EconomicCalendar
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -432,9 +592,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[EconomicCalendar](src/models/economic-calendar.ts)</code>
+**Direct**: `await client.calendar.economicCalendar(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[EconomicCalendar](src/models/economic-calendar.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.calendar.economicCalendar(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;EconomicCalendar, ApiError&gt;</code>, with `result.value` of type <code>[EconomicCalendar](src/models/economic-calendar.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -445,7 +613,7 @@ try {
 </details>
 
 <details>
-<summary><code>ipoCalendar(request: Calendar.IpoCalendarRequest, options?: RequestOptions): ApiPromise&lt;IpoCalendar, ResponseError&gt;</code></summary>
+<summary><code>ipoCalendar(request: Calendar.IpoCalendarRequest, options?: RequestOptions): ApiPromise&lt;IpoCalendar, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -460,17 +628,35 @@ Get recent and upcoming IPO.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.calendar.ipoCalendar({ from, to });
+  const response = await client.calendar.ipoCalendar({ from: "2024-01-15", to: "2024-01-15" });
   // TODO: Handle 'response' of type IpoCalendar
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.calendar.ipoCalendar({ from: "2024-01-15", to: "2024-01-15" }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type IpoCalendar
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -495,9 +681,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[IpoCalendar](src/models/ipo-calendar.ts)</code>
+**Direct**: `await client.calendar.ipoCalendar(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[IpoCalendar](src/models/ipo-calendar.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.calendar.ipoCalendar(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;IpoCalendar, ApiError&gt;</code>, with `result.value` of type <code>[IpoCalendar](src/models/ipo-calendar.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -512,7 +706,7 @@ try {
 > Source: [CorporateActions](src/resources/corporate-actions.ts)
 
 <details>
-<summary><code>isinChange(request: CorporateActions.IsinChangeRequest, options?: RequestOptions): ApiPromise&lt;IsinChange, ResponseError&gt;</code></summary>
+<summary><code>isinChange(request: CorporateActions.IsinChangeRequest, options?: RequestOptions): ApiPromise&lt;IsinChange, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -527,17 +721,41 @@ Get a list of ISIN changes for EU-listed securities. Limit to 2000 events at a t
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.corporateActions.isinChange({ from, to });
+  const response = await client.corporateActions.isinChange({
+    from: "some example string",
+    to: "some example string",
+  });
   // TODO: Handle 'response' of type IsinChange
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.corporateActions.isinChange({
+  from: "some example string",
+  to: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type IsinChange
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -562,9 +780,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[IsinChange](src/models/isin-change.ts)</code>
+**Direct**: `await client.corporateActions.isinChange(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[IsinChange](src/models/isin-change.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.corporateActions.isinChange(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;IsinChange, ApiError&gt;</code>, with `result.value` of type <code>[IsinChange](src/models/isin-change.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -575,7 +801,7 @@ try {
 </details>
 
 <details>
-<summary><code>symbolChange(request: CorporateActions.SymbolChangeRequest, options?: RequestOptions): ApiPromise&lt;SymbolChange, ResponseError&gt;</code></summary>
+<summary><code>symbolChange(request: CorporateActions.SymbolChangeRequest, options?: RequestOptions): ApiPromise&lt;SymbolChange, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -590,17 +816,41 @@ Get a list of symbol changes for US-listed, EU-listed, NSE and ASX securities. L
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.corporateActions.symbolChange({ from, to });
+  const response = await client.corporateActions.symbolChange({
+    from: "some example string",
+    to: "some example string",
+  });
   // TODO: Handle 'response' of type SymbolChange
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.corporateActions.symbolChange({
+  from: "some example string",
+  to: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type SymbolChange
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -625,9 +875,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[SymbolChange](src/models/symbol-change.ts)</code>
+**Direct**: `await client.corporateActions.symbolChange(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[SymbolChange](src/models/symbol-change.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.corporateActions.symbolChange(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;SymbolChange, ApiError&gt;</code>, with `result.value` of type <code>[SymbolChange](src/models/symbol-change.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -642,7 +900,7 @@ try {
 > Source: [Crypto](src/resources/crypto.ts)
 
 <details>
-<summary><code>cryptoCandles(request: Crypto.CryptoCandlesRequest, options?: RequestOptions): ApiPromise&lt;CryptoCandles, ResponseError&gt;</code></summary>
+<summary><code>cryptoCandles(request: Crypto.CryptoCandlesRequest, options?: RequestOptions): ApiPromise&lt;CryptoCandles, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -657,17 +915,45 @@ Get candlestick data for crypto symbols.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.crypto.cryptoCandles({ symbol, resolution, from, to });
+  const response = await client.crypto.cryptoCandles({
+    symbol: "some example string",
+    resolution: "some example string",
+    from: 1,
+    to: 1,
+  });
   // TODO: Handle 'response' of type CryptoCandles
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.crypto.cryptoCandles({
+  symbol: "some example string",
+  resolution: "some example string",
+  from: 1,
+  to: 1,
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type CryptoCandles
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -694,9 +980,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[CryptoCandles](src/models/crypto-candles.ts)</code>
+**Direct**: `await client.crypto.cryptoCandles(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[CryptoCandles](src/models/crypto-candles.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.crypto.cryptoCandles(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;CryptoCandles, ApiError&gt;</code>, with `result.value` of type <code>[CryptoCandles](src/models/crypto-candles.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -707,7 +1001,7 @@ try {
 </details>
 
 <details>
-<summary><code>cryptoExchanges(options?: RequestOptions): ApiPromise&lt;string[], ResponseError&gt;</code></summary>
+<summary><code>cryptoExchanges(options?: RequestOptions): ApiPromise&lt;string[], ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -722,7 +1016,7 @@ List supported crypto exchanges
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -732,7 +1026,25 @@ try {
   const response = await client.crypto.cryptoExchanges();
   // TODO: Handle 'response' of type string[]
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.crypto.cryptoExchanges().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type string[]
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -744,9 +1056,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>string[]</code>
+**Direct**: `await client.crypto.cryptoExchanges()`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>string[]</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.crypto.cryptoExchanges().asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;string[], ApiError&gt;</code>, with `result.value` of type <code>string[]</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -757,7 +1077,7 @@ try {
 </details>
 
 <details>
-<summary><code>cryptoProfile(request: Crypto.CryptoProfileRequest, options?: RequestOptions): ApiPromise&lt;CryptoProfile, ResponseError&gt;</code></summary>
+<summary><code>cryptoProfile(request: Crypto.CryptoProfileRequest, options?: RequestOptions): ApiPromise&lt;CryptoProfile, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -772,17 +1092,35 @@ Get crypto's profile.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.crypto.cryptoProfile({ symbol });
+  const response = await client.crypto.cryptoProfile({ symbol: "some example string" });
   // TODO: Handle 'response' of type CryptoProfile
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.crypto.cryptoProfile({ symbol: "some example string" }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type CryptoProfile
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -806,9 +1144,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[CryptoProfile](src/models/crypto-profile.ts)</code>
+**Direct**: `await client.crypto.cryptoProfile(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[CryptoProfile](src/models/crypto-profile.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.crypto.cryptoProfile(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;CryptoProfile, ApiError&gt;</code>, with `result.value` of type <code>[CryptoProfile](src/models/crypto-profile.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -819,7 +1165,7 @@ try {
 </details>
 
 <details>
-<summary><code>cryptoSymbols(request: Crypto.CryptoSymbolsRequest, options?: RequestOptions): ApiPromise&lt;CryptoSymbol[], ResponseError&gt;</code></summary>
+<summary><code>cryptoSymbols(request: Crypto.CryptoSymbolsRequest, options?: RequestOptions): ApiPromise&lt;CryptoSymbol[], ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -834,17 +1180,35 @@ List supported crypto symbols by exchange
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.crypto.cryptoSymbols({ exchange });
+  const response = await client.crypto.cryptoSymbols({ exchange: "some example string" });
   // TODO: Handle 'response' of type CryptoSymbol[]
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.crypto.cryptoSymbols({ exchange: "some example string" }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type CryptoSymbol[]
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -868,9 +1232,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[CryptoSymbol](src/models/crypto-symbol.ts)[]</code>
+**Direct**: `await client.crypto.cryptoSymbols(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[CryptoSymbol](src/models/crypto-symbol.ts)[]</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.crypto.cryptoSymbols(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;CryptoSymbol[], ApiError&gt;</code>, with `result.value` of type <code>[CryptoSymbol](src/models/crypto-symbol.ts)[]</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -885,7 +1257,7 @@ try {
 > Source: [Economic](src/resources/economic.ts)
 
 <details>
-<summary><code>economicCode(options?: RequestOptions): ApiPromise&lt;EconomicCode[], ResponseError&gt;</code></summary>
+<summary><code>economicCode(options?: RequestOptions): ApiPromise&lt;EconomicCode[], ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -900,7 +1272,7 @@ List codes of supported economic data.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -910,7 +1282,25 @@ try {
   const response = await client.economic.economicCode();
   // TODO: Handle 'response' of type EconomicCode[]
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.economic.economicCode().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type EconomicCode[]
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -922,9 +1312,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[EconomicCode](src/models/economic-code.ts)[]</code>
+**Direct**: `await client.economic.economicCode()`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[EconomicCode](src/models/economic-code.ts)[]</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.economic.economicCode().asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;EconomicCode[], ApiError&gt;</code>, with `result.value` of type <code>[EconomicCode](src/models/economic-code.ts)[]</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -935,7 +1333,7 @@ try {
 </details>
 
 <details>
-<summary><code>economicData(request: Economic.EconomicDataRequest, options?: RequestOptions): ApiPromise&lt;EconomicData, ResponseError&gt;</code></summary>
+<summary><code>economicData(request: Economic.EconomicDataRequest, options?: RequestOptions): ApiPromise&lt;EconomicData, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -950,17 +1348,35 @@ Get economic data.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.economic.economicData({ code });
+  const response = await client.economic.economicData({ code: "some example string" });
   // TODO: Handle 'response' of type EconomicData
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.economic.economicData({ code: "some example string" }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type EconomicData
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -984,9 +1400,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[EconomicData](src/models/economic-data.ts)</code>
+**Direct**: `await client.economic.economicData(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[EconomicData](src/models/economic-data.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.economic.economicData(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;EconomicData, ApiError&gt;</code>, with `result.value` of type <code>[EconomicData](src/models/economic-data.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -1001,7 +1425,7 @@ try {
 > Source: [Etf](src/resources/etf.ts)
 
 <details>
-<summary><code>etfsAllocation(request: Etf.EtfsAllocationRequest, options?: RequestOptions): ApiPromise&lt;EtFsAllocation, ResponseError&gt;</code></summary>
+<summary><code>etfsAllocation(request: Etf.EtfsAllocationRequest, options?: RequestOptions): ApiPromise&lt;EtFsAllocation, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -1016,7 +1440,7 @@ Get ETF equity allocation based on the characteristics of the holdings.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -1026,7 +1450,25 @@ try {
   const response = await client.etf.etfsAllocation();
   // TODO: Handle 'response' of type EtFsAllocation
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.etf.etfsAllocation().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type EtFsAllocation
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -1051,9 +1493,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[EtFsAllocation](src/models/et-fs-allocation.ts)</code>
+**Direct**: `await client.etf.etfsAllocation(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[EtFsAllocation](src/models/et-fs-allocation.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.etf.etfsAllocation(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;EtFsAllocation, ApiError&gt;</code>, with `result.value` of type <code>[EtFsAllocation](src/models/et-fs-allocation.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -1064,7 +1514,7 @@ try {
 </details>
 
 <details>
-<summary><code>etfsCountryExposure(request: Etf.EtfsCountryExposureRequest, options?: RequestOptions): ApiPromise&lt;EtFsCountryExposure, ResponseError&gt;</code></summary>
+<summary><code>etfsCountryExposure(request: Etf.EtfsCountryExposureRequest, options?: RequestOptions): ApiPromise&lt;EtFsCountryExposure, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -1079,7 +1529,7 @@ Get ETF country exposure data.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -1089,7 +1539,25 @@ try {
   const response = await client.etf.etfsCountryExposure();
   // TODO: Handle 'response' of type EtFsCountryExposure
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.etf.etfsCountryExposure().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type EtFsCountryExposure
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -1114,9 +1582,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[EtFsCountryExposure](src/models/et-fs-country-exposure.ts)</code>
+**Direct**: `await client.etf.etfsCountryExposure(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[EtFsCountryExposure](src/models/et-fs-country-exposure.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.etf.etfsCountryExposure(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;EtFsCountryExposure, ApiError&gt;</code>, with `result.value` of type <code>[EtFsCountryExposure](src/models/et-fs-country-exposure.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -1127,7 +1603,7 @@ try {
 </details>
 
 <details>
-<summary><code>etfsHoldings(request: Etf.EtfsHoldingsRequest, options?: RequestOptions): ApiPromise&lt;EtFsHoldings, ResponseError&gt;</code></summary>
+<summary><code>etfsHoldings(request: Etf.EtfsHoldingsRequest, options?: RequestOptions): ApiPromise&lt;EtFsHoldings, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -1142,7 +1618,7 @@ Get full ETF holdings/constituents. This endpoint has global coverage. Widget on
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -1152,7 +1628,25 @@ try {
   const response = await client.etf.etfsHoldings();
   // TODO: Handle 'response' of type EtFsHoldings
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.etf.etfsHoldings().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type EtFsHoldings
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -1179,9 +1673,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[EtFsHoldings](src/models/et-fs-holdings.ts)</code>
+**Direct**: `await client.etf.etfsHoldings(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[EtFsHoldings](src/models/et-fs-holdings.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.etf.etfsHoldings(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;EtFsHoldings, ApiError&gt;</code>, with `result.value` of type <code>[EtFsHoldings](src/models/et-fs-holdings.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -1192,7 +1694,7 @@ try {
 </details>
 
 <details>
-<summary><code>etfsProfile(request: Etf.EtfsProfileRequest, options?: RequestOptions): ApiPromise&lt;EtFsProfile, ResponseError&gt;</code></summary>
+<summary><code>etfsProfile(request: Etf.EtfsProfileRequest, options?: RequestOptions): ApiPromise&lt;EtFsProfile, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -1207,7 +1709,7 @@ Get ETF profile information. This endpoint has global coverage. A list of suppor
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -1217,7 +1719,25 @@ try {
   const response = await client.etf.etfsProfile();
   // TODO: Handle 'response' of type EtFsProfile
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.etf.etfsProfile().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type EtFsProfile
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -1242,9 +1762,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[EtFsProfile](src/models/et-fs-profile.ts)</code>
+**Direct**: `await client.etf.etfsProfile(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[EtFsProfile](src/models/et-fs-profile.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.etf.etfsProfile(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;EtFsProfile, ApiError&gt;</code>, with `result.value` of type <code>[EtFsProfile](src/models/et-fs-profile.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -1255,7 +1783,7 @@ try {
 </details>
 
 <details>
-<summary><code>etfsSectorExposure(request: Etf.EtfsSectorExposureRequest, options?: RequestOptions): ApiPromise&lt;EtFsSectorExposure, ResponseError&gt;</code></summary>
+<summary><code>etfsSectorExposure(request: Etf.EtfsSectorExposureRequest, options?: RequestOptions): ApiPromise&lt;EtFsSectorExposure, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -1270,7 +1798,7 @@ Get ETF sector exposure data.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -1280,7 +1808,25 @@ try {
   const response = await client.etf.etfsSectorExposure();
   // TODO: Handle 'response' of type EtFsSectorExposure
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.etf.etfsSectorExposure().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type EtFsSectorExposure
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -1305,9 +1851,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[EtFsSectorExposure](src/models/et-fs-sector-exposure.ts)</code>
+**Direct**: `await client.etf.etfsSectorExposure(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[EtFsSectorExposure](src/models/et-fs-sector-exposure.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.etf.etfsSectorExposure(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;EtFsSectorExposure, ApiError&gt;</code>, with `result.value` of type <code>[EtFsSectorExposure](src/models/et-fs-sector-exposure.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -1322,7 +1876,7 @@ try {
 > Source: [Forex](src/resources/forex.ts)
 
 <details>
-<summary><code>forexCandles(request: Forex.ForexCandlesRequest, options?: RequestOptions): ApiPromise&lt;ForexCandles, ResponseError&gt;</code></summary>
+<summary><code>forexCandles(request: Forex.ForexCandlesRequest, options?: RequestOptions): ApiPromise&lt;ForexCandles, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -1337,17 +1891,45 @@ Get candlestick data for forex symbols.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.forex.forexCandles({ symbol, resolution, from, to });
+  const response = await client.forex.forexCandles({
+    symbol: "some example string",
+    resolution: "some example string",
+    from: 1,
+    to: 1,
+  });
   // TODO: Handle 'response' of type ForexCandles
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.forex.forexCandles({
+  symbol: "some example string",
+  resolution: "some example string",
+  from: 1,
+  to: 1,
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type ForexCandles
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -1374,9 +1956,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ForexCandles](src/models/forex-candles.ts)</code>
+**Direct**: `await client.forex.forexCandles(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[ForexCandles](src/models/forex-candles.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.forex.forexCandles(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;ForexCandles, ApiError&gt;</code>, with `result.value` of type <code>[ForexCandles](src/models/forex-candles.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -1387,7 +1977,7 @@ try {
 </details>
 
 <details>
-<summary><code>forexExchanges(options?: RequestOptions): ApiPromise&lt;string[], ResponseError&gt;</code></summary>
+<summary><code>forexExchanges(options?: RequestOptions): ApiPromise&lt;string[], ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -1402,7 +1992,7 @@ List supported forex exchanges
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -1412,7 +2002,25 @@ try {
   const response = await client.forex.forexExchanges();
   // TODO: Handle 'response' of type string[]
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.forex.forexExchanges().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type string[]
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -1424,9 +2032,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>string[]</code>
+**Direct**: `await client.forex.forexExchanges()`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>string[]</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.forex.forexExchanges().asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;string[], ApiError&gt;</code>, with `result.value` of type <code>string[]</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -1437,7 +2053,7 @@ try {
 </details>
 
 <details>
-<summary><code>forexRates(request: Forex.ForexRatesRequest, options?: RequestOptions): ApiPromise&lt;Forexrates, ResponseError&gt;</code></summary>
+<summary><code>forexRates(request: Forex.ForexRatesRequest, options?: RequestOptions): ApiPromise&lt;Forexrates, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -1452,7 +2068,7 @@ Get rates for all forex pairs. Ideal for currency conversion
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -1462,7 +2078,25 @@ try {
   const response = await client.forex.forexRates();
   // TODO: Handle 'response' of type Forexrates
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.forex.forexRates().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type Forexrates
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -1487,9 +2121,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Forexrates](src/models/forexrates.ts)</code>
+**Direct**: `await client.forex.forexRates(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[Forexrates](src/models/forexrates.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.forex.forexRates(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;Forexrates, ApiError&gt;</code>, with `result.value` of type <code>[Forexrates](src/models/forexrates.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -1500,7 +2142,7 @@ try {
 </details>
 
 <details>
-<summary><code>forexSymbols(request: Forex.ForexSymbolsRequest, options?: RequestOptions): ApiPromise&lt;ForexSymbol[], ResponseError&gt;</code></summary>
+<summary><code>forexSymbols(request: Forex.ForexSymbolsRequest, options?: RequestOptions): ApiPromise&lt;ForexSymbol[], ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -1515,17 +2157,35 @@ List supported forex symbols.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.forex.forexSymbols({ exchange });
+  const response = await client.forex.forexSymbols({ exchange: "some example string" });
   // TODO: Handle 'response' of type ForexSymbol[]
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.forex.forexSymbols({ exchange: "some example string" }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type ForexSymbol[]
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -1549,9 +2209,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ForexSymbol](src/models/forex-symbol.ts)[]</code>
+**Direct**: `await client.forex.forexSymbols(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[ForexSymbol](src/models/forex-symbol.ts)[]</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.forex.forexSymbols(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;ForexSymbol[], ApiError&gt;</code>, with `result.value` of type <code>[ForexSymbol](src/models/forex-symbol.ts)[]</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -1566,7 +2234,7 @@ try {
 > Source: [GlobalFilings](src/resources/global-filings.ts)
 
 <details>
-<summary><code>globalFilingsDownload(request: GlobalFilings.GlobalFilingsDownloadRequest, options?: RequestOptions): ApiPromise&lt;undefined, ResponseError&gt;</code></summary>
+<summary><code>globalFilingsDownload(request: GlobalFilings.GlobalFilingsDownloadRequest, options?: RequestOptions): ApiPromise&lt;undefined, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -1581,16 +2249,36 @@ try {
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  await client.globalFilings.globalFilingsDownload({ documentId });
+  await client.globalFilings.globalFilingsDownload({ documentId: "some example string" });
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.globalFilings.globalFilingsDownload({
+  documentId: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: The call succeeded and resolves to no body
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -1614,9 +2302,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>undefined</code>
+**Direct**: `await client.globalFilings.globalFilingsDownload(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>undefined</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.globalFilings.globalFilingsDownload(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;undefined, ApiError&gt;</code>, with `result.value` of type <code>undefined</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -1627,7 +2323,7 @@ try {
 </details>
 
 <details>
-<summary><code>globalFilingsSearch(request: GlobalFilings.GlobalFilingsSearchRequest, options?: RequestOptions): ApiPromise&lt;SearchResponse, ResponseError&gt;</code></summary>
+<summary><code>globalFilingsSearch(request: GlobalFilings.GlobalFilingsSearchRequest, options?: RequestOptions): ApiPromise&lt;SearchResponse, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -1642,7 +2338,7 @@ try {
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -1652,7 +2348,25 @@ try {
   const response = await client.globalFilings.globalFilingsSearch();
   // TODO: Handle 'response' of type SearchResponse
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.globalFilings.globalFilingsSearch().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type SearchResponse
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -1676,9 +2390,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[SearchResponse](src/models/search-response.ts)</code>
+**Direct**: `await client.globalFilings.globalFilingsSearch(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[SearchResponse](src/models/search-response.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.globalFilings.globalFilingsSearch(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;SearchResponse, ApiError&gt;</code>, with `result.value` of type <code>[SearchResponse](src/models/search-response.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -1689,7 +2411,7 @@ try {
 </details>
 
 <details>
-<summary><code>globalFilingsSearchFilter(request: GlobalFilings.GlobalFilingsSearchFilterRequest, options?: RequestOptions): ApiPromise&lt;SearchFilter, ResponseError&gt;</code></summary>
+<summary><code>globalFilingsSearchFilter(request: GlobalFilings.GlobalFilingsSearchFilterRequest, options?: RequestOptions): ApiPromise&lt;SearchFilter, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -1704,17 +2426,37 @@ try {
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.globalFilings.globalFilingsSearchFilter({ field });
+  const response = await client.globalFilings.globalFilingsSearchFilter({ field: "some example string" });
   // TODO: Handle 'response' of type SearchFilter
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.globalFilings.globalFilingsSearchFilter({
+  field: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type SearchFilter
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -1739,9 +2481,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[SearchFilter](src/models/search-filter.ts)</code>
+**Direct**: `await client.globalFilings.globalFilingsSearchFilter(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[SearchFilter](src/models/search-filter.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.globalFilings.globalFilingsSearchFilter(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;SearchFilter, ApiError&gt;</code>, with `result.value` of type <code>[SearchFilter](src/models/search-filter.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -1752,7 +2502,7 @@ try {
 </details>
 
 <details>
-<summary><code>searchInFiling(request: GlobalFilings.SearchInFilingRequest, options?: RequestOptions): ApiPromise&lt;InFilingResponse, ResponseError&gt;</code></summary>
+<summary><code>searchInFiling(request: GlobalFilings.SearchInFilingRequest, options?: RequestOptions): ApiPromise&lt;InFilingResponse, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -1767,7 +2517,7 @@ try {
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -1777,7 +2527,25 @@ try {
   const response = await client.globalFilings.searchInFiling();
   // TODO: Handle 'response' of type InFilingResponse
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.globalFilings.searchInFiling().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type InFilingResponse
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -1801,9 +2569,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[InFilingResponse](src/models/in-filing-response.ts)</code>
+**Direct**: `await client.globalFilings.searchInFiling(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[InFilingResponse](src/models/in-filing-response.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.globalFilings.searchInFiling(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;InFilingResponse, ApiError&gt;</code>, with `result.value` of type <code>[InFilingResponse](src/models/in-filing-response.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -1818,7 +2594,7 @@ try {
 > Source: [Index](src/resources/index.ts)
 
 <details>
-<summary><code>indicesConstituents(request: Index.IndicesConstituentsRequest, options?: RequestOptions): ApiPromise&lt;IndicesConstituents, ResponseError&gt;</code></summary>
+<summary><code>indicesConstituents(request: Index.IndicesConstituentsRequest, options?: RequestOptions): ApiPromise&lt;IndicesConstituents, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -1833,17 +2609,35 @@ Get a list of index's constituents. A list of supported indices for this endpoin
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.index.indicesConstituents({ symbol });
+  const response = await client.index.indicesConstituents({ symbol: "some example string" });
   // TODO: Handle 'response' of type IndicesConstituents
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.index.indicesConstituents({ symbol: "some example string" }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type IndicesConstituents
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -1867,9 +2661,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[IndicesConstituents](src/models/indices-constituents.ts)</code>
+**Direct**: `await client.index.indicesConstituents(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[IndicesConstituents](src/models/indices-constituents.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.index.indicesConstituents(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;IndicesConstituents, ApiError&gt;</code>, with `result.value` of type <code>[IndicesConstituents](src/models/indices-constituents.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -1880,7 +2682,7 @@ try {
 </details>
 
 <details>
-<summary><code>indicesHistoricalConstituents(request: Index.IndicesHistoricalConstituentsRequest, options?: RequestOptions): ApiPromise&lt;IndicesHistoricalConstituents, ResponseError&gt;</code></summary>
+<summary><code>indicesHistoricalConstituents(request: Index.IndicesHistoricalConstituentsRequest, options?: RequestOptions): ApiPromise&lt;IndicesHistoricalConstituents, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -1895,17 +2697,37 @@ Get full history of index's constituents including symbols and dates of joining 
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.index.indicesHistoricalConstituents({ symbol });
+  const response = await client.index.indicesHistoricalConstituents({ symbol: "some example string" });
   // TODO: Handle 'response' of type IndicesHistoricalConstituents
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.index.indicesHistoricalConstituents({
+  symbol: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type IndicesHistoricalConstituents
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -1929,9 +2751,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[IndicesHistoricalConstituents](src/models/indices-historical-constituents.ts)</code>
+**Direct**: `await client.index.indicesHistoricalConstituents(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[IndicesHistoricalConstituents](src/models/indices-historical-constituents.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.index.indicesHistoricalConstituents(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;IndicesHistoricalConstituents, ApiError&gt;</code>, with `result.value` of type <code>[IndicesHistoricalConstituents](src/models/indices-historical-constituents.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -1946,7 +2776,7 @@ try {
 > Source: [Institutional](src/resources/institutional.ts)
 
 <details>
-<summary><code>institutionalOwnership(request: Institutional.InstitutionalOwnershipRequest, options?: RequestOptions): ApiPromise&lt;InstitutionalOwnership, ResponseError&gt;</code></summary>
+<summary><code>institutionalOwnership(request: Institutional.InstitutionalOwnershipRequest, options?: RequestOptions): ApiPromise&lt;InstitutionalOwnership, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -1961,17 +2791,45 @@ Get a list institutional investors' positions for a particular stock overtime. D
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.institutional.institutionalOwnership({ symbol, cusip, from, to });
+  const response = await client.institutional.institutionalOwnership({
+    symbol: "some example string",
+    cusip: "some example string",
+    from: "some example string",
+    to: "some example string",
+  });
   // TODO: Handle 'response' of type InstitutionalOwnership
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.institutional.institutionalOwnership({
+  symbol: "some example string",
+  cusip: "some example string",
+  from: "some example string",
+  to: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type InstitutionalOwnership
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -1998,9 +2856,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[InstitutionalOwnership](src/models/institutional-ownership.ts)</code>
+**Direct**: `await client.institutional.institutionalOwnership(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[InstitutionalOwnership](src/models/institutional-ownership.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.institutional.institutionalOwnership(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;InstitutionalOwnership, ApiError&gt;</code>, with `result.value` of type <code>[InstitutionalOwnership](src/models/institutional-ownership.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -2011,7 +2877,7 @@ try {
 </details>
 
 <details>
-<summary><code>institutionalPortfolio(request: Institutional.InstitutionalPortfolioRequest, options?: RequestOptions): ApiPromise&lt;InstitutionalPortfolio, ResponseError&gt;</code></summary>
+<summary><code>institutionalPortfolio(request: Institutional.InstitutionalPortfolioRequest, options?: RequestOptions): ApiPromise&lt;InstitutionalPortfolio, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -2026,17 +2892,43 @@ Get the holdings/portfolio data of institutional investors from 13-F filings. Li
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.institutional.institutionalPortfolio({ cik, from, to });
+  const response = await client.institutional.institutionalPortfolio({
+    cik: "some example string",
+    from: "some example string",
+    to: "some example string",
+  });
   // TODO: Handle 'response' of type InstitutionalPortfolio
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.institutional.institutionalPortfolio({
+  cik: "some example string",
+  from: "some example string",
+  to: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type InstitutionalPortfolio
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -2062,9 +2954,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[InstitutionalPortfolio](src/models/institutional-portfolio.ts)</code>
+**Direct**: `await client.institutional.institutionalPortfolio(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[InstitutionalPortfolio](src/models/institutional-portfolio.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.institutional.institutionalPortfolio(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;InstitutionalPortfolio, ApiError&gt;</code>, with `result.value` of type <code>[InstitutionalPortfolio](src/models/institutional-portfolio.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -2075,7 +2975,7 @@ try {
 </details>
 
 <details>
-<summary><code>institutionalProfile(request: Institutional.InstitutionalProfileRequest, options?: RequestOptions): ApiPromise&lt;InstitutionalProfile, ResponseError&gt;</code></summary>
+<summary><code>institutionalProfile(request: Institutional.InstitutionalProfileRequest, options?: RequestOptions): ApiPromise&lt;InstitutionalProfile, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -2090,7 +2990,7 @@ Get a list of well-known institutional investors. Currently support 60+ profiles
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -2100,7 +3000,25 @@ try {
   const response = await client.institutional.institutionalProfile();
   // TODO: Handle 'response' of type InstitutionalProfile
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.institutional.institutionalProfile().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type InstitutionalProfile
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -2124,9 +3042,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[InstitutionalProfile](src/models/institutional-profile.ts)</code>
+**Direct**: `await client.institutional.institutionalProfile(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[InstitutionalProfile](src/models/institutional-profile.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.institutional.institutionalProfile(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;InstitutionalProfile, ApiError&gt;</code>, with `result.value` of type <code>[InstitutionalProfile](src/models/institutional-profile.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -2141,7 +3067,7 @@ try {
 > Source: [Misc](src/resources/misc.ts)
 
 <details>
-<summary><code>aiChat(request: Misc.AiChatRequest, options?: RequestOptions): ApiPromise&lt;AiChatResponse, ResponseError&gt;</code></summary>
+<summary><code>aiChat(request: Misc.AiChatRequest, options?: RequestOptions): ApiPromise&lt;AiChatResponse, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -2156,7 +3082,7 @@ try {
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -2166,7 +3092,25 @@ try {
   const response = await client.misc.aiChat();
   // TODO: Handle 'response' of type AiChatResponse
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.misc.aiChat().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type AiChatResponse
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -2190,9 +3134,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AiChatResponse](src/models/ai-chat-response.ts)</code>
+**Direct**: `await client.misc.aiChat(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[AiChatResponse](src/models/ai-chat-response.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.misc.aiChat(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;AiChatResponse, ApiError&gt;</code>, with `result.value` of type <code>[AiChatResponse](src/models/ai-chat-response.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -2203,7 +3155,7 @@ try {
 </details>
 
 <details>
-<summary><code>airlinePriceIndex(request: Misc.AirlinePriceIndexRequest, options?: RequestOptions): ApiPromise&lt;AirlinePriceIndexData, ResponseError&gt;</code></summary>
+<summary><code>airlinePriceIndex(request: Misc.AirlinePriceIndexRequest, options?: RequestOptions): ApiPromise&lt;AirlinePriceIndexData, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -2218,17 +3170,43 @@ try {
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.misc.airlinePriceIndex({ airline, from, to });
+  const response = await client.misc.airlinePriceIndex({
+    airline: "some example string",
+    from: "2024-01-15",
+    to: "2024-01-15",
+  });
   // TODO: Handle 'response' of type AirlinePriceIndexData
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.misc.airlinePriceIndex({
+  airline: "some example string",
+  from: "2024-01-15",
+  to: "2024-01-15",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type AirlinePriceIndexData
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -2254,9 +3232,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AirlinePriceIndexData](src/models/airline-price-index-data.ts)</code>
+**Direct**: `await client.misc.airlinePriceIndex(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[AirlinePriceIndexData](src/models/airline-price-index-data.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.misc.airlinePriceIndex(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;AirlinePriceIndexData, ApiError&gt;</code>, with `result.value` of type <code>[AirlinePriceIndexData](src/models/airline-price-index-data.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -2267,7 +3253,7 @@ try {
 </details>
 
 <details>
-<summary><code>bankBranch(request: Misc.BankBranchRequest, options?: RequestOptions): ApiPromise&lt;BankBranchRes, ResponseError&gt;</code></summary>
+<summary><code>bankBranch(request: Misc.BankBranchRequest, options?: RequestOptions): ApiPromise&lt;BankBranchRes, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -2282,17 +3268,35 @@ Retrieve list of US bank branches information for a given symbol.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.misc.bankBranch({ symbol });
+  const response = await client.misc.bankBranch({ symbol: {} });
   // TODO: Handle 'response' of type BankBranchRes
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.misc.bankBranch({ symbol: {} }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type BankBranchRes
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -2316,9 +3320,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[BankBranchRes](src/models/bank-branch-res.ts)</code>
+**Direct**: `await client.misc.bankBranch(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[BankBranchRes](src/models/bank-branch-res.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.misc.bankBranch(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;BankBranchRes, ApiError&gt;</code>, with `result.value` of type <code>[BankBranchRes](src/models/bank-branch-res.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -2329,7 +3341,7 @@ try {
 </details>
 
 <details>
-<summary><code>country(options?: RequestOptions): ApiPromise&lt;CountryMetadata[], ResponseError&gt;</code></summary>
+<summary><code>country(options?: RequestOptions): ApiPromise&lt;CountryMetadata[], ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -2344,7 +3356,7 @@ List all countries and metadata.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -2354,7 +3366,25 @@ try {
   const response = await client.misc.country();
   // TODO: Handle 'response' of type CountryMetadata[]
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.misc.country().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type CountryMetadata[]
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -2366,9 +3396,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[CountryMetadata](src/models/country-metadata.ts)[]</code>
+**Direct**: `await client.misc.country()`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[CountryMetadata](src/models/country-metadata.ts)[]</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.misc.country().asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;CountryMetadata[], ApiError&gt;</code>, with `result.value` of type <code>[CountryMetadata](src/models/country-metadata.ts)[]</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -2379,7 +3417,7 @@ try {
 </details>
 
 <details>
-<summary><code>covid19(options?: RequestOptions): ApiPromise&lt;CovidInfo[], ResponseError&gt;</code></summary>
+<summary><code>covid19(options?: RequestOptions): ApiPromise&lt;CovidInfo[], ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -2394,7 +3432,7 @@ Get real-time updates on the number of COVID-19 (Corona virus) cases in the US w
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -2404,7 +3442,25 @@ try {
   const response = await client.misc.covid19();
   // TODO: Handle 'response' of type CovidInfo[]
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.misc.covid19().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type CovidInfo[]
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -2416,9 +3472,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[CovidInfo](src/models/covid-info.ts)[]</code>
+**Direct**: `await client.misc.covid19()`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[CovidInfo](src/models/covid-info.ts)[]</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.misc.covid19().asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;CovidInfo[], ApiError&gt;</code>, with `result.value` of type <code>[CovidInfo](src/models/covid-info.ts)[]</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -2429,7 +3493,7 @@ try {
 </details>
 
 <details>
-<summary><code>fdaCommitteeMeetingCalendar(options?: RequestOptions): ApiPromise&lt;FdaComitteeMeeting[], ResponseError&gt;</code></summary>
+<summary><code>fdaCommitteeMeetingCalendar(options?: RequestOptions): ApiPromise&lt;FdaComitteeMeeting[], ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -2444,7 +3508,7 @@ FDA's advisory committees are established to provide functions which support the
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -2454,7 +3518,25 @@ try {
   const response = await client.misc.fdaCommitteeMeetingCalendar();
   // TODO: Handle 'response' of type FdaComitteeMeeting[]
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.misc.fdaCommitteeMeetingCalendar().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type FdaComitteeMeeting[]
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -2466,9 +3548,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[FdaComitteeMeeting](src/models/fda-comittee-meeting.ts)[]</code>
+**Direct**: `await client.misc.fdaCommitteeMeetingCalendar()`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[FdaComitteeMeeting](src/models/fda-comittee-meeting.ts)[]</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.misc.fdaCommitteeMeetingCalendar().asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;FdaComitteeMeeting[], ApiError&gt;</code>, with `result.value` of type <code>[FdaComitteeMeeting](src/models/fda-comittee-meeting.ts)[]</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -2479,7 +3569,7 @@ try {
 </details>
 
 <details>
-<summary><code>quote(request: Misc.QuoteRequest, options?: RequestOptions): ApiPromise&lt;Quote, ResponseError&gt;</code></summary>
+<summary><code>quote(request: Misc.QuoteRequest, options?: RequestOptions): ApiPromise&lt;Quote, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -2494,17 +3584,35 @@ try {
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.misc.quote({ symbol });
+  const response = await client.misc.quote({ symbol: "some example string" });
   // TODO: Handle 'response' of type Quote
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.misc.quote({ symbol: "some example string" }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type Quote
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -2528,9 +3636,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Quote](src/models/quote.ts)</code>
+**Direct**: `await client.misc.quote(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[Quote](src/models/quote.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.misc.quote(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;Quote, ApiError&gt;</code>, with `result.value` of type <code>[Quote](src/models/quote.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -2541,7 +3657,7 @@ try {
 </details>
 
 <details>
-<summary><code>sectorMetric(request: Misc.SectorMetricRequest, options?: RequestOptions): ApiPromise&lt;SectorMetric, ResponseError&gt;</code></summary>
+<summary><code>sectorMetric(request: Misc.SectorMetricRequest, options?: RequestOptions): ApiPromise&lt;SectorMetric, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -2556,17 +3672,35 @@ Get ratios for different sectors and regions/indices.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.misc.sectorMetric({ region });
+  const response = await client.misc.sectorMetric({ region: "some example string" });
   // TODO: Handle 'response' of type SectorMetric
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.misc.sectorMetric({ region: "some example string" }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type SectorMetric
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -2590,9 +3724,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[SectorMetric](src/models/sector-metric.ts)</code>
+**Direct**: `await client.misc.sectorMetric(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[SectorMetric](src/models/sector-metric.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.misc.sectorMetric(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;SectorMetric, ApiError&gt;</code>, with `result.value` of type <code>[SectorMetric](src/models/sector-metric.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -2603,7 +3745,7 @@ try {
 </details>
 
 <details>
-<summary><code>symbolSearch(request: Misc.SymbolSearchRequest, options?: RequestOptions): ApiPromise&lt;SymbolLookup, ResponseError&gt;</code></summary>
+<summary><code>symbolSearch(request: Misc.SymbolSearchRequest, options?: RequestOptions): ApiPromise&lt;SymbolLookup, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -2618,17 +3760,35 @@ Search for best-matching symbols based on your query. You can input anything fro
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.misc.symbolSearch({ q });
+  const response = await client.misc.symbolSearch({ q: "some example string" });
   // TODO: Handle 'response' of type SymbolLookup
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.misc.symbolSearch({ q: "some example string" }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type SymbolLookup
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -2653,9 +3813,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[SymbolLookup](src/models/symbol-lookup.ts)</code>
+**Direct**: `await client.misc.symbolSearch(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[SymbolLookup](src/models/symbol-lookup.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.misc.symbolSearch(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;SymbolLookup, ApiError&gt;</code>, with `result.value` of type <code>[SymbolLookup](src/models/symbol-lookup.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -2666,7 +3834,7 @@ try {
 </details>
 
 <details>
-<summary><code>technicalIndicator(request: Misc.TechnicalIndicatorRequest, options?: RequestOptions): ApiPromise&lt;Record&lt;string, unknown&gt;, ResponseError&gt;</code></summary>
+<summary><code>technicalIndicator(request: Misc.TechnicalIndicatorRequest, options?: RequestOptions): ApiPromise&lt;Record&lt;string, unknown&gt;, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -2681,17 +3849,47 @@ Return technical indicator with price data. List of supported indicators can be 
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.misc.technicalIndicator({ symbol, resolution, from, to, indicator });
+  const response = await client.misc.technicalIndicator({
+    symbol: "some example string",
+    resolution: "some example string",
+    from: 1,
+    to: 1,
+    indicator: "some example string",
+  });
   // TODO: Handle 'response' of type Record<string, unknown>
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.misc.technicalIndicator({
+  symbol: "some example string",
+  resolution: "some example string",
+  from: 1,
+  to: 1,
+  indicator: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type Record<string, unknown>
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -2719,9 +3917,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>Record&lt;string, unknown&gt;</code>
+**Direct**: `await client.misc.technicalIndicator(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>Record&lt;string, unknown&gt;</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.misc.technicalIndicator(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;Record&lt;string, unknown&gt;, ApiError&gt;</code>, with `result.value` of type <code>Record&lt;string, unknown&gt;</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -2736,7 +3942,7 @@ try {
 > Source: [MutualFund](src/resources/mutual-fund.ts)
 
 <details>
-<summary><code>mutualFundCountryExposure(request: MutualFund.MutualFundCountryExposureRequest, options?: RequestOptions): ApiPromise&lt;MutualFundCountryExposure, ResponseError&gt;</code></summary>
+<summary><code>mutualFundCountryExposure(request: MutualFund.MutualFundCountryExposureRequest, options?: RequestOptions): ApiPromise&lt;MutualFundCountryExposure, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -2751,7 +3957,7 @@ Get Mutual Funds country exposure data.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -2761,7 +3967,25 @@ try {
   const response = await client.mutualFund.mutualFundCountryExposure();
   // TODO: Handle 'response' of type MutualFundCountryExposure
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.mutualFund.mutualFundCountryExposure().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type MutualFundCountryExposure
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -2786,9 +4010,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[MutualFundCountryExposure](src/models/mutual-fund-country-exposure.ts)</code>
+**Direct**: `await client.mutualFund.mutualFundCountryExposure(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[MutualFundCountryExposure](src/models/mutual-fund-country-exposure.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.mutualFund.mutualFundCountryExposure(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;MutualFundCountryExposure, ApiError&gt;</code>, with `result.value` of type <code>[MutualFundCountryExposure](src/models/mutual-fund-country-exposure.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -2799,7 +4031,7 @@ try {
 </details>
 
 <details>
-<summary><code>mutualFundEet(request: MutualFund.MutualFundEetRequest, options?: RequestOptions): ApiPromise&lt;MutualFundEet, ResponseError&gt;</code></summary>
+<summary><code>mutualFundEet(request: MutualFund.MutualFundEetRequest, options?: RequestOptions): ApiPromise&lt;MutualFundEet, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -2814,17 +4046,35 @@ Get EET data for EU funds. For PAIs data, please see the EET PAI endpoint.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.mutualFund.mutualFundEet({ isin });
+  const response = await client.mutualFund.mutualFundEet({ isin: "some example string" });
   // TODO: Handle 'response' of type MutualFundEet
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.mutualFund.mutualFundEet({ isin: "some example string" }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type MutualFundEet
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -2848,9 +4098,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[MutualFundEet](src/models/mutual-fund-eet.ts)</code>
+**Direct**: `await client.mutualFund.mutualFundEet(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[MutualFundEet](src/models/mutual-fund-eet.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.mutualFund.mutualFundEet(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;MutualFundEet, ApiError&gt;</code>, with `result.value` of type <code>[MutualFundEet](src/models/mutual-fund-eet.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -2861,7 +4119,7 @@ try {
 </details>
 
 <details>
-<summary><code>mutualFundEetPai(request: MutualFund.MutualFundEetPaiRequest, options?: RequestOptions): ApiPromise&lt;MutualFundEetPai, ResponseError&gt;</code></summary>
+<summary><code>mutualFundEetPai(request: MutualFund.MutualFundEetPaiRequest, options?: RequestOptions): ApiPromise&lt;MutualFundEetPai, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -2876,17 +4134,35 @@ Get EET PAI data for EU funds.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.mutualFund.mutualFundEetPai({ isin });
+  const response = await client.mutualFund.mutualFundEetPai({ isin: "some example string" });
   // TODO: Handle 'response' of type MutualFundEetPai
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.mutualFund.mutualFundEetPai({ isin: "some example string" }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type MutualFundEetPai
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -2910,9 +4186,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[MutualFundEetPai](src/models/mutual-fund-eet-pai.ts)</code>
+**Direct**: `await client.mutualFund.mutualFundEetPai(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[MutualFundEetPai](src/models/mutual-fund-eet-pai.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.mutualFund.mutualFundEetPai(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;MutualFundEetPai, ApiError&gt;</code>, with `result.value` of type <code>[MutualFundEetPai](src/models/mutual-fund-eet-pai.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -2923,7 +4207,7 @@ try {
 </details>
 
 <details>
-<summary><code>mutualFundHoldings(request: MutualFund.MutualFundHoldingsRequest, options?: RequestOptions): ApiPromise&lt;MutualFundHoldings, ResponseError&gt;</code></summary>
+<summary><code>mutualFundHoldings(request: MutualFund.MutualFundHoldingsRequest, options?: RequestOptions): ApiPromise&lt;MutualFundHoldings, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -2938,7 +4222,7 @@ Get full Mutual Funds holdings/constituents. This endpoint covers both US and gl
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -2948,7 +4232,25 @@ try {
   const response = await client.mutualFund.mutualFundHoldings();
   // TODO: Handle 'response' of type MutualFundHoldings
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.mutualFund.mutualFundHoldings().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type MutualFundHoldings
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -2974,9 +4276,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[MutualFundHoldings](src/models/mutual-fund-holdings.ts)</code>
+**Direct**: `await client.mutualFund.mutualFundHoldings(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[MutualFundHoldings](src/models/mutual-fund-holdings.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.mutualFund.mutualFundHoldings(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;MutualFundHoldings, ApiError&gt;</code>, with `result.value` of type <code>[MutualFundHoldings](src/models/mutual-fund-holdings.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -2987,7 +4297,7 @@ try {
 </details>
 
 <details>
-<summary><code>mutualFundProfile(request: MutualFund.MutualFundProfileRequest, options?: RequestOptions): ApiPromise&lt;MutualFundProfile, ResponseError&gt;</code></summary>
+<summary><code>mutualFundProfile(request: MutualFund.MutualFundProfileRequest, options?: RequestOptions): ApiPromise&lt;MutualFundProfile, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -3002,7 +4312,7 @@ Get mutual funds profile information. This endpoint covers both US and global mu
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -3012,7 +4322,25 @@ try {
   const response = await client.mutualFund.mutualFundProfile();
   // TODO: Handle 'response' of type MutualFundProfile
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.mutualFund.mutualFundProfile().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type MutualFundProfile
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -3037,9 +4365,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[MutualFundProfile](src/models/mutual-fund-profile.ts)</code>
+**Direct**: `await client.mutualFund.mutualFundProfile(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[MutualFundProfile](src/models/mutual-fund-profile.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.mutualFund.mutualFundProfile(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;MutualFundProfile, ApiError&gt;</code>, with `result.value` of type <code>[MutualFundProfile](src/models/mutual-fund-profile.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -3050,7 +4386,7 @@ try {
 </details>
 
 <details>
-<summary><code>mutualFundSectorExposure(request: MutualFund.MutualFundSectorExposureRequest, options?: RequestOptions): ApiPromise&lt;MutualFundSectorExposure, ResponseError&gt;</code></summary>
+<summary><code>mutualFundSectorExposure(request: MutualFund.MutualFundSectorExposureRequest, options?: RequestOptions): ApiPromise&lt;MutualFundSectorExposure, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -3065,7 +4401,7 @@ Get Mutual Funds sector exposure data.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -3075,7 +4411,25 @@ try {
   const response = await client.mutualFund.mutualFundSectorExposure();
   // TODO: Handle 'response' of type MutualFundSectorExposure
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.mutualFund.mutualFundSectorExposure().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type MutualFundSectorExposure
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -3100,9 +4454,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[MutualFundSectorExposure](src/models/mutual-fund-sector-exposure.ts)</code>
+**Direct**: `await client.mutualFund.mutualFundSectorExposure(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[MutualFundSectorExposure](src/models/mutual-fund-sector-exposure.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.mutualFund.mutualFundSectorExposure(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;MutualFundSectorExposure, ApiError&gt;</code>, with `result.value` of type <code>[MutualFundSectorExposure](src/models/mutual-fund-sector-exposure.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -3117,7 +4479,7 @@ try {
 > Source: [News](src/resources/news.ts)
 
 <details>
-<summary><code>companyNews(request: News.CompanyNewsRequest, options?: RequestOptions): ApiPromise&lt;CompanyNews[], ResponseError&gt;</code></summary>
+<summary><code>companyNews(request: News.CompanyNewsRequest, options?: RequestOptions): ApiPromise&lt;CompanyNews[], ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -3132,17 +4494,43 @@ List latest company news by symbol. This endpoint is only available for North Am
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.news.companyNews({ symbol, from, to });
+  const response = await client.news.companyNews({
+    symbol: "some example string",
+    from: "2024-01-15",
+    to: "2024-01-15",
+  });
   // TODO: Handle 'response' of type CompanyNews[]
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.news.companyNews({
+  symbol: "some example string",
+  from: "2024-01-15",
+  to: "2024-01-15",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type CompanyNews[]
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -3168,9 +4556,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[CompanyNews](src/models/company-news.ts)[]</code>
+**Direct**: `await client.news.companyNews(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[CompanyNews](src/models/company-news.ts)[]</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.news.companyNews(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;CompanyNews[], ApiError&gt;</code>, with `result.value` of type <code>[CompanyNews](src/models/company-news.ts)[]</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -3181,7 +4577,7 @@ try {
 </details>
 
 <details>
-<summary><code>marketNews(request: News.MarketNewsRequest, options?: RequestOptions): ApiPromise&lt;MarketNews[], ResponseError&gt;</code></summary>
+<summary><code>marketNews(request: News.MarketNewsRequest, options?: RequestOptions): ApiPromise&lt;MarketNews[], ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -3196,17 +4592,35 @@ Get latest market news.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.news.marketNews({ category });
+  const response = await client.news.marketNews({ category: "some example string" });
   // TODO: Handle 'response' of type MarketNews[]
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.news.marketNews({ category: "some example string" }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type MarketNews[]
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -3231,9 +4645,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[MarketNews](src/models/market-news.ts)[]</code>
+**Direct**: `await client.news.marketNews(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[MarketNews](src/models/market-news.ts)[]</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.news.marketNews(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;MarketNews[], ApiError&gt;</code>, with `result.value` of type <code>[MarketNews](src/models/market-news.ts)[]</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -3244,7 +4666,7 @@ try {
 </details>
 
 <details>
-<summary><code>newsSentiment(request: News.NewsSentimentRequest, options?: RequestOptions): ApiPromise&lt;NewsSentiment, ResponseError&gt;</code></summary>
+<summary><code>newsSentiment(request: News.NewsSentimentRequest, options?: RequestOptions): ApiPromise&lt;NewsSentiment, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -3259,17 +4681,35 @@ Get company's news sentiment and statistics. This endpoint is only available for
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.news.newsSentiment({ symbol });
+  const response = await client.news.newsSentiment({ symbol: "some example string" });
   // TODO: Handle 'response' of type NewsSentiment
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.news.newsSentiment({ symbol: "some example string" }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type NewsSentiment
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -3293,9 +4733,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[NewsSentiment](src/models/news-sentiment.ts)</code>
+**Direct**: `await client.news.newsSentiment(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[NewsSentiment](src/models/news-sentiment.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.news.newsSentiment(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;NewsSentiment, ApiError&gt;</code>, with `result.value` of type <code>[NewsSentiment](src/models/news-sentiment.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -3306,7 +4754,7 @@ try {
 </details>
 
 <details>
-<summary><code>pressReleases(request: News.PressReleasesRequest, options?: RequestOptions): ApiPromise&lt;PressRelease, ResponseError&gt;</code></summary>
+<summary><code>pressReleases(request: News.PressReleasesRequest, options?: RequestOptions): ApiPromise&lt;PressRelease, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -3321,17 +4769,35 @@ try {
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.news.pressReleases({ symbol });
+  const response = await client.news.pressReleases({ symbol: "some example string" });
   // TODO: Handle 'response' of type PressRelease
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.news.pressReleases({ symbol: "some example string" }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type PressRelease
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -3357,9 +4823,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[PressRelease](src/models/press-release.ts)</code>
+**Direct**: `await client.news.pressReleases(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[PressRelease](src/models/press-release.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.news.pressReleases(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;PressRelease, ApiError&gt;</code>, with `result.value` of type <code>[PressRelease](src/models/press-release.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -3374,7 +4848,7 @@ try {
 > Source: [Scan](src/resources/scan.ts)
 
 <details>
-<summary><code>aggregateIndicator(request: Scan.AggregateIndicatorRequest, options?: RequestOptions): ApiPromise&lt;AggregateIndicators, ResponseError&gt;</code></summary>
+<summary><code>aggregateIndicator(request: Scan.AggregateIndicatorRequest, options?: RequestOptions): ApiPromise&lt;AggregateIndicators, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -3389,17 +4863,41 @@ Get aggregate signal of multiple technical indicators such as MACD, RSI, Moving 
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.scan.aggregateIndicator({ symbol, resolution });
+  const response = await client.scan.aggregateIndicator({
+    symbol: "some example string",
+    resolution: "some example string",
+  });
   // TODO: Handle 'response' of type AggregateIndicators
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.scan.aggregateIndicator({
+  symbol: "some example string",
+  resolution: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type AggregateIndicators
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -3424,9 +4922,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AggregateIndicators](src/models/aggregate-indicators.ts)</code>
+**Direct**: `await client.scan.aggregateIndicator(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[AggregateIndicators](src/models/aggregate-indicators.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.scan.aggregateIndicator(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;AggregateIndicators, ApiError&gt;</code>, with `result.value` of type <code>[AggregateIndicators](src/models/aggregate-indicators.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -3437,7 +4943,7 @@ try {
 </details>
 
 <details>
-<summary><code>patternRecognition(request: Scan.PatternRecognitionRequest, options?: RequestOptions): ApiPromise&lt;PatternRecognition, ResponseError&gt;</code></summary>
+<summary><code>patternRecognition(request: Scan.PatternRecognitionRequest, options?: RequestOptions): ApiPromise&lt;PatternRecognition, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -3452,17 +4958,41 @@ Run pattern recognition algorithm on a symbol. Support double top/bottom, triple
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.scan.patternRecognition({ symbol, resolution });
+  const response = await client.scan.patternRecognition({
+    symbol: "some example string",
+    resolution: "some example string",
+  });
   // TODO: Handle 'response' of type PatternRecognition
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.scan.patternRecognition({
+  symbol: "some example string",
+  resolution: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type PatternRecognition
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -3487,9 +5017,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[PatternRecognition](src/models/pattern-recognition.ts)</code>
+**Direct**: `await client.scan.patternRecognition(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[PatternRecognition](src/models/pattern-recognition.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.scan.patternRecognition(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;PatternRecognition, ApiError&gt;</code>, with `result.value` of type <code>[PatternRecognition](src/models/pattern-recognition.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -3500,7 +5038,7 @@ try {
 </details>
 
 <details>
-<summary><code>supportResistance(request: Scan.SupportResistanceRequest, options?: RequestOptions): ApiPromise&lt;SupportResistance, ResponseError&gt;</code></summary>
+<summary><code>supportResistance(request: Scan.SupportResistanceRequest, options?: RequestOptions): ApiPromise&lt;SupportResistance, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -3515,17 +5053,41 @@ Get support and resistance levels for a symbol.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.scan.supportResistance({ symbol, resolution });
+  const response = await client.scan.supportResistance({
+    symbol: "some example string",
+    resolution: "some example string",
+  });
   // TODO: Handle 'response' of type SupportResistance
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.scan.supportResistance({
+  symbol: "some example string",
+  resolution: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type SupportResistance
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -3550,9 +5112,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[SupportResistance](src/models/support-resistance.ts)</code>
+**Direct**: `await client.scan.supportResistance(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[SupportResistance](src/models/support-resistance.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.scan.supportResistance(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;SupportResistance, ApiError&gt;</code>, with `result.value` of type <code>[SupportResistance](src/models/support-resistance.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -3567,7 +5137,7 @@ try {
 > Source: [StockEstimates](src/resources/stock-estimates.ts)
 
 <details>
-<summary><code>companyCapexEstimates(request: StockEstimates.CompanyCapexEstimatesRequest, options?: RequestOptions): ApiPromise&lt;CapexEstimates, ResponseError&gt;</code></summary>
+<summary><code>companyCapexEstimates(request: StockEstimates.CompanyCapexEstimatesRequest, options?: RequestOptions): ApiPromise&lt;CapexEstimates, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -3582,17 +5152,37 @@ Get company's capital expenditure estimates.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockEstimates.companyCapexEstimates({ symbol });
+  const response = await client.stockEstimates.companyCapexEstimates({ symbol: "some example string" });
   // TODO: Handle 'response' of type CapexEstimates
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockEstimates.companyCapexEstimates({
+  symbol: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type CapexEstimates
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -3617,9 +5207,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[CapexEstimates](src/models/capex-estimates.ts)</code>
+**Direct**: `await client.stockEstimates.companyCapexEstimates(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[CapexEstimates](src/models/capex-estimates.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockEstimates.companyCapexEstimates(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;CapexEstimates, ApiError&gt;</code>, with `result.value` of type <code>[CapexEstimates](src/models/capex-estimates.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -3630,7 +5228,7 @@ try {
 </details>
 
 <details>
-<summary><code>companyDpsEstimates(request: StockEstimates.CompanyDpsEstimatesRequest, options?: RequestOptions): ApiPromise&lt;DpsEstimates, ResponseError&gt;</code></summary>
+<summary><code>companyDpsEstimates(request: StockEstimates.CompanyDpsEstimatesRequest, options?: RequestOptions): ApiPromise&lt;DpsEstimates, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -3645,17 +5243,37 @@ Get company's Dividend per Share estimates.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockEstimates.companyDpsEstimates({ symbol });
+  const response = await client.stockEstimates.companyDpsEstimates({ symbol: "some example string" });
   // TODO: Handle 'response' of type DpsEstimates
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockEstimates.companyDpsEstimates({
+  symbol: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type DpsEstimates
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -3680,9 +5298,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[DpsEstimates](src/models/dps-estimates.ts)</code>
+**Direct**: `await client.stockEstimates.companyDpsEstimates(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[DpsEstimates](src/models/dps-estimates.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockEstimates.companyDpsEstimates(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;DpsEstimates, ApiError&gt;</code>, with `result.value` of type <code>[DpsEstimates](src/models/dps-estimates.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -3693,7 +5319,7 @@ try {
 </details>
 
 <details>
-<summary><code>companyEarnings(request: StockEstimates.CompanyEarningsRequest, options?: RequestOptions): ApiPromise&lt;EarningResult[], ResponseError&gt;</code></summary>
+<summary><code>companyEarnings(request: StockEstimates.CompanyEarningsRequest, options?: RequestOptions): ApiPromise&lt;EarningResult[], ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -3708,17 +5334,35 @@ Get company historical quarterly earnings surprise going back to 2000.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockEstimates.companyEarnings({ symbol });
+  const response = await client.stockEstimates.companyEarnings({ symbol: "some example string" });
   // TODO: Handle 'response' of type EarningResult[]
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockEstimates.companyEarnings({ symbol: "some example string" }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type EarningResult[]
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -3743,9 +5387,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[EarningResult](src/models/earning-result.ts)[]</code>
+**Direct**: `await client.stockEstimates.companyEarnings(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[EarningResult](src/models/earning-result.ts)[]</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockEstimates.companyEarnings(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;EarningResult[], ApiError&gt;</code>, with `result.value` of type <code>[EarningResult](src/models/earning-result.ts)[]</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -3756,7 +5408,7 @@ try {
 </details>
 
 <details>
-<summary><code>companyEarningsQualityScore(request: StockEstimates.CompanyEarningsQualityScoreRequest, options?: RequestOptions): ApiPromise&lt;CompanyEarningsQualityScore, ResponseError&gt;</code></summary>
+<summary><code>companyEarningsQualityScore(request: StockEstimates.CompanyEarningsQualityScoreRequest, options?: RequestOptions): ApiPromise&lt;CompanyEarningsQualityScore, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -3771,17 +5423,41 @@ try {
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockEstimates.companyEarningsQualityScore({ symbol, freq });
+  const response = await client.stockEstimates.companyEarningsQualityScore({
+    symbol: "some example string",
+    freq: "some example string",
+  });
   // TODO: Handle 'response' of type CompanyEarningsQualityScore
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockEstimates.companyEarningsQualityScore({
+  symbol: "some example string",
+  freq: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type CompanyEarningsQualityScore
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -3806,9 +5482,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[CompanyEarningsQualityScore](src/models/company-earnings-quality-score.ts)</code>
+**Direct**: `await client.stockEstimates.companyEarningsQualityScore(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[CompanyEarningsQualityScore](src/models/company-earnings-quality-score.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockEstimates.companyEarningsQualityScore(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;CompanyEarningsQualityScore, ApiError&gt;</code>, with `result.value` of type <code>[CompanyEarningsQualityScore](src/models/company-earnings-quality-score.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -3819,7 +5503,7 @@ try {
 </details>
 
 <details>
-<summary><code>companyEbitEstimates(request: StockEstimates.CompanyEbitEstimatesRequest, options?: RequestOptions): ApiPromise&lt;EbitEstimates, ResponseError&gt;</code></summary>
+<summary><code>companyEbitEstimates(request: StockEstimates.CompanyEbitEstimatesRequest, options?: RequestOptions): ApiPromise&lt;EbitEstimates, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -3834,17 +5518,37 @@ Get company's ebit estimates.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockEstimates.companyEbitEstimates({ symbol });
+  const response = await client.stockEstimates.companyEbitEstimates({ symbol: "some example string" });
   // TODO: Handle 'response' of type EbitEstimates
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockEstimates.companyEbitEstimates({
+  symbol: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type EbitEstimates
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -3869,9 +5573,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[EbitEstimates](src/models/ebit-estimates.ts)</code>
+**Direct**: `await client.stockEstimates.companyEbitEstimates(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[EbitEstimates](src/models/ebit-estimates.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockEstimates.companyEbitEstimates(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;EbitEstimates, ApiError&gt;</code>, with `result.value` of type <code>[EbitEstimates](src/models/ebit-estimates.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -3882,7 +5594,7 @@ try {
 </details>
 
 <details>
-<summary><code>companyEbitdaEstimates(request: StockEstimates.CompanyEbitdaEstimatesRequest, options?: RequestOptions): ApiPromise&lt;EbitdaEstimates, ResponseError&gt;</code></summary>
+<summary><code>companyEbitdaEstimates(request: StockEstimates.CompanyEbitdaEstimatesRequest, options?: RequestOptions): ApiPromise&lt;EbitdaEstimates, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -3897,17 +5609,37 @@ Get company's ebitda estimates.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockEstimates.companyEbitdaEstimates({ symbol });
+  const response = await client.stockEstimates.companyEbitdaEstimates({ symbol: "some example string" });
   // TODO: Handle 'response' of type EbitdaEstimates
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockEstimates.companyEbitdaEstimates({
+  symbol: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type EbitdaEstimates
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -3932,9 +5664,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[EbitdaEstimates](src/models/ebitda-estimates.ts)</code>
+**Direct**: `await client.stockEstimates.companyEbitdaEstimates(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[EbitdaEstimates](src/models/ebitda-estimates.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockEstimates.companyEbitdaEstimates(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;EbitdaEstimates, ApiError&gt;</code>, with `result.value` of type <code>[EbitdaEstimates](src/models/ebitda-estimates.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -3945,7 +5685,7 @@ try {
 </details>
 
 <details>
-<summary><code>companyEpsEstimates(request: StockEstimates.CompanyEpsEstimatesRequest, options?: RequestOptions): ApiPromise&lt;EarningsEstimates, ResponseError&gt;</code></summary>
+<summary><code>companyEpsEstimates(request: StockEstimates.CompanyEpsEstimatesRequest, options?: RequestOptions): ApiPromise&lt;EarningsEstimates, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -3960,17 +5700,37 @@ Get company's EPS estimates.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockEstimates.companyEpsEstimates({ symbol });
+  const response = await client.stockEstimates.companyEpsEstimates({ symbol: "some example string" });
   // TODO: Handle 'response' of type EarningsEstimates
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockEstimates.companyEpsEstimates({
+  symbol: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type EarningsEstimates
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -3995,9 +5755,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[EarningsEstimates](src/models/earnings-estimates.ts)</code>
+**Direct**: `await client.stockEstimates.companyEpsEstimates(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[EarningsEstimates](src/models/earnings-estimates.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockEstimates.companyEpsEstimates(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;EarningsEstimates, ApiError&gt;</code>, with `result.value` of type <code>[EarningsEstimates](src/models/earnings-estimates.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -4008,7 +5776,7 @@ try {
 </details>
 
 <details>
-<summary><code>companyFcfEstimates(request: StockEstimates.CompanyFcfEstimatesRequest, options?: RequestOptions): ApiPromise&lt;FcfEstimates, ResponseError&gt;</code></summary>
+<summary><code>companyFcfEstimates(request: StockEstimates.CompanyFcfEstimatesRequest, options?: RequestOptions): ApiPromise&lt;FcfEstimates, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -4023,17 +5791,37 @@ Get company's free cash flow estimates.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockEstimates.companyFcfEstimates({ symbol });
+  const response = await client.stockEstimates.companyFcfEstimates({ symbol: "some example string" });
   // TODO: Handle 'response' of type FcfEstimates
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockEstimates.companyFcfEstimates({
+  symbol: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type FcfEstimates
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -4058,9 +5846,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[FcfEstimates](src/models/fcf-estimates.ts)</code>
+**Direct**: `await client.stockEstimates.companyFcfEstimates(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[FcfEstimates](src/models/fcf-estimates.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockEstimates.companyFcfEstimates(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;FcfEstimates, ApiError&gt;</code>, with `result.value` of type <code>[FcfEstimates](src/models/fcf-estimates.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -4071,7 +5867,7 @@ try {
 </details>
 
 <details>
-<summary><code>companyGrossIncomeEstimates(request: StockEstimates.CompanyGrossIncomeEstimatesRequest, options?: RequestOptions): ApiPromise&lt;GrossIncomeEstimates, ResponseError&gt;</code></summary>
+<summary><code>companyGrossIncomeEstimates(request: StockEstimates.CompanyGrossIncomeEstimatesRequest, options?: RequestOptions): ApiPromise&lt;GrossIncomeEstimates, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -4086,17 +5882,37 @@ Get company's gross income estimates.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockEstimates.companyGrossIncomeEstimates({ symbol });
+  const response = await client.stockEstimates.companyGrossIncomeEstimates({ symbol: "some example string" });
   // TODO: Handle 'response' of type GrossIncomeEstimates
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockEstimates.companyGrossIncomeEstimates({
+  symbol: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type GrossIncomeEstimates
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -4121,9 +5937,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[GrossIncomeEstimates](src/models/gross-income-estimates.ts)</code>
+**Direct**: `await client.stockEstimates.companyGrossIncomeEstimates(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[GrossIncomeEstimates](src/models/gross-income-estimates.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockEstimates.companyGrossIncomeEstimates(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;GrossIncomeEstimates, ApiError&gt;</code>, with `result.value` of type <code>[GrossIncomeEstimates](src/models/gross-income-estimates.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -4134,7 +5958,7 @@ try {
 </details>
 
 <details>
-<summary><code>companyNetIncomeEstimates(request: StockEstimates.CompanyNetIncomeEstimatesRequest, options?: RequestOptions): ApiPromise&lt;NetIncomeEstimates, ResponseError&gt;</code></summary>
+<summary><code>companyNetIncomeEstimates(request: StockEstimates.CompanyNetIncomeEstimatesRequest, options?: RequestOptions): ApiPromise&lt;NetIncomeEstimates, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -4149,17 +5973,37 @@ Get company's net income estimates.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockEstimates.companyNetIncomeEstimates({ symbol });
+  const response = await client.stockEstimates.companyNetIncomeEstimates({ symbol: "some example string" });
   // TODO: Handle 'response' of type NetIncomeEstimates
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockEstimates.companyNetIncomeEstimates({
+  symbol: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type NetIncomeEstimates
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -4184,9 +6028,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[NetIncomeEstimates](src/models/net-income-estimates.ts)</code>
+**Direct**: `await client.stockEstimates.companyNetIncomeEstimates(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[NetIncomeEstimates](src/models/net-income-estimates.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockEstimates.companyNetIncomeEstimates(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;NetIncomeEstimates, ApiError&gt;</code>, with `result.value` of type <code>[NetIncomeEstimates](src/models/net-income-estimates.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -4197,7 +6049,7 @@ try {
 </details>
 
 <details>
-<summary><code>companyOcfEstimates(request: StockEstimates.CompanyOcfEstimatesRequest, options?: RequestOptions): ApiPromise&lt;OcfEstimates, ResponseError&gt;</code></summary>
+<summary><code>companyOcfEstimates(request: StockEstimates.CompanyOcfEstimatesRequest, options?: RequestOptions): ApiPromise&lt;OcfEstimates, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -4212,17 +6064,37 @@ Get company's operating cash flow estimates.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockEstimates.companyOcfEstimates({ symbol });
+  const response = await client.stockEstimates.companyOcfEstimates({ symbol: "some example string" });
   // TODO: Handle 'response' of type OcfEstimates
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockEstimates.companyOcfEstimates({
+  symbol: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type OcfEstimates
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -4247,9 +6119,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[OcfEstimates](src/models/ocf-estimates.ts)</code>
+**Direct**: `await client.stockEstimates.companyOcfEstimates(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[OcfEstimates](src/models/ocf-estimates.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockEstimates.companyOcfEstimates(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;OcfEstimates, ApiError&gt;</code>, with `result.value` of type <code>[OcfEstimates](src/models/ocf-estimates.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -4260,7 +6140,7 @@ try {
 </details>
 
 <details>
-<summary><code>companyPretaxIncomeEstimates(request: StockEstimates.CompanyPretaxIncomeEstimatesRequest, options?: RequestOptions): ApiPromise&lt;PretaxIncomeEstimates, ResponseError&gt;</code></summary>
+<summary><code>companyPretaxIncomeEstimates(request: StockEstimates.CompanyPretaxIncomeEstimatesRequest, options?: RequestOptions): ApiPromise&lt;PretaxIncomeEstimates, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -4275,17 +6155,39 @@ Get company's pretax income estimates.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockEstimates.companyPretaxIncomeEstimates({ symbol });
+  const response = await client.stockEstimates.companyPretaxIncomeEstimates({
+    symbol: "some example string",
+  });
   // TODO: Handle 'response' of type PretaxIncomeEstimates
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockEstimates.companyPretaxIncomeEstimates({
+  symbol: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type PretaxIncomeEstimates
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -4310,9 +6212,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[PretaxIncomeEstimates](src/models/pretax-income-estimates.ts)</code>
+**Direct**: `await client.stockEstimates.companyPretaxIncomeEstimates(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[PretaxIncomeEstimates](src/models/pretax-income-estimates.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockEstimates.companyPretaxIncomeEstimates(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;PretaxIncomeEstimates, ApiError&gt;</code>, with `result.value` of type <code>[PretaxIncomeEstimates](src/models/pretax-income-estimates.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -4323,7 +6233,7 @@ try {
 </details>
 
 <details>
-<summary><code>companyRevenueEstimates(request: StockEstimates.CompanyRevenueEstimatesRequest, options?: RequestOptions): ApiPromise&lt;RevenueEstimates, ResponseError&gt;</code></summary>
+<summary><code>companyRevenueEstimates(request: StockEstimates.CompanyRevenueEstimatesRequest, options?: RequestOptions): ApiPromise&lt;RevenueEstimates, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -4338,17 +6248,37 @@ Get company's revenue estimates.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockEstimates.companyRevenueEstimates({ symbol });
+  const response = await client.stockEstimates.companyRevenueEstimates({ symbol: "some example string" });
   // TODO: Handle 'response' of type RevenueEstimates
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockEstimates.companyRevenueEstimates({
+  symbol: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type RevenueEstimates
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -4373,9 +6303,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[RevenueEstimates](src/models/revenue-estimates.ts)</code>
+**Direct**: `await client.stockEstimates.companyRevenueEstimates(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[RevenueEstimates](src/models/revenue-estimates.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockEstimates.companyRevenueEstimates(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;RevenueEstimates, ApiError&gt;</code>, with `result.value` of type <code>[RevenueEstimates](src/models/revenue-estimates.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -4386,7 +6324,7 @@ try {
 </details>
 
 <details>
-<summary><code>priceTarget(request: StockEstimates.PriceTargetRequest, options?: RequestOptions): ApiPromise&lt;PriceTarget, ResponseError&gt;</code></summary>
+<summary><code>priceTarget(request: StockEstimates.PriceTargetRequest, options?: RequestOptions): ApiPromise&lt;PriceTarget, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -4401,17 +6339,35 @@ Get latest price target consensus.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockEstimates.priceTarget({ symbol });
+  const response = await client.stockEstimates.priceTarget({ symbol: "some example string" });
   // TODO: Handle 'response' of type PriceTarget
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockEstimates.priceTarget({ symbol: "some example string" }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type PriceTarget
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -4435,9 +6391,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[PriceTarget](src/models/price-target.ts)</code>
+**Direct**: `await client.stockEstimates.priceTarget(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[PriceTarget](src/models/price-target.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockEstimates.priceTarget(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;PriceTarget, ApiError&gt;</code>, with `result.value` of type <code>[PriceTarget](src/models/price-target.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -4448,7 +6412,7 @@ try {
 </details>
 
 <details>
-<summary><code>recommendationTrends(request: StockEstimates.RecommendationTrendsRequest, options?: RequestOptions): ApiPromise&lt;RecommendationTrend[], ResponseError&gt;</code></summary>
+<summary><code>recommendationTrends(request: StockEstimates.RecommendationTrendsRequest, options?: RequestOptions): ApiPromise&lt;RecommendationTrend[], ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -4463,17 +6427,37 @@ Get latest analyst recommendation trends for a company.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockEstimates.recommendationTrends({ symbol });
+  const response = await client.stockEstimates.recommendationTrends({ symbol: "some example string" });
   // TODO: Handle 'response' of type RecommendationTrend[]
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockEstimates.recommendationTrends({
+  symbol: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type RecommendationTrend[]
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -4497,9 +6481,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[RecommendationTrend](src/models/recommendation-trend.ts)[]</code>
+**Direct**: `await client.stockEstimates.recommendationTrends(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[RecommendationTrend](src/models/recommendation-trend.ts)[]</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockEstimates.recommendationTrends(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;RecommendationTrend[], ApiError&gt;</code>, with `result.value` of type <code>[RecommendationTrend](src/models/recommendation-trend.ts)[]</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -4510,7 +6502,7 @@ try {
 </details>
 
 <details>
-<summary><code>revenueBreakdown(request: StockEstimates.RevenueBreakdownRequest, options?: RequestOptions): ApiPromise&lt;RevenueBreakdown, ResponseError&gt;</code></summary>
+<summary><code>revenueBreakdown(request: StockEstimates.RevenueBreakdownRequest, options?: RequestOptions): ApiPromise&lt;RevenueBreakdown, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -4525,7 +6517,7 @@ try {
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -4535,7 +6527,25 @@ try {
   const response = await client.stockEstimates.revenueBreakdown();
   // TODO: Handle 'response' of type RevenueBreakdown
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockEstimates.revenueBreakdown().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type RevenueBreakdown
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -4560,9 +6570,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[RevenueBreakdown](src/models/revenue-breakdown.ts)</code>
+**Direct**: `await client.stockEstimates.revenueBreakdown(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[RevenueBreakdown](src/models/revenue-breakdown.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockEstimates.revenueBreakdown(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;RevenueBreakdown, ApiError&gt;</code>, with `result.value` of type <code>[RevenueBreakdown](src/models/revenue-breakdown.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -4573,7 +6591,7 @@ try {
 </details>
 
 <details>
-<summary><code>revenueBreakdown2(request: StockEstimates.RevenueBreakdown2Request, options?: RequestOptions): ApiPromise&lt;RevenueBreakdown2, ResponseError&gt;</code></summary>
+<summary><code>revenueBreakdown2(request: StockEstimates.RevenueBreakdown2Request, options?: RequestOptions): ApiPromise&lt;RevenueBreakdown2, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -4588,17 +6606,35 @@ try {
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockEstimates.revenueBreakdown2({ symbol });
+  const response = await client.stockEstimates.revenueBreakdown2({ symbol: "some example string" });
   // TODO: Handle 'response' of type RevenueBreakdown2
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockEstimates.revenueBreakdown2({ symbol: "some example string" }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type RevenueBreakdown2
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -4622,9 +6658,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[RevenueBreakdown2](src/models/revenue-breakdown2.ts)</code>
+**Direct**: `await client.stockEstimates.revenueBreakdown2(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[RevenueBreakdown2](src/models/revenue-breakdown2.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockEstimates.revenueBreakdown2(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;RevenueBreakdown2, ApiError&gt;</code>, with `result.value` of type <code>[RevenueBreakdown2](src/models/revenue-breakdown2.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -4635,7 +6679,7 @@ try {
 </details>
 
 <details>
-<summary><code>upgradeDowngrade(request: StockEstimates.UpgradeDowngradeRequest, options?: RequestOptions): ApiPromise&lt;UpgradeDowngrade[], ResponseError&gt;</code></summary>
+<summary><code>upgradeDowngrade(request: StockEstimates.UpgradeDowngradeRequest, options?: RequestOptions): ApiPromise&lt;UpgradeDowngrade[], ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -4650,7 +6694,7 @@ Get latest stock upgrade and downgrade.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -4660,7 +6704,25 @@ try {
   const response = await client.stockEstimates.upgradeDowngrade();
   // TODO: Handle 'response' of type UpgradeDowngrade[]
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockEstimates.upgradeDowngrade().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type UpgradeDowngrade[]
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -4686,9 +6748,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[UpgradeDowngrade](src/models/upgrade-downgrade.ts)[]</code>
+**Direct**: `await client.stockEstimates.upgradeDowngrade(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[UpgradeDowngrade](src/models/upgrade-downgrade.ts)[]</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockEstimates.upgradeDowngrade(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;UpgradeDowngrade[], ApiError&gt;</code>, with `result.value` of type <code>[UpgradeDowngrade](src/models/upgrade-downgrade.ts)[]</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -4703,7 +6773,7 @@ try {
 > Source: [StockFundamentals](src/resources/stock-fundamentals.ts)
 
 <details>
-<summary><code>companyBasicFinancials(request: StockFundamentals.CompanyBasicFinancialsRequest, options?: RequestOptions): ApiPromise&lt;BasicFinancials, ResponseError&gt;</code></summary>
+<summary><code>companyBasicFinancials(request: StockFundamentals.CompanyBasicFinancialsRequest, options?: RequestOptions): ApiPromise&lt;BasicFinancials, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -4718,17 +6788,41 @@ Get company basic financials such as margin, P/E ratio, 52-week high/low etc.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockFundamentals.companyBasicFinancials({ symbol, metric });
+  const response = await client.stockFundamentals.companyBasicFinancials({
+    symbol: "some example string",
+    metric: "some example string",
+  });
   // TODO: Handle 'response' of type BasicFinancials
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockFundamentals.companyBasicFinancials({
+  symbol: "some example string",
+  metric: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type BasicFinancials
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -4753,9 +6847,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[BasicFinancials](src/models/basic-financials.ts)</code>
+**Direct**: `await client.stockFundamentals.companyBasicFinancials(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[BasicFinancials](src/models/basic-financials.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockFundamentals.companyBasicFinancials(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;BasicFinancials, ApiError&gt;</code>, with `result.value` of type <code>[BasicFinancials](src/models/basic-financials.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -4766,7 +6868,7 @@ try {
 </details>
 
 <details>
-<summary><code>companyEsgScore(request: StockFundamentals.CompanyEsgScoreRequest, options?: RequestOptions): ApiPromise&lt;CompanyEsg, ResponseError&gt;</code></summary>
+<summary><code>companyEsgScore(request: StockFundamentals.CompanyEsgScoreRequest, options?: RequestOptions): ApiPromise&lt;CompanyEsg, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -4781,17 +6883,37 @@ try {
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockFundamentals.companyEsgScore({ symbol });
+  const response = await client.stockFundamentals.companyEsgScore({ symbol: "some example string" });
   // TODO: Handle 'response' of type CompanyEsg
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockFundamentals.companyEsgScore({
+  symbol: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type CompanyEsg
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -4815,9 +6937,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[CompanyEsg](src/models/company-esg.ts)</code>
+**Direct**: `await client.stockFundamentals.companyEsgScore(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[CompanyEsg](src/models/company-esg.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockFundamentals.companyEsgScore(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;CompanyEsg, ApiError&gt;</code>, with `result.value` of type <code>[CompanyEsg](src/models/company-esg.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -4828,7 +6958,7 @@ try {
 </details>
 
 <details>
-<summary><code>companyExecutive(request: StockFundamentals.CompanyExecutiveRequest, options?: RequestOptions): ApiPromise&lt;CompanyExecutive, ResponseError&gt;</code></summary>
+<summary><code>companyExecutive(request: StockFundamentals.CompanyExecutiveRequest, options?: RequestOptions): ApiPromise&lt;CompanyExecutive, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -4843,17 +6973,37 @@ Get a list of company's executives and members of the Board.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockFundamentals.companyExecutive({ symbol });
+  const response = await client.stockFundamentals.companyExecutive({ symbol: "some example string" });
   // TODO: Handle 'response' of type CompanyExecutive
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockFundamentals.companyExecutive({
+  symbol: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type CompanyExecutive
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -4877,9 +7027,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[CompanyExecutive](src/models/company-executive.ts)</code>
+**Direct**: `await client.stockFundamentals.companyExecutive(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[CompanyExecutive](src/models/company-executive.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockFundamentals.companyExecutive(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;CompanyExecutive, ApiError&gt;</code>, with `result.value` of type <code>[CompanyExecutive](src/models/company-executive.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -4890,7 +7048,7 @@ try {
 </details>
 
 <details>
-<summary><code>companyHistoricalEsgScore(request: StockFundamentals.CompanyHistoricalEsgScoreRequest, options?: RequestOptions): ApiPromise&lt;HistoricalCompanyEsg, ResponseError&gt;</code></summary>
+<summary><code>companyHistoricalEsgScore(request: StockFundamentals.CompanyHistoricalEsgScoreRequest, options?: RequestOptions): ApiPromise&lt;HistoricalCompanyEsg, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -4905,17 +7063,39 @@ try {
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockFundamentals.companyHistoricalEsgScore({ symbol });
+  const response = await client.stockFundamentals.companyHistoricalEsgScore({
+    symbol: "some example string",
+  });
   // TODO: Handle 'response' of type HistoricalCompanyEsg
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockFundamentals.companyHistoricalEsgScore({
+  symbol: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type HistoricalCompanyEsg
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -4939,9 +7119,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[HistoricalCompanyEsg](src/models/historical-company-esg.ts)</code>
+**Direct**: `await client.stockFundamentals.companyHistoricalEsgScore(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[HistoricalCompanyEsg](src/models/historical-company-esg.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockFundamentals.companyHistoricalEsgScore(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;HistoricalCompanyEsg, ApiError&gt;</code>, with `result.value` of type <code>[HistoricalCompanyEsg](src/models/historical-company-esg.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -4952,7 +7140,7 @@ try {
 </details>
 
 <details>
-<summary><code>companyProfile(request: StockFundamentals.CompanyProfileRequest, options?: RequestOptions): ApiPromise&lt;CompanyProfile, ResponseError&gt;</code></summary>
+<summary><code>companyProfile(request: StockFundamentals.CompanyProfileRequest, options?: RequestOptions): ApiPromise&lt;CompanyProfile, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -4967,7 +7155,7 @@ Get general information of a company. You can query by symbol, ISIN or CUSIP
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -4977,7 +7165,25 @@ try {
   const response = await client.stockFundamentals.companyProfile();
   // TODO: Handle 'response' of type CompanyProfile
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockFundamentals.companyProfile().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type CompanyProfile
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -5003,9 +7209,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[CompanyProfile](src/models/company-profile.ts)</code>
+**Direct**: `await client.stockFundamentals.companyProfile(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[CompanyProfile](src/models/company-profile.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockFundamentals.companyProfile(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;CompanyProfile, ApiError&gt;</code>, with `result.value` of type <code>[CompanyProfile](src/models/company-profile.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -5016,7 +7230,7 @@ try {
 </details>
 
 <details>
-<summary><code>companyProfile2(request: StockFundamentals.CompanyProfile2Request, options?: RequestOptions): ApiPromise&lt;CompanyProfile2, ResponseError&gt;</code></summary>
+<summary><code>companyProfile2(request: StockFundamentals.CompanyProfile2Request, options?: RequestOptions): ApiPromise&lt;CompanyProfile2, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -5031,7 +7245,7 @@ Get general information of a company. You can query by symbol, ISIN or CUSIP. Th
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -5041,7 +7255,25 @@ try {
   const response = await client.stockFundamentals.companyProfile2();
   // TODO: Handle 'response' of type CompanyProfile2
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockFundamentals.companyProfile2().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type CompanyProfile2
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -5067,9 +7299,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[CompanyProfile2](src/models/company-profile2.ts)</code>
+**Direct**: `await client.stockFundamentals.companyProfile2(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[CompanyProfile2](src/models/company-profile2.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockFundamentals.companyProfile2(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;CompanyProfile2, ApiError&gt;</code>, with `result.value` of type <code>[CompanyProfile2](src/models/company-profile2.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -5080,7 +7320,7 @@ try {
 </details>
 
 <details>
-<summary><code>earningsCallLive(request: StockFundamentals.EarningsCallLiveRequest, options?: RequestOptions): ApiPromise&lt;EarningsCallLive, ResponseError&gt;</code></summary>
+<summary><code>earningsCallLive(request: StockFundamentals.EarningsCallLiveRequest, options?: RequestOptions): ApiPromise&lt;EarningsCallLive, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -5095,7 +7335,7 @@ try {
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -5105,7 +7345,25 @@ try {
   const response = await client.stockFundamentals.earningsCallLive();
   // TODO: Handle 'response' of type EarningsCallLive
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockFundamentals.earningsCallLive().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type EarningsCallLive
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -5131,9 +7389,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[EarningsCallLive](src/models/earnings-call-live.ts)</code>
+**Direct**: `await client.stockFundamentals.earningsCallLive(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[EarningsCallLive](src/models/earnings-call-live.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockFundamentals.earningsCallLive(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;EarningsCallLive, ApiError&gt;</code>, with `result.value` of type <code>[EarningsCallLive](src/models/earnings-call-live.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -5144,7 +7410,7 @@ try {
 </details>
 
 <details>
-<summary><code>filings(request: StockFundamentals.FilingsRequest, options?: RequestOptions): ApiPromise&lt;Filing[], ResponseError&gt;</code></summary>
+<summary><code>filings(request: StockFundamentals.FilingsRequest, options?: RequestOptions): ApiPromise&lt;Filing[], ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -5159,7 +7425,7 @@ List company's filing. Limit to 250 documents at a time. This data is available 
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -5169,7 +7435,25 @@ try {
   const response = await client.stockFundamentals.filings();
   // TODO: Handle 'response' of type Filing[]
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockFundamentals.filings().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type Filing[]
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -5198,9 +7482,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Filing](src/models/filing.ts)[]</code>
+**Direct**: `await client.stockFundamentals.filings(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[Filing](src/models/filing.ts)[]</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockFundamentals.filings(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;Filing[], ApiError&gt;</code>, with `result.value` of type <code>[Filing](src/models/filing.ts)[]</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -5211,7 +7503,7 @@ try {
 </details>
 
 <details>
-<summary><code>filingsSentiment(request: StockFundamentals.FilingsSentimentRequest, options?: RequestOptions): ApiPromise&lt;SecSentimentAnalysis, ResponseError&gt;</code></summary>
+<summary><code>filingsSentiment(request: StockFundamentals.FilingsSentimentRequest, options?: RequestOptions): ApiPromise&lt;SecSentimentAnalysis, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -5226,17 +7518,37 @@ Get sentiment analysis of 10-K and 10-Q filings from SEC. An abnormal increase i
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockFundamentals.filingsSentiment({ accessNumber });
+  const response = await client.stockFundamentals.filingsSentiment({ accessNumber: "some example string" });
   // TODO: Handle 'response' of type SecSentimentAnalysis
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockFundamentals.filingsSentiment({
+  accessNumber: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type SecSentimentAnalysis
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -5260,9 +7572,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[SecSentimentAnalysis](src/models/sec-sentiment-analysis.ts)</code>
+**Direct**: `await client.stockFundamentals.filingsSentiment(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[SecSentimentAnalysis](src/models/sec-sentiment-analysis.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockFundamentals.filingsSentiment(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;SecSentimentAnalysis, ApiError&gt;</code>, with `result.value` of type <code>[SecSentimentAnalysis](src/models/sec-sentiment-analysis.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -5273,7 +7593,7 @@ try {
 </details>
 
 <details>
-<summary><code>financials(request: StockFundamentals.FinancialsRequest, options?: RequestOptions): ApiPromise&lt;FinancialStatements, ResponseError&gt;</code></summary>
+<summary><code>financials(request: StockFundamentals.FinancialsRequest, options?: RequestOptions): ApiPromise&lt;FinancialStatements, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -5288,17 +7608,43 @@ try {
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockFundamentals.financials({ symbol, statement, freq });
+  const response = await client.stockFundamentals.financials({
+    symbol: "some example string",
+    statement: "some example string",
+    freq: "some example string",
+  });
   // TODO: Handle 'response' of type FinancialStatements
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockFundamentals.financials({
+  symbol: "some example string",
+  statement: "some example string",
+  freq: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type FinancialStatements
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -5325,9 +7671,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[FinancialStatements](src/models/financial-statements.ts)</code>
+**Direct**: `await client.stockFundamentals.financials(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[FinancialStatements](src/models/financial-statements.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockFundamentals.financials(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;FinancialStatements, ApiError&gt;</code>, with `result.value` of type <code>[FinancialStatements](src/models/financial-statements.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -5338,7 +7692,7 @@ try {
 </details>
 
 <details>
-<summary><code>financialsReported(request: StockFundamentals.FinancialsReportedRequest, options?: RequestOptions): ApiPromise&lt;FinancialsAsReported, ResponseError&gt;</code></summary>
+<summary><code>financialsReported(request: StockFundamentals.FinancialsReportedRequest, options?: RequestOptions): ApiPromise&lt;FinancialsAsReported, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -5353,7 +7707,7 @@ Get financials as reported. This data is available for bulk download on <a href=
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -5363,7 +7717,25 @@ try {
   const response = await client.stockFundamentals.financialsReported();
   // TODO: Handle 'response' of type FinancialsAsReported
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockFundamentals.financialsReported().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type FinancialsAsReported
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -5392,9 +7764,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[FinancialsAsReported](src/models/financials-as-reported.ts)</code>
+**Direct**: `await client.stockFundamentals.financialsReported(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[FinancialsAsReported](src/models/financials-as-reported.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockFundamentals.financialsReported(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;FinancialsAsReported, ApiError&gt;</code>, with `result.value` of type <code>[FinancialsAsReported](src/models/financials-as-reported.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -5405,7 +7785,7 @@ try {
 </details>
 
 <details>
-<summary><code>historicalEmployeeCount(request: StockFundamentals.HistoricalEmployeeCountRequest, options?: RequestOptions): ApiPromise&lt;HistoricalEmployeeCount, ResponseError&gt;</code></summary>
+<summary><code>historicalEmployeeCount(request: StockFundamentals.HistoricalEmployeeCountRequest, options?: RequestOptions): ApiPromise&lt;HistoricalEmployeeCount, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -5420,17 +7800,43 @@ Get historical employee count for global companies.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockFundamentals.historicalEmployeeCount({ symbol, from, to });
+  const response = await client.stockFundamentals.historicalEmployeeCount({
+    symbol: "some example string",
+    from: "2024-01-15",
+    to: "2024-01-15",
+  });
   // TODO: Handle 'response' of type HistoricalEmployeeCount
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockFundamentals.historicalEmployeeCount({
+  symbol: "some example string",
+  from: "2024-01-15",
+  to: "2024-01-15",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type HistoricalEmployeeCount
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -5456,9 +7862,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[HistoricalEmployeeCount](src/models/historical-employee-count.ts)</code>
+**Direct**: `await client.stockFundamentals.historicalEmployeeCount(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[HistoricalEmployeeCount](src/models/historical-employee-count.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockFundamentals.historicalEmployeeCount(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;HistoricalEmployeeCount, ApiError&gt;</code>, with `result.value` of type <code>[HistoricalEmployeeCount](src/models/historical-employee-count.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -5469,7 +7883,7 @@ try {
 </details>
 
 <details>
-<summary><code>internationalFilings(request: StockFundamentals.InternationalFilingsRequest, options?: RequestOptions): ApiPromise&lt;InternationalFiling[], ResponseError&gt;</code></summary>
+<summary><code>internationalFilings(request: StockFundamentals.InternationalFilingsRequest, options?: RequestOptions): ApiPromise&lt;InternationalFiling[], ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -5484,7 +7898,7 @@ List filings for international companies. Limit to 500 documents at a time. Thes
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -5494,7 +7908,25 @@ try {
   const response = await client.stockFundamentals.internationalFilings();
   // TODO: Handle 'response' of type InternationalFiling[]
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockFundamentals.internationalFilings().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type InternationalFiling[]
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -5521,9 +7953,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[InternationalFiling](src/models/international-filing.ts)[]</code>
+**Direct**: `await client.stockFundamentals.internationalFilings(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[InternationalFiling](src/models/international-filing.ts)[]</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockFundamentals.internationalFilings(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;InternationalFiling[], ApiError&gt;</code>, with `result.value` of type <code>[InternationalFiling](src/models/international-filing.ts)[]</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -5534,7 +7974,7 @@ try {
 </details>
 
 <details>
-<summary><code>newsroom(request: StockFundamentals.NewsroomRequest, options?: RequestOptions): ApiPromise&lt;Newsroom, ResponseError&gt;</code></summary>
+<summary><code>newsroom(request: StockFundamentals.NewsroomRequest, options?: RequestOptions): ApiPromise&lt;Newsroom, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -5549,17 +7989,35 @@ try {
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockFundamentals.newsroom({ symbol });
+  const response = await client.stockFundamentals.newsroom({ symbol: "some example string" });
   // TODO: Handle 'response' of type Newsroom
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockFundamentals.newsroom({ symbol: "some example string" }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type Newsroom
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -5585,9 +8043,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Newsroom](src/models/newsroom.ts)</code>
+**Direct**: `await client.stockFundamentals.newsroom(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[Newsroom](src/models/newsroom.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockFundamentals.newsroom(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;Newsroom, ApiError&gt;</code>, with `result.value` of type <code>[Newsroom](src/models/newsroom.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -5598,7 +8064,7 @@ try {
 </details>
 
 <details>
-<summary><code>similarityIndex(request: StockFundamentals.SimilarityIndexRequest, options?: RequestOptions): ApiPromise&lt;SimilarityIndex, ResponseError&gt;</code></summary>
+<summary><code>similarityIndex(request: StockFundamentals.SimilarityIndexRequest, options?: RequestOptions): ApiPromise&lt;SimilarityIndex, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -5613,7 +8079,7 @@ try {
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
@@ -5623,7 +8089,25 @@ try {
   const response = await client.stockFundamentals.similarityIndex();
   // TODO: Handle 'response' of type SimilarityIndex
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockFundamentals.similarityIndex().asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type SimilarityIndex
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -5649,9 +8133,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[SimilarityIndex](src/models/similarity-index.ts)</code>
+**Direct**: `await client.stockFundamentals.similarityIndex(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[SimilarityIndex](src/models/similarity-index.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockFundamentals.similarityIndex(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;SimilarityIndex, ApiError&gt;</code>, with `result.value` of type <code>[SimilarityIndex](src/models/similarity-index.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -5662,7 +8154,7 @@ try {
 </details>
 
 <details>
-<summary><code>stockPresentation(request: StockFundamentals.StockPresentationRequest, options?: RequestOptions): ApiPromise&lt;StockPresentation, ResponseError&gt;</code></summary>
+<summary><code>stockPresentation(request: StockFundamentals.StockPresentationRequest, options?: RequestOptions): ApiPromise&lt;StockPresentation, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -5677,17 +8169,37 @@ try {
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockFundamentals.stockPresentation({ symbol });
+  const response = await client.stockFundamentals.stockPresentation({ symbol: "some example string" });
   // TODO: Handle 'response' of type StockPresentation
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockFundamentals.stockPresentation({
+  symbol: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type StockPresentation
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -5711,9 +8223,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[StockPresentation](src/models/stock-presentation.ts)</code>
+**Direct**: `await client.stockFundamentals.stockPresentation(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[StockPresentation](src/models/stock-presentation.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockFundamentals.stockPresentation(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;StockPresentation, ApiError&gt;</code>, with `result.value` of type <code>[StockPresentation](src/models/stock-presentation.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -5724,7 +8244,7 @@ try {
 </details>
 
 <details>
-<summary><code>transcripts(request: StockFundamentals.TranscriptsRequest, options?: RequestOptions): ApiPromise&lt;EarningsCallTranscripts, ResponseError&gt;</code></summary>
+<summary><code>transcripts(request: StockFundamentals.TranscriptsRequest, options?: RequestOptions): ApiPromise&lt;EarningsCallTranscripts, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -5739,17 +8259,35 @@ try {
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockFundamentals.transcripts({ id });
+  const response = await client.stockFundamentals.transcripts({ id: "some example string" });
   // TODO: Handle 'response' of type EarningsCallTranscripts
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockFundamentals.transcripts({ id: "some example string" }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type EarningsCallTranscripts
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -5773,9 +8311,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[EarningsCallTranscripts](src/models/earnings-call-transcripts.ts)</code>
+**Direct**: `await client.stockFundamentals.transcripts(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[EarningsCallTranscripts](src/models/earnings-call-transcripts.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockFundamentals.transcripts(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;EarningsCallTranscripts, ApiError&gt;</code>, with `result.value` of type <code>[EarningsCallTranscripts](src/models/earnings-call-transcripts.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -5786,7 +8332,7 @@ try {
 </details>
 
 <details>
-<summary><code>transcriptsList(request: StockFundamentals.TranscriptsListRequest, options?: RequestOptions): ApiPromise&lt;EarningsCallTranscriptsList, ResponseError&gt;</code></summary>
+<summary><code>transcriptsList(request: StockFundamentals.TranscriptsListRequest, options?: RequestOptions): ApiPromise&lt;EarningsCallTranscriptsList, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -5801,17 +8347,37 @@ List earnings call transcripts' metadata. This endpoint is available for Global 
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockFundamentals.transcriptsList({ symbol });
+  const response = await client.stockFundamentals.transcriptsList({ symbol: "some example string" });
   // TODO: Handle 'response' of type EarningsCallTranscriptsList
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockFundamentals.transcriptsList({
+  symbol: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type EarningsCallTranscriptsList
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -5835,9 +8401,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[EarningsCallTranscriptsList](src/models/earnings-call-transcripts-list.ts)</code>
+**Direct**: `await client.stockFundamentals.transcriptsList(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[EarningsCallTranscriptsList](src/models/earnings-call-transcripts-list.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockFundamentals.transcriptsList(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;EarningsCallTranscriptsList, ApiError&gt;</code>, with `result.value` of type <code>[EarningsCallTranscriptsList](src/models/earnings-call-transcripts-list.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -5852,7 +8426,7 @@ try {
 > Source: [StockOwnership](src/resources/stock-ownership.ts)
 
 <details>
-<summary><code>congressionalTrading(request: StockOwnership.CongressionalTradingRequest, options?: RequestOptions): ApiPromise&lt;CongressionalTrading, ResponseError&gt;</code></summary>
+<summary><code>congressionalTrading(request: StockOwnership.CongressionalTradingRequest, options?: RequestOptions): ApiPromise&lt;CongressionalTrading, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -5867,17 +8441,43 @@ Get stock trades data disclosed by members of congress.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockOwnership.congressionalTrading({ symbol, from, to });
+  const response = await client.stockOwnership.congressionalTrading({
+    symbol: "some example string",
+    from: "2024-01-15",
+    to: "2024-01-15",
+  });
   // TODO: Handle 'response' of type CongressionalTrading
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockOwnership.congressionalTrading({
+  symbol: "some example string",
+  from: "2024-01-15",
+  to: "2024-01-15",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type CongressionalTrading
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -5903,9 +8503,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[CongressionalTrading](src/models/congressional-trading.ts)</code>
+**Direct**: `await client.stockOwnership.congressionalTrading(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[CongressionalTrading](src/models/congressional-trading.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockOwnership.congressionalTrading(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;CongressionalTrading, ApiError&gt;</code>, with `result.value` of type <code>[CongressionalTrading](src/models/congressional-trading.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -5916,7 +8524,7 @@ try {
 </details>
 
 <details>
-<summary><code>fundOwnership(request: StockOwnership.FundOwnershipRequest, options?: RequestOptions): ApiPromise&lt;FundOwnership, ResponseError&gt;</code></summary>
+<summary><code>fundOwnership(request: StockOwnership.FundOwnershipRequest, options?: RequestOptions): ApiPromise&lt;FundOwnership, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -5931,17 +8539,35 @@ Get a full list fund and institutional investors of a company in descending orde
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockOwnership.fundOwnership({ symbol });
+  const response = await client.stockOwnership.fundOwnership({ symbol: "some example string" });
   // TODO: Handle 'response' of type FundOwnership
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockOwnership.fundOwnership({ symbol: "some example string" }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type FundOwnership
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -5966,9 +8592,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[FundOwnership](src/models/fund-ownership.ts)</code>
+**Direct**: `await client.stockOwnership.fundOwnership(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[FundOwnership](src/models/fund-ownership.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockOwnership.fundOwnership(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;FundOwnership, ApiError&gt;</code>, with `result.value` of type <code>[FundOwnership](src/models/fund-ownership.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -5979,7 +8613,7 @@ try {
 </details>
 
 <details>
-<summary><code>insiderSentiment(request: StockOwnership.InsiderSentimentRequest, options?: RequestOptions): ApiPromise&lt;InsiderSentiments, ResponseError&gt;</code></summary>
+<summary><code>insiderSentiment(request: StockOwnership.InsiderSentimentRequest, options?: RequestOptions): ApiPromise&lt;InsiderSentiments, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -5994,17 +8628,43 @@ Get insider sentiment data for US companies calculated using method discussed <a
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockOwnership.insiderSentiment({ symbol, from, to });
+  const response = await client.stockOwnership.insiderSentiment({
+    symbol: "some example string",
+    from: "2024-01-15",
+    to: "2024-01-15",
+  });
   // TODO: Handle 'response' of type InsiderSentiments
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockOwnership.insiderSentiment({
+  symbol: "some example string",
+  from: "2024-01-15",
+  to: "2024-01-15",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type InsiderSentiments
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -6030,9 +8690,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[InsiderSentiments](src/models/insider-sentiments.ts)</code>
+**Direct**: `await client.stockOwnership.insiderSentiment(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[InsiderSentiments](src/models/insider-sentiments.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockOwnership.insiderSentiment(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;InsiderSentiments, ApiError&gt;</code>, with `result.value` of type <code>[InsiderSentiments](src/models/insider-sentiments.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -6043,7 +8711,7 @@ try {
 </details>
 
 <details>
-<summary><code>insiderTransactions(request: StockOwnership.InsiderTransactionsRequest, options?: RequestOptions): ApiPromise&lt;InsiderTransactions, ResponseError&gt;</code></summary>
+<summary><code>insiderTransactions(request: StockOwnership.InsiderTransactionsRequest, options?: RequestOptions): ApiPromise&lt;InsiderTransactions, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -6058,17 +8726,37 @@ Company insider transactions data sourced from <code>Form 3,4,5</code>, SEDI and
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockOwnership.insiderTransactions({ symbol });
+  const response = await client.stockOwnership.insiderTransactions({ symbol: "some example string" });
   // TODO: Handle 'response' of type InsiderTransactions
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockOwnership.insiderTransactions({
+  symbol: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type InsiderTransactions
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -6094,9 +8782,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[InsiderTransactions](src/models/insider-transactions.ts)</code>
+**Direct**: `await client.stockOwnership.insiderTransactions(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[InsiderTransactions](src/models/insider-transactions.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockOwnership.insiderTransactions(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;InsiderTransactions, ApiError&gt;</code>, with `result.value` of type <code>[InsiderTransactions](src/models/insider-transactions.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -6107,7 +8803,7 @@ try {
 </details>
 
 <details>
-<summary><code>investmentThemes(request: StockOwnership.InvestmentThemesRequest, options?: RequestOptions): ApiPromise&lt;InvestmentThemes, ResponseError&gt;</code></summary>
+<summary><code>investmentThemes(request: StockOwnership.InvestmentThemesRequest, options?: RequestOptions): ApiPromise&lt;InvestmentThemes, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -6122,17 +8818,35 @@ try {
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockOwnership.investmentThemes({ theme });
+  const response = await client.stockOwnership.investmentThemes({ theme: "some example string" });
   // TODO: Handle 'response' of type InvestmentThemes
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockOwnership.investmentThemes({ theme: "some example string" }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type InvestmentThemes
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -6156,9 +8870,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[InvestmentThemes](src/models/investment-themes.ts)</code>
+**Direct**: `await client.stockOwnership.investmentThemes(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[InvestmentThemes](src/models/investment-themes.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockOwnership.investmentThemes(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;InvestmentThemes, ApiError&gt;</code>, with `result.value` of type <code>[InvestmentThemes](src/models/investment-themes.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -6169,7 +8891,7 @@ try {
 </details>
 
 <details>
-<summary><code>ownership(request: StockOwnership.OwnershipRequest, options?: RequestOptions): ApiPromise&lt;Ownership, ResponseError&gt;</code></summary>
+<summary><code>ownership(request: StockOwnership.OwnershipRequest, options?: RequestOptions): ApiPromise&lt;Ownership, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -6184,17 +8906,35 @@ Get a full list of shareholders of a company in descending order of the number o
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockOwnership.ownership({ symbol });
+  const response = await client.stockOwnership.ownership({ symbol: "some example string" });
   // TODO: Handle 'response' of type Ownership
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockOwnership.ownership({ symbol: "some example string" }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type Ownership
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -6219,9 +8959,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Ownership](src/models/ownership.ts)</code>
+**Direct**: `await client.stockOwnership.ownership(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[Ownership](src/models/ownership.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockOwnership.ownership(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;Ownership, ApiError&gt;</code>, with `result.value` of type <code>[Ownership](src/models/ownership.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -6232,7 +8980,7 @@ try {
 </details>
 
 <details>
-<summary><code>socialSentiment(request: StockOwnership.SocialSentimentRequest, options?: RequestOptions): ApiPromise&lt;SocialSentiment, ResponseError&gt;</code></summary>
+<summary><code>socialSentiment(request: StockOwnership.SocialSentimentRequest, options?: RequestOptions): ApiPromise&lt;SocialSentiment, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -6247,17 +8995,35 @@ try {
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockOwnership.socialSentiment({ symbol });
+  const response = await client.stockOwnership.socialSentiment({ symbol: "some example string" });
   // TODO: Handle 'response' of type SocialSentiment
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockOwnership.socialSentiment({ symbol: "some example string" }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type SocialSentiment
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -6283,9 +9049,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[SocialSentiment](src/models/social-sentiment.ts)</code>
+**Direct**: `await client.stockOwnership.socialSentiment(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[SocialSentiment](src/models/social-sentiment.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockOwnership.socialSentiment(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;SocialSentiment, ApiError&gt;</code>, with `result.value` of type <code>[SocialSentiment](src/models/social-sentiment.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -6296,7 +9070,7 @@ try {
 </details>
 
 <details>
-<summary><code>stockLobbying(request: StockOwnership.StockLobbyingRequest, options?: RequestOptions): ApiPromise&lt;LobbyingResult, ResponseError&gt;</code></summary>
+<summary><code>stockLobbying(request: StockOwnership.StockLobbyingRequest, options?: RequestOptions): ApiPromise&lt;LobbyingResult, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -6311,17 +9085,43 @@ Get a list of reported lobbying activities in the Senate and the House.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockOwnership.stockLobbying({ symbol, from, to });
+  const response = await client.stockOwnership.stockLobbying({
+    symbol: "some example string",
+    from: "2024-01-15",
+    to: "2024-01-15",
+  });
   // TODO: Handle 'response' of type LobbyingResult
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockOwnership.stockLobbying({
+  symbol: "some example string",
+  from: "2024-01-15",
+  to: "2024-01-15",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type LobbyingResult
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -6347,9 +9147,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[LobbyingResult](src/models/lobbying-result.ts)</code>
+**Direct**: `await client.stockOwnership.stockLobbying(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[LobbyingResult](src/models/lobbying-result.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockOwnership.stockLobbying(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;LobbyingResult, ApiError&gt;</code>, with `result.value` of type <code>[LobbyingResult](src/models/lobbying-result.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -6360,7 +9168,7 @@ try {
 </details>
 
 <details>
-<summary><code>stockUsaSpending(request: StockOwnership.StockUsaSpendingRequest, options?: RequestOptions): ApiPromise&lt;UsaSpendingResult, ResponseError&gt;</code></summary>
+<summary><code>stockUsaSpending(request: StockOwnership.StockUsaSpendingRequest, options?: RequestOptions): ApiPromise&lt;UsaSpendingResult, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -6375,17 +9183,43 @@ try {
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockOwnership.stockUsaSpending({ symbol, from, to });
+  const response = await client.stockOwnership.stockUsaSpending({
+    symbol: "some example string",
+    from: "2024-01-15",
+    to: "2024-01-15",
+  });
   // TODO: Handle 'response' of type UsaSpendingResult
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockOwnership.stockUsaSpending({
+  symbol: "some example string",
+  from: "2024-01-15",
+  to: "2024-01-15",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type UsaSpendingResult
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -6411,9 +9245,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[UsaSpendingResult](src/models/usa-spending-result.ts)</code>
+**Direct**: `await client.stockOwnership.stockUsaSpending(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[UsaSpendingResult](src/models/usa-spending-result.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockOwnership.stockUsaSpending(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;UsaSpendingResult, ApiError&gt;</code>, with `result.value` of type <code>[UsaSpendingResult](src/models/usa-spending-result.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -6424,7 +9266,7 @@ try {
 </details>
 
 <details>
-<summary><code>stockUsptoPatent(request: StockOwnership.StockUsptoPatentRequest, options?: RequestOptions): ApiPromise&lt;UsptoPatentResult, ResponseError&gt;</code></summary>
+<summary><code>stockUsptoPatent(request: StockOwnership.StockUsptoPatentRequest, options?: RequestOptions): ApiPromise&lt;UsptoPatentResult, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -6439,17 +9281,43 @@ List USPTO patents for companies. Limit to 250 records per API call.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockOwnership.stockUsptoPatent({ symbol, from, to });
+  const response = await client.stockOwnership.stockUsptoPatent({
+    symbol: "some example string",
+    from: "2024-01-15",
+    to: "2024-01-15",
+  });
   // TODO: Handle 'response' of type UsptoPatentResult
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockOwnership.stockUsptoPatent({
+  symbol: "some example string",
+  from: "2024-01-15",
+  to: "2024-01-15",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type UsptoPatentResult
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -6475,9 +9343,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[UsptoPatentResult](src/models/uspto-patent-result.ts)</code>
+**Direct**: `await client.stockOwnership.stockUsptoPatent(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[UsptoPatentResult](src/models/uspto-patent-result.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockOwnership.stockUsptoPatent(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;UsptoPatentResult, ApiError&gt;</code>, with `result.value` of type <code>[UsptoPatentResult](src/models/uspto-patent-result.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -6488,7 +9364,7 @@ try {
 </details>
 
 <details>
-<summary><code>stockVisaApplication(request: StockOwnership.StockVisaApplicationRequest, options?: RequestOptions): ApiPromise&lt;VisaApplicationResult, ResponseError&gt;</code></summary>
+<summary><code>stockVisaApplication(request: StockOwnership.StockVisaApplicationRequest, options?: RequestOptions): ApiPromise&lt;VisaApplicationResult, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -6503,17 +9379,43 @@ Get a list of H1-B and Permanent visa applications for companies from the DOL. T
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockOwnership.stockVisaApplication({ symbol, from, to });
+  const response = await client.stockOwnership.stockVisaApplication({
+    symbol: "some example string",
+    from: "2024-01-15",
+    to: "2024-01-15",
+  });
   // TODO: Handle 'response' of type VisaApplicationResult
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockOwnership.stockVisaApplication({
+  symbol: "some example string",
+  from: "2024-01-15",
+  to: "2024-01-15",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type VisaApplicationResult
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -6539,9 +9441,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[VisaApplicationResult](src/models/visa-application-result.ts)</code>
+**Direct**: `await client.stockOwnership.stockVisaApplication(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[VisaApplicationResult](src/models/visa-application-result.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockOwnership.stockVisaApplication(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;VisaApplicationResult, ApiError&gt;</code>, with `result.value` of type <code>[VisaApplicationResult](src/models/visa-application-result.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -6552,7 +9462,7 @@ try {
 </details>
 
 <details>
-<summary><code>supplyChainRelationships(request: StockOwnership.SupplyChainRelationshipsRequest, options?: RequestOptions): ApiPromise&lt;SupplyChainRelationships, ResponseError&gt;</code></summary>
+<summary><code>supplyChainRelationships(request: StockOwnership.SupplyChainRelationshipsRequest, options?: RequestOptions): ApiPromise&lt;SupplyChainRelationships, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -6567,17 +9477,37 @@ try {
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockOwnership.supplyChainRelationships({ symbol });
+  const response = await client.stockOwnership.supplyChainRelationships({ symbol: "some example string" });
   // TODO: Handle 'response' of type SupplyChainRelationships
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockOwnership.supplyChainRelationships({
+  symbol: "some example string",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type SupplyChainRelationships
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -6601,9 +9531,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[SupplyChainRelationships](src/models/supply-chain-relationships.ts)</code>
+**Direct**: `await client.stockOwnership.supplyChainRelationships(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[SupplyChainRelationships](src/models/supply-chain-relationships.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockOwnership.supplyChainRelationships(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;SupplyChainRelationships, ApiError&gt;</code>, with `result.value` of type <code>[SupplyChainRelationships](src/models/supply-chain-relationships.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -6618,7 +9556,7 @@ try {
 > Source: [StockPrices](src/resources/stock-prices.ts)
 
 <details>
-<summary><code>companyPeers(request: StockPrices.CompanyPeersRequest, options?: RequestOptions): ApiPromise&lt;string[], ResponseError&gt;</code></summary>
+<summary><code>companyPeers(request: StockPrices.CompanyPeersRequest, options?: RequestOptions): ApiPromise&lt;string[], ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -6633,17 +9571,35 @@ Get company peers. Return a list of peers operating in the same country and sect
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockPrices.companyPeers({ symbol });
+  const response = await client.stockPrices.companyPeers({ symbol: "some example string" });
   // TODO: Handle 'response' of type string[]
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockPrices.companyPeers({ symbol: "some example string" }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type string[]
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -6668,9 +9624,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>string[]</code>
+**Direct**: `await client.stockPrices.companyPeers(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>string[]</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockPrices.companyPeers(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;string[], ApiError&gt;</code>, with `result.value` of type <code>string[]</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -6681,7 +9645,7 @@ try {
 </details>
 
 <details>
-<summary><code>historicalMarketCap(request: StockPrices.HistoricalMarketCapRequest, options?: RequestOptions): ApiPromise&lt;HistoricalMarketCapData, ResponseError&gt;</code></summary>
+<summary><code>historicalMarketCap(request: StockPrices.HistoricalMarketCapRequest, options?: RequestOptions): ApiPromise&lt;HistoricalMarketCapData, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -6696,17 +9660,43 @@ Get historical market cap data for global companies.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockPrices.historicalMarketCap({ symbol, from, to });
+  const response = await client.stockPrices.historicalMarketCap({
+    symbol: "some example string",
+    from: "2024-01-15",
+    to: "2024-01-15",
+  });
   // TODO: Handle 'response' of type HistoricalMarketCapData
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockPrices.historicalMarketCap({
+  symbol: "some example string",
+  from: "2024-01-15",
+  to: "2024-01-15",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type HistoricalMarketCapData
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -6732,9 +9722,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[HistoricalMarketCapData](src/models/historical-market-cap-data.ts)</code>
+**Direct**: `await client.stockPrices.historicalMarketCap(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[HistoricalMarketCapData](src/models/historical-market-cap-data.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockPrices.historicalMarketCap(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;HistoricalMarketCapData, ApiError&gt;</code>, with `result.value` of type <code>[HistoricalMarketCapData](src/models/historical-market-cap-data.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -6745,7 +9743,7 @@ try {
 </details>
 
 <details>
-<summary><code>marketHoliday(request: StockPrices.MarketHolidayRequest, options?: RequestOptions): ApiPromise&lt;MarketHoliday, ResponseError&gt;</code></summary>
+<summary><code>marketHoliday(request: StockPrices.MarketHolidayRequest, options?: RequestOptions): ApiPromise&lt;MarketHoliday, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -6760,17 +9758,35 @@ Get a list of holidays for global exchanges.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockPrices.marketHoliday({ exchange });
+  const response = await client.stockPrices.marketHoliday({ exchange: "some example string" });
   // TODO: Handle 'response' of type MarketHoliday
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockPrices.marketHoliday({ exchange: "some example string" }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type MarketHoliday
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -6794,9 +9810,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[MarketHoliday](src/models/market-holiday.ts)</code>
+**Direct**: `await client.stockPrices.marketHoliday(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[MarketHoliday](src/models/market-holiday.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockPrices.marketHoliday(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;MarketHoliday, ApiError&gt;</code>, with `result.value` of type <code>[MarketHoliday](src/models/market-holiday.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -6807,7 +9831,7 @@ try {
 </details>
 
 <details>
-<summary><code>marketStatus(request: StockPrices.MarketStatusRequest, options?: RequestOptions): ApiPromise&lt;MarketStatus, ResponseError&gt;</code></summary>
+<summary><code>marketStatus(request: StockPrices.MarketStatusRequest, options?: RequestOptions): ApiPromise&lt;MarketStatus, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -6822,17 +9846,35 @@ Get current market status for global exchanges (whether exchanges are open or cl
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockPrices.marketStatus({ exchange });
+  const response = await client.stockPrices.marketStatus({ exchange: "some example string" });
   // TODO: Handle 'response' of type MarketStatus
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockPrices.marketStatus({ exchange: "some example string" }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type MarketStatus
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -6856,9 +9898,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[MarketStatus](src/models/market-status.ts)</code>
+**Direct**: `await client.stockPrices.marketStatus(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[MarketStatus](src/models/market-status.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockPrices.marketStatus(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;MarketStatus, ApiError&gt;</code>, with `result.value` of type <code>[MarketStatus](src/models/market-status.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -6869,7 +9919,7 @@ try {
 </details>
 
 <details>
-<summary><code>priceMetrics(request: StockPrices.PriceMetricsRequest, options?: RequestOptions): ApiPromise&lt;PriceMetrics, ResponseError&gt;</code></summary>
+<summary><code>priceMetrics(request: StockPrices.PriceMetricsRequest, options?: RequestOptions): ApiPromise&lt;PriceMetrics, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -6884,17 +9934,35 @@ Get company price performance statistics such as 52-week high/low, YTD return an
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockPrices.priceMetrics({ symbol });
+  const response = await client.stockPrices.priceMetrics({ symbol: "some example string" });
   // TODO: Handle 'response' of type PriceMetrics
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockPrices.priceMetrics({ symbol: "some example string" }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type PriceMetrics
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -6919,9 +9987,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[PriceMetrics](src/models/price-metrics.ts)</code>
+**Direct**: `await client.stockPrices.priceMetrics(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[PriceMetrics](src/models/price-metrics.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockPrices.priceMetrics(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;PriceMetrics, ApiError&gt;</code>, with `result.value` of type <code>[PriceMetrics](src/models/price-metrics.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -6932,7 +10008,7 @@ try {
 </details>
 
 <details>
-<summary><code>stockBasicDividends(request: StockPrices.StockBasicDividendsRequest, options?: RequestOptions): ApiPromise&lt;Dividends2, ResponseError&gt;</code></summary>
+<summary><code>stockBasicDividends(request: StockPrices.StockBasicDividendsRequest, options?: RequestOptions): ApiPromise&lt;Dividends2, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -6947,17 +10023,35 @@ Get global dividends data.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockPrices.stockBasicDividends({ symbol });
+  const response = await client.stockPrices.stockBasicDividends({ symbol: "some example string" });
   // TODO: Handle 'response' of type Dividends2
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockPrices.stockBasicDividends({ symbol: "some example string" }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type Dividends2
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -6981,9 +10075,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Dividends2](src/models/dividends2.ts)</code>
+**Direct**: `await client.stockPrices.stockBasicDividends(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[Dividends2](src/models/dividends2.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockPrices.stockBasicDividends(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;Dividends2, ApiError&gt;</code>, with `result.value` of type <code>[Dividends2](src/models/dividends2.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -6994,7 +10096,7 @@ try {
 </details>
 
 <details>
-<summary><code>stockBidask(request: StockPrices.StockBidaskRequest, options?: RequestOptions): ApiPromise&lt;LastBidAsk, ResponseError&gt;</code></summary>
+<summary><code>stockBidask(request: StockPrices.StockBidaskRequest, options?: RequestOptions): ApiPromise&lt;LastBidAsk, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -7009,17 +10111,35 @@ Get last bid/ask data for US stocks.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockPrices.stockBidask({ symbol });
+  const response = await client.stockPrices.stockBidask({ symbol: "some example string" });
   // TODO: Handle 'response' of type LastBidAsk
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockPrices.stockBidask({ symbol: "some example string" }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type LastBidAsk
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -7043,9 +10163,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[LastBidAsk](src/models/last-bid-ask.ts)</code>
+**Direct**: `await client.stockPrices.stockBidask(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[LastBidAsk](src/models/last-bid-ask.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockPrices.stockBidask(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;LastBidAsk, ApiError&gt;</code>, with `result.value` of type <code>[LastBidAsk](src/models/last-bid-ask.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -7056,7 +10184,7 @@ try {
 </details>
 
 <details>
-<summary><code>stockCandles(request: StockPrices.StockCandlesRequest, options?: RequestOptions): ApiPromise&lt;StockCandles, ResponseError&gt;</code></summary>
+<summary><code>stockCandles(request: StockPrices.StockCandlesRequest, options?: RequestOptions): ApiPromise&lt;StockCandles, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -7071,17 +10199,45 @@ try {
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockPrices.stockCandles({ symbol, resolution, from, to });
+  const response = await client.stockPrices.stockCandles({
+    symbol: "some example string",
+    resolution: "some example string",
+    from: 1,
+    to: 1,
+  });
   // TODO: Handle 'response' of type StockCandles
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockPrices.stockCandles({
+  symbol: "some example string",
+  resolution: "some example string",
+  from: 1,
+  to: 1,
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type StockCandles
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -7108,9 +10264,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[StockCandles](src/models/stock-candles.ts)</code>
+**Direct**: `await client.stockPrices.stockCandles(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[StockCandles](src/models/stock-candles.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockPrices.stockCandles(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;StockCandles, ApiError&gt;</code>, with `result.value` of type <code>[StockCandles](src/models/stock-candles.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -7121,7 +10285,7 @@ try {
 </details>
 
 <details>
-<summary><code>stockDividends(request: StockPrices.StockDividendsRequest, options?: RequestOptions): ApiPromise&lt;Dividends[], ResponseError&gt;</code></summary>
+<summary><code>stockDividends(request: StockPrices.StockDividendsRequest, options?: RequestOptions): ApiPromise&lt;Dividends[], ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -7136,17 +10300,43 @@ Get dividends data for common stocks going back 30 years.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockPrices.stockDividends({ symbol, from, to });
+  const response = await client.stockPrices.stockDividends({
+    symbol: "some example string",
+    from: "2024-01-15",
+    to: "2024-01-15",
+  });
   // TODO: Handle 'response' of type Dividends[]
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockPrices.stockDividends({
+  symbol: "some example string",
+  from: "2024-01-15",
+  to: "2024-01-15",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type Dividends[]
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -7172,9 +10362,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Dividends](src/models/dividends.ts)[]</code>
+**Direct**: `await client.stockPrices.stockDividends(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[Dividends](src/models/dividends.ts)[]</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockPrices.stockDividends(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;Dividends[], ApiError&gt;</code>, with `result.value` of type <code>[Dividends](src/models/dividends.ts)[]</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -7185,7 +10383,7 @@ try {
 </details>
 
 <details>
-<summary><code>stockNbbo(request: StockPrices.StockNbboRequest, options?: RequestOptions): ApiPromise&lt;HistoricalNbbo, ResponseError&gt;</code></summary>
+<summary><code>stockNbbo(request: StockPrices.StockNbboRequest, options?: RequestOptions): ApiPromise&lt;HistoricalNbbo, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -7200,17 +10398,45 @@ try {
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockPrices.stockNbbo({ symbol, date, limit, skip });
+  const response = await client.stockPrices.stockNbbo({
+    symbol: "some example string",
+    date: "2024-01-15",
+    limit: 1,
+    skip: 1,
+  });
   // TODO: Handle 'response' of type HistoricalNbbo
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockPrices.stockNbbo({
+  symbol: "some example string",
+  date: "2024-01-15",
+  limit: 1,
+  skip: 1,
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type HistoricalNbbo
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -7237,9 +10463,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[HistoricalNbbo](src/models/historical-nbbo.ts)</code>
+**Direct**: `await client.stockPrices.stockNbbo(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[HistoricalNbbo](src/models/historical-nbbo.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockPrices.stockNbbo(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;HistoricalNbbo, ApiError&gt;</code>, with `result.value` of type <code>[HistoricalNbbo](src/models/historical-nbbo.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -7250,7 +10484,7 @@ try {
 </details>
 
 <details>
-<summary><code>stockSplits(request: StockPrices.StockSplitsRequest, options?: RequestOptions): ApiPromise&lt;Split[], ResponseError&gt;</code></summary>
+<summary><code>stockSplits(request: StockPrices.StockSplitsRequest, options?: RequestOptions): ApiPromise&lt;Split[], ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -7265,17 +10499,43 @@ Get splits data for stocks.
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockPrices.stockSplits({ symbol, from, to });
+  const response = await client.stockPrices.stockSplits({
+    symbol: "some example string",
+    from: "2024-01-15",
+    to: "2024-01-15",
+  });
   // TODO: Handle 'response' of type Split[]
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockPrices.stockSplits({
+  symbol: "some example string",
+  from: "2024-01-15",
+  to: "2024-01-15",
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type Split[]
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -7301,9 +10561,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Split](src/models/split.ts)[]</code>
+**Direct**: `await client.stockPrices.stockSplits(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[Split](src/models/split.ts)[]</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockPrices.stockSplits(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;Split[], ApiError&gt;</code>, with `result.value` of type <code>[Split](src/models/split.ts)[]</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -7314,7 +10582,7 @@ try {
 </details>
 
 <details>
-<summary><code>stockSymbols(request: StockPrices.StockSymbolsRequest, options?: RequestOptions): ApiPromise&lt;StockSymbol[], ResponseError&gt;</code></summary>
+<summary><code>stockSymbols(request: StockPrices.StockSymbolsRequest, options?: RequestOptions): ApiPromise&lt;StockSymbol[], ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -7329,17 +10597,35 @@ List supported stocks. We use the following symbology to identify stocks on Finn
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockPrices.stockSymbols({ exchange });
+  const response = await client.stockPrices.stockSymbols({ exchange: "some example string" });
   // TODO: Handle 'response' of type StockSymbol[]
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockPrices.stockSymbols({ exchange: "some example string" }).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type StockSymbol[]
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -7366,9 +10652,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[StockSymbol](src/models/stock-symbol.ts)[]</code>
+**Direct**: `await client.stockPrices.stockSymbols(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[StockSymbol](src/models/stock-symbol.ts)[]</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockPrices.stockSymbols(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;StockSymbol[], ApiError&gt;</code>, with `result.value` of type <code>[StockSymbol](src/models/stock-symbol.ts)[]</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>
@@ -7379,7 +10673,7 @@ try {
 </details>
 
 <details>
-<summary><code>stockTick(request: StockPrices.StockTickRequest, options?: RequestOptions): ApiPromise&lt;TickData, ResponseError&gt;</code></summary>
+<summary><code>stockTick(request: StockPrices.StockTickRequest, options?: RequestOptions): ApiPromise&lt;TickData, ApiError&gt;</code></summary>
 
 <dl>
 <dd>
@@ -7429,17 +10723,45 @@ try {
 </dd>
 </dl>
 
-### Usage
+### Direct Usage
 
 <dl>
 <dd>
 
 ```ts
 try {
-  const response = await client.stockPrices.stockTick({ symbol, date, limit, skip });
+  const response = await client.stockPrices.stockTick({
+    symbol: "some example string",
+    date: "2024-01-15",
+    limit: 1,
+    skip: 1,
+  });
   // TODO: Handle 'response' of type TickData
 } catch (err) {
-  // TODO: Handle 'err' of type ResponseError
+  // TODO: Handle 'err' of type ApiError, where 'err.payload' is always the Undeclared arm
+}
+```
+
+</dd>
+</dl>
+
+### Usage as ApiResult
+
+<dl>
+<dd>
+
+```ts
+const result = await client.stockPrices.stockTick({
+  symbol: "some example string",
+  date: "2024-01-15",
+  limit: 1,
+  skip: 1,
+}).asApiResult();
+// TODO: Use 'result.status' and 'result.headers' to read the raw response status and headers
+if (result.ok) {
+  // TODO: Use 'result.value' of type TickData
+} else {
+  // TODO: Handle 'result', where 'result.payload' is always the Undeclared arm
 }
 ```
 
@@ -7466,9 +10788,17 @@ try {
 <dl>
 <dd>
 
-**OnSuccess**: <code>[TickData](src/models/tick-data.ts)</code>
+**Direct**: `await client.stockPrices.stockTick(request)`
 
-**OnError**: <code>[ResponseError](src/core/response-error.ts)</code>
+- **OnSuccess**: <code>[TickData](src/models/tick-data.ts)</code>
+- **OnError**: throws <code>[ApiError](src/core/api-error.ts)</code>, with `err.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm
+
+**As ApiResult**: `await client.stockPrices.stockTick(request).asApiResult()`
+
+- **OnSuccess**: <code>[ApiResult](src/core/api-promise.ts)&lt;TickData, ApiError&gt;</code>, with `result.value` of type <code>[TickData](src/models/tick-data.ts)</code>
+- **OnError**: `result.payload` always the <code>[Undeclared](src/core/api-error.ts)</code> arm, with `result.message`
+
+**Thrown**: <code>[FinnhubApiError](src/core/errors.ts)</code> on any operational failure — a caller abort and a programmer error stay outside the family and reach you raw
 
 </dd>
 </dl>

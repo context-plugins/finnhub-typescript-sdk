@@ -2,8 +2,11 @@ import * as s from "../core/validation/index.js";
 import type { Schema } from "../core/validation/schema.js";
 
 export type IndexHistoricalConstituent = {
+  /** Symbol */
   symbol?: string;
+  /** <code>add</code> or <code>remove</code>. */
   action?: string;
+  /** Date of joining or leaving the index. */
   date?: string;
 };
 

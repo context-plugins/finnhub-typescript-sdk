@@ -3,8 +3,11 @@ import type { Schema } from "../core/validation/schema.js";
 import { breakdownItemSchema, type BreakdownItem } from "./breakdown-item.js";
 
 export type RevenueBreakdown = {
+  /** Symbol */
   symbol?: string;
+  /** CIK */
   cik?: string;
+  /** Array of revenue breakdown over multiple periods. */
   data?: BreakdownItem[];
 };
 

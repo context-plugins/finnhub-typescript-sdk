@@ -3,7 +3,9 @@ import type { Schema } from "../core/validation/schema.js";
 import { bondYieldCurveInfoSchema, type BondYieldCurveInfo } from "./bond-yield-curve-info.js";
 
 export type BondYieldCurve = {
+  /** Array of data. */
   data?: BondYieldCurveInfo[];
+  /** Bond's code */
   code?: string;
 };
 

@@ -3,6 +3,7 @@ import type { Schema } from "../core/validation/schema.js";
 import { dividends2InfoSchema, type Dividends2Info } from "./dividends2-info.js";
 
 export type Dividends2 = {
+  /** Symbol */
   symbol?: string;
   data?: Dividends2Info[];
 };

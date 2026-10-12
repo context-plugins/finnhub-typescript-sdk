@@ -3,8 +3,11 @@ import type { Schema } from "../core/validation/schema.js";
 import { dpsEstimatesInfoSchema, type DpsEstimatesInfo } from "./dps-estimates-info.js";
 
 export type DpsEstimates = {
+  /** List of estimates */
   data?: DpsEstimatesInfo[];
+  /** Frequency: annual or quarterly. */
   freq?: string;
+  /** Company symbol. */
   symbol?: string;
 };
 

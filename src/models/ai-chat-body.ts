@@ -3,7 +3,9 @@ import type { Schema } from "../core/validation/schema.js";
 import { aiChatMessageSchema, type AiChatMessage } from "./ai-chat-message.js";
 
 export type AiChatBody = {
+  /** Messages */
   messages: AiChatMessage[];
+  /** Stream responses */
   stream?: boolean;
 };
 

@@ -3,8 +3,11 @@ import type { Schema } from "../core/validation/schema.js";
 import { ebitdaEstimatesInfoSchema, type EbitdaEstimatesInfo } from "./ebitda-estimates-info.js";
 
 export type EbitdaEstimates = {
+  /** List of estimates */
   data?: EbitdaEstimatesInfo[];
+  /** Frequency: annual or quarterly. */
   freq?: string;
+  /** Company symbol. */
   symbol?: string;
 };
 

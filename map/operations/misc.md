@@ -4,16 +4,17 @@
 
 Accessor: `client.misc` · Source: `src/resources/misc.ts` · 10 operations · Request types: namespace `Misc`
 
-**Type sources**: every type an operation names, with the file that declares it and the schema value exported beside it. Import every name from `finnhub-api`; the `Source` path is where to **read** the shape, never what to import. `ResponseError` and the runtime error family are excluded — see sdk-map.md.
+**Type sources**: every type an operation names, with the file that declares it and the schema value exported beside it. Import every name from `finnhub-api`; the `Source` path is where to **read** the shape, never what to import. `ApiError`, the runtime error family and the file vocabulary are excluded — see sdk-map.md.
 
 ### aiChat
 
-- **Signature**: `aiChat(request: Misc.AiChatRequest, options?: RequestOptions): ApiPromise<AiChatResponse, ResponseError>`
+- **Signature**: `aiChat(request: Misc.AiChatRequest, options?: RequestOptions): ApiPromise<AiChatResponse, ApiError>`
 - **Wire**: `POST /ai-chat`
 - **Auth**: `apiKey`
-- **Request body**: `application/json` — the `body` field
+- **Request body**: `application/json` — the `body` field. **Optional**: omit it and the request carries no body and no `Content-Type` header at all
+- **SDK-sent**: `header Idempotency-Key` (minted per call)
 - **Returns**: `AiChatResponse`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `Misc.AiChatRequest` (1):
 
@@ -28,12 +29,12 @@ Accessor: `client.misc` · Source: `src/resources/misc.ts` · 10 operations · R
 
 ### airlinePriceIndex
 
-- **Signature**: `airlinePriceIndex(request: Misc.AirlinePriceIndexRequest, options?: RequestOptions): ApiPromise<AirlinePriceIndexData, ResponseError>`
+- **Signature**: `airlinePriceIndex(request: Misc.AirlinePriceIndexRequest, options?: RequestOptions): ApiPromise<AirlinePriceIndexData, ApiError>`
 - **Wire**: `GET /airline/price-index`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `AirlinePriceIndexData`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `Misc.AirlinePriceIndexRequest` (3):
 
@@ -49,12 +50,12 @@ Accessor: `client.misc` · Source: `src/resources/misc.ts` · 10 operations · R
 
 ### bankBranch
 
-- **Signature**: `bankBranch(request: Misc.BankBranchRequest, options?: RequestOptions): ApiPromise<BankBranchRes, ResponseError>`
+- **Signature**: `bankBranch(request: Misc.BankBranchRequest, options?: RequestOptions): ApiPromise<BankBranchRes, ApiError>`
 - **Wire**: `GET /bank-branch`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `BankBranchRes`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `Misc.BankBranchRequest` (1):
 
@@ -68,12 +69,12 @@ Accessor: `client.misc` · Source: `src/resources/misc.ts` · 10 operations · R
 
 ### country
 
-- **Signature**: `country(options?: RequestOptions): ApiPromise<CountryMetadata[], ResponseError>`
+- **Signature**: `country(options?: RequestOptions): ApiPromise<CountryMetadata[], ApiError>`
 - **Wire**: `GET /country`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `CountryMetadata[]` — a bare `application/json` array; the success type *is* the array, not a wrapper model
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 | Type | Schema value | Source |
 | --- | --- | --- |
@@ -81,12 +82,12 @@ Accessor: `client.misc` · Source: `src/resources/misc.ts` · 10 operations · R
 
 ### covid19
 
-- **Signature**: `covid19(options?: RequestOptions): ApiPromise<CovidInfo[], ResponseError>`
+- **Signature**: `covid19(options?: RequestOptions): ApiPromise<CovidInfo[], ApiError>`
 - **Wire**: `GET /covid19/us`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `CovidInfo[]` — a bare `application/json` array; the success type *is* the array, not a wrapper model
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 | Type | Schema value | Source |
 | --- | --- | --- |
@@ -94,12 +95,12 @@ Accessor: `client.misc` · Source: `src/resources/misc.ts` · 10 operations · R
 
 ### fdaCommitteeMeetingCalendar
 
-- **Signature**: `fdaCommitteeMeetingCalendar(options?: RequestOptions): ApiPromise<FdaComitteeMeeting[], ResponseError>`
+- **Signature**: `fdaCommitteeMeetingCalendar(options?: RequestOptions): ApiPromise<FdaComitteeMeeting[], ApiError>`
 - **Wire**: `GET /fda-advisory-committee-calendar`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `FdaComitteeMeeting[]` — a bare `application/json` array; the success type *is* the array, not a wrapper model
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 | Type | Schema value | Source |
 | --- | --- | --- |
@@ -107,12 +108,12 @@ Accessor: `client.misc` · Source: `src/resources/misc.ts` · 10 operations · R
 
 ### quote
 
-- **Signature**: `quote(request: Misc.QuoteRequest, options?: RequestOptions): ApiPromise<Quote, ResponseError>`
+- **Signature**: `quote(request: Misc.QuoteRequest, options?: RequestOptions): ApiPromise<Quote, ApiError>`
 - **Wire**: `GET /quote`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `Quote`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `Misc.QuoteRequest` (1):
 
@@ -126,12 +127,12 @@ Accessor: `client.misc` · Source: `src/resources/misc.ts` · 10 operations · R
 
 ### sectorMetric
 
-- **Signature**: `sectorMetric(request: Misc.SectorMetricRequest, options?: RequestOptions): ApiPromise<SectorMetric, ResponseError>`
+- **Signature**: `sectorMetric(request: Misc.SectorMetricRequest, options?: RequestOptions): ApiPromise<SectorMetric, ApiError>`
 - **Wire**: `GET /sector/metrics`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `SectorMetric`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `Misc.SectorMetricRequest` (1):
 
@@ -145,12 +146,12 @@ Accessor: `client.misc` · Source: `src/resources/misc.ts` · 10 operations · R
 
 ### symbolSearch
 
-- **Signature**: `symbolSearch(request: Misc.SymbolSearchRequest, options?: RequestOptions): ApiPromise<SymbolLookup, ResponseError>`
+- **Signature**: `symbolSearch(request: Misc.SymbolSearchRequest, options?: RequestOptions): ApiPromise<SymbolLookup, ApiError>`
 - **Wire**: `GET /search`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `SymbolLookup`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `Misc.SymbolSearchRequest` (2):
 
@@ -165,12 +166,12 @@ Accessor: `client.misc` · Source: `src/resources/misc.ts` · 10 operations · R
 
 ### technicalIndicator
 
-- **Signature**: `technicalIndicator(request: Misc.TechnicalIndicatorRequest, options?: RequestOptions): ApiPromise<Record<string, unknown>, ResponseError>`
+- **Signature**: `technicalIndicator(request: Misc.TechnicalIndicatorRequest, options?: RequestOptions): ApiPromise<Record<string, unknown>, ApiError>`
 - **Wire**: `GET /indicator`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `Record<string, unknown>` — a bare `application/json` map; the success type *is* the map
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `Misc.TechnicalIndicatorRequest` (5):
 

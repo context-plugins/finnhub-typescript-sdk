@@ -3,8 +3,13 @@ import type { Schema } from "../core/validation/schema.js";
 import { similarityIndexInfoSchema, type SimilarityIndexInfo } from "./similarity-index-info.js";
 
 export type SimilarityIndex = {
+  /** Symbol. */
   symbol?: string;
+  /** CIK. */
   cik?: string;
+  /**
+   * Array of filings with its cosine similarity compared to the same report of the previous year.
+   */
   similarity?: SimilarityIndexInfo[];
 };
 

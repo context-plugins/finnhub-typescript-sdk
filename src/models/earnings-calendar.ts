@@ -3,6 +3,7 @@ import type { Schema } from "../core/validation/schema.js";
 import { earningReleaseSchema, type EarningRelease } from "./earning-release.js";
 
 export type EarningsCalendar = {
+  /** Array of earnings release. */
   earningsCalendar?: EarningRelease[];
 };
 

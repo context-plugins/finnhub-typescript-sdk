@@ -2,9 +2,13 @@ import * as s from "../core/validation/index.js";
 import type { Schema } from "../core/validation/schema.js";
 
 export type EconomicCode = {
+  /** Finnhub economic code used to get historical data */
   code?: string;
+  /** Country */
   country?: string;
+  /** Indicator name */
   name?: string;
+  /** Unit */
   unit?: string;
 };
 

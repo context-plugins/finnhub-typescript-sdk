@@ -6,7 +6,9 @@ import {
 } from "./institutional-ownership-info.js";
 
 export type InstitutionalOwnershipGroup = {
+  /** Report date. */
   reportDate?: string;
+  /** Array of institutional investors. */
   ownership?: InstitutionalOwnershipInfo[];
 };
 

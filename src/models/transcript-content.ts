@@ -2,8 +2,11 @@ import * as s from "../core/validation/index.js";
 import type { Schema } from "../core/validation/schema.js";
 
 export type TranscriptContent = {
+  /** Speaker's name */
   name?: string;
+  /** Speaker's speech */
   speech?: string[];
+  /** Earnings calls section (management discussion or Q&A) */
   session?: string;
 };
 

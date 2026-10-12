@@ -3,6 +3,7 @@ import type { Schema } from "../core/validation/schema.js";
 import { economicEventSchema, type EconomicEvent } from "./economic-event.js";
 
 export type EconomicCalendar = {
+  /** Array of economic events. */
   economicCalendar?: EconomicEvent[];
 };
 

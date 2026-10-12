@@ -6,7 +6,9 @@ import {
 } from "./institutional-profile-info.js";
 
 export type InstitutionalProfile = {
+  /** CIK. */
   cik?: string;
+  /** Array of investors. */
   data?: InstitutionalProfileInfo[];
 };
 

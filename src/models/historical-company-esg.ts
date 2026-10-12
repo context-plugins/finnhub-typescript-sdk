@@ -3,7 +3,9 @@ import type { Schema } from "../core/validation/schema.js";
 import { companyEsg2Schema, type CompanyEsg2 } from "./company-esg2.js";
 
 export type HistoricalCompanyEsg = {
+  /** symbol */
   symbol?: string;
+  /** Historical ESG data points. */
   data?: CompanyEsg2[];
 };
 

@@ -6,8 +6,11 @@ import {
 } from "./institutional-portfolio-info.js";
 
 export type InstitutionalPortfolioGroup = {
+  /** Report date. */
   reportDate?: string;
+  /** Filing date. */
   filingDate?: string;
+  /** Array of positions. */
   portfolio?: InstitutionalPortfolioInfo[];
 };
 

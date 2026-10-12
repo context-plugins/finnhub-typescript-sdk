@@ -3,7 +3,9 @@ import type { Schema } from "../core/validation/schema.js";
 import { newsroomArticleSchema, type NewsroomArticle } from "./newsroom-article.js";
 
 export type Newsroom = {
+  /** Company symbol. */
   symbol?: string;
+  /** Array of articles. */
   data?: NewsroomArticle[];
 };
 

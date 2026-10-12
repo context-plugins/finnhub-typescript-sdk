@@ -3,8 +3,11 @@ import type { Schema } from "../core/validation/schema.js";
 import { filingSentimentSchema, type FilingSentiment } from "./filing-sentiment.js";
 
 export type SecSentimentAnalysis = {
+  /** Access number. */
   accessNumber?: string;
+  /** Symbol. */
   symbol?: string;
+  /** CIK. */
   cik?: string;
   sentiment?: FilingSentiment;
 };

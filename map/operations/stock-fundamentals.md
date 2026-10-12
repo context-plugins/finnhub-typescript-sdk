@@ -4,16 +4,16 @@
 
 Accessor: `client.stockFundamentals` · Source: `src/resources/stock-fundamentals.ts` · 18 operations · Request types: namespace `StockFundamentals`
 
-**Type sources**: every type an operation names, with the file that declares it and the schema value exported beside it. Import every name from `finnhub-api`; the `Source` path is where to **read** the shape, never what to import. `ResponseError` and the runtime error family are excluded — see sdk-map.md.
+**Type sources**: every type an operation names, with the file that declares it and the schema value exported beside it. Import every name from `finnhub-api`; the `Source` path is where to **read** the shape, never what to import. `ApiError`, the runtime error family and the file vocabulary are excluded — see sdk-map.md.
 
 ### companyBasicFinancials
 
-- **Signature**: `companyBasicFinancials(request: StockFundamentals.CompanyBasicFinancialsRequest, options?: RequestOptions): ApiPromise<BasicFinancials, ResponseError>`
+- **Signature**: `companyBasicFinancials(request: StockFundamentals.CompanyBasicFinancialsRequest, options?: RequestOptions): ApiPromise<BasicFinancials, ApiError>`
 - **Wire**: `GET /stock/metric`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `BasicFinancials`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockFundamentals.CompanyBasicFinancialsRequest` (2):
 
@@ -28,12 +28,12 @@ Accessor: `client.stockFundamentals` · Source: `src/resources/stock-fundamental
 
 ### companyEsgScore
 
-- **Signature**: `companyEsgScore(request: StockFundamentals.CompanyEsgScoreRequest, options?: RequestOptions): ApiPromise<CompanyEsg, ResponseError>`
+- **Signature**: `companyEsgScore(request: StockFundamentals.CompanyEsgScoreRequest, options?: RequestOptions): ApiPromise<CompanyEsg, ApiError>`
 - **Wire**: `GET /stock/esg`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `CompanyEsg`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockFundamentals.CompanyEsgScoreRequest` (1):
 
@@ -47,12 +47,12 @@ Accessor: `client.stockFundamentals` · Source: `src/resources/stock-fundamental
 
 ### companyExecutive
 
-- **Signature**: `companyExecutive(request: StockFundamentals.CompanyExecutiveRequest, options?: RequestOptions): ApiPromise<CompanyExecutive, ResponseError>`
+- **Signature**: `companyExecutive(request: StockFundamentals.CompanyExecutiveRequest, options?: RequestOptions): ApiPromise<CompanyExecutive, ApiError>`
 - **Wire**: `GET /stock/executive`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `CompanyExecutive`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockFundamentals.CompanyExecutiveRequest` (1):
 
@@ -66,12 +66,12 @@ Accessor: `client.stockFundamentals` · Source: `src/resources/stock-fundamental
 
 ### companyHistoricalEsgScore
 
-- **Signature**: `companyHistoricalEsgScore(request: StockFundamentals.CompanyHistoricalEsgScoreRequest, options?: RequestOptions): ApiPromise<HistoricalCompanyEsg, ResponseError>`
+- **Signature**: `companyHistoricalEsgScore(request: StockFundamentals.CompanyHistoricalEsgScoreRequest, options?: RequestOptions): ApiPromise<HistoricalCompanyEsg, ApiError>`
 - **Wire**: `GET /stock/historical-esg`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `HistoricalCompanyEsg`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockFundamentals.CompanyHistoricalEsgScoreRequest` (1):
 
@@ -85,12 +85,12 @@ Accessor: `client.stockFundamentals` · Source: `src/resources/stock-fundamental
 
 ### companyProfile
 
-- **Signature**: `companyProfile(request: StockFundamentals.CompanyProfileRequest, options?: RequestOptions): ApiPromise<CompanyProfile, ResponseError>`
+- **Signature**: `companyProfile(request: StockFundamentals.CompanyProfileRequest, options?: RequestOptions): ApiPromise<CompanyProfile, ApiError>`
 - **Wire**: `GET /stock/profile`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `CompanyProfile`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockFundamentals.CompanyProfileRequest` (3):
 
@@ -106,12 +106,12 @@ Accessor: `client.stockFundamentals` · Source: `src/resources/stock-fundamental
 
 ### companyProfile2
 
-- **Signature**: `companyProfile2(request: StockFundamentals.CompanyProfile2Request, options?: RequestOptions): ApiPromise<CompanyProfile2, ResponseError>`
+- **Signature**: `companyProfile2(request: StockFundamentals.CompanyProfile2Request, options?: RequestOptions): ApiPromise<CompanyProfile2, ApiError>`
 - **Wire**: `GET /stock/profile2`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `CompanyProfile2`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockFundamentals.CompanyProfile2Request` (3):
 
@@ -127,12 +127,12 @@ Accessor: `client.stockFundamentals` · Source: `src/resources/stock-fundamental
 
 ### earningsCallLive
 
-- **Signature**: `earningsCallLive(request: StockFundamentals.EarningsCallLiveRequest, options?: RequestOptions): ApiPromise<EarningsCallLive, ResponseError>`
+- **Signature**: `earningsCallLive(request: StockFundamentals.EarningsCallLiveRequest, options?: RequestOptions): ApiPromise<EarningsCallLive, ApiError>`
 - **Wire**: `GET /stock/earnings-call-live`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `EarningsCallLive`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockFundamentals.EarningsCallLiveRequest` (3):
 
@@ -148,12 +148,12 @@ Accessor: `client.stockFundamentals` · Source: `src/resources/stock-fundamental
 
 ### filings
 
-- **Signature**: `filings(request: StockFundamentals.FilingsRequest, options?: RequestOptions): ApiPromise<Filing[], ResponseError>`
+- **Signature**: `filings(request: StockFundamentals.FilingsRequest, options?: RequestOptions): ApiPromise<Filing[], ApiError>`
 - **Wire**: `GET /stock/filings`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `Filing[]` — a bare `application/json` array; the success type *is* the array, not a wrapper model
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockFundamentals.FilingsRequest` (6):
 
@@ -172,12 +172,12 @@ Accessor: `client.stockFundamentals` · Source: `src/resources/stock-fundamental
 
 ### filingsSentiment
 
-- **Signature**: `filingsSentiment(request: StockFundamentals.FilingsSentimentRequest, options?: RequestOptions): ApiPromise<SecSentimentAnalysis, ResponseError>`
+- **Signature**: `filingsSentiment(request: StockFundamentals.FilingsSentimentRequest, options?: RequestOptions): ApiPromise<SecSentimentAnalysis, ApiError>`
 - **Wire**: `GET /stock/filings-sentiment`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `SecSentimentAnalysis`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockFundamentals.FilingsSentimentRequest` (1):
 
@@ -191,12 +191,12 @@ Accessor: `client.stockFundamentals` · Source: `src/resources/stock-fundamental
 
 ### financials
 
-- **Signature**: `financials(request: StockFundamentals.FinancialsRequest, options?: RequestOptions): ApiPromise<FinancialStatements, ResponseError>`
+- **Signature**: `financials(request: StockFundamentals.FinancialsRequest, options?: RequestOptions): ApiPromise<FinancialStatements, ApiError>`
 - **Wire**: `GET /stock/financials`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `FinancialStatements`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockFundamentals.FinancialsRequest` (4):
 
@@ -213,12 +213,12 @@ Accessor: `client.stockFundamentals` · Source: `src/resources/stock-fundamental
 
 ### financialsReported
 
-- **Signature**: `financialsReported(request: StockFundamentals.FinancialsReportedRequest, options?: RequestOptions): ApiPromise<FinancialsAsReported, ResponseError>`
+- **Signature**: `financialsReported(request: StockFundamentals.FinancialsReportedRequest, options?: RequestOptions): ApiPromise<FinancialsAsReported, ApiError>`
 - **Wire**: `GET /stock/financials-reported`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `FinancialsAsReported`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockFundamentals.FinancialsReportedRequest` (6):
 
@@ -237,12 +237,12 @@ Accessor: `client.stockFundamentals` · Source: `src/resources/stock-fundamental
 
 ### historicalEmployeeCount
 
-- **Signature**: `historicalEmployeeCount(request: StockFundamentals.HistoricalEmployeeCountRequest, options?: RequestOptions): ApiPromise<HistoricalEmployeeCount, ResponseError>`
+- **Signature**: `historicalEmployeeCount(request: StockFundamentals.HistoricalEmployeeCountRequest, options?: RequestOptions): ApiPromise<HistoricalEmployeeCount, ApiError>`
 - **Wire**: `GET /stock/historical-employee-count`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `HistoricalEmployeeCount`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockFundamentals.HistoricalEmployeeCountRequest` (3):
 
@@ -258,12 +258,12 @@ Accessor: `client.stockFundamentals` · Source: `src/resources/stock-fundamental
 
 ### internationalFilings
 
-- **Signature**: `internationalFilings(request: StockFundamentals.InternationalFilingsRequest, options?: RequestOptions): ApiPromise<InternationalFiling[], ResponseError>`
+- **Signature**: `internationalFilings(request: StockFundamentals.InternationalFilingsRequest, options?: RequestOptions): ApiPromise<InternationalFiling[], ApiError>`
 - **Wire**: `GET /stock/international-filings`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `InternationalFiling[]` — a bare `application/json` array; the success type *is* the array, not a wrapper model
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockFundamentals.InternationalFilingsRequest` (4):
 
@@ -280,12 +280,12 @@ Accessor: `client.stockFundamentals` · Source: `src/resources/stock-fundamental
 
 ### newsroom
 
-- **Signature**: `newsroom(request: StockFundamentals.NewsroomRequest, options?: RequestOptions): ApiPromise<Newsroom, ResponseError>`
+- **Signature**: `newsroom(request: StockFundamentals.NewsroomRequest, options?: RequestOptions): ApiPromise<Newsroom, ApiError>`
 - **Wire**: `GET /stock/newsroom`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `Newsroom`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockFundamentals.NewsroomRequest` (3):
 
@@ -301,12 +301,12 @@ Accessor: `client.stockFundamentals` · Source: `src/resources/stock-fundamental
 
 ### similarityIndex
 
-- **Signature**: `similarityIndex(request: StockFundamentals.SimilarityIndexRequest, options?: RequestOptions): ApiPromise<SimilarityIndex, ResponseError>`
+- **Signature**: `similarityIndex(request: StockFundamentals.SimilarityIndexRequest, options?: RequestOptions): ApiPromise<SimilarityIndex, ApiError>`
 - **Wire**: `GET /stock/similarity-index`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `SimilarityIndex`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockFundamentals.SimilarityIndexRequest` (3):
 
@@ -322,12 +322,12 @@ Accessor: `client.stockFundamentals` · Source: `src/resources/stock-fundamental
 
 ### stockPresentation
 
-- **Signature**: `stockPresentation(request: StockFundamentals.StockPresentationRequest, options?: RequestOptions): ApiPromise<StockPresentation, ResponseError>`
+- **Signature**: `stockPresentation(request: StockFundamentals.StockPresentationRequest, options?: RequestOptions): ApiPromise<StockPresentation, ApiError>`
 - **Wire**: `GET /stock/presentation`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `StockPresentation`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockFundamentals.StockPresentationRequest` (1):
 
@@ -341,12 +341,12 @@ Accessor: `client.stockFundamentals` · Source: `src/resources/stock-fundamental
 
 ### transcripts
 
-- **Signature**: `transcripts(request: StockFundamentals.TranscriptsRequest, options?: RequestOptions): ApiPromise<EarningsCallTranscripts, ResponseError>`
+- **Signature**: `transcripts(request: StockFundamentals.TranscriptsRequest, options?: RequestOptions): ApiPromise<EarningsCallTranscripts, ApiError>`
 - **Wire**: `GET /stock/transcripts`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `EarningsCallTranscripts`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockFundamentals.TranscriptsRequest` (1):
 
@@ -360,12 +360,12 @@ Accessor: `client.stockFundamentals` · Source: `src/resources/stock-fundamental
 
 ### transcriptsList
 
-- **Signature**: `transcriptsList(request: StockFundamentals.TranscriptsListRequest, options?: RequestOptions): ApiPromise<EarningsCallTranscriptsList, ResponseError>`
+- **Signature**: `transcriptsList(request: StockFundamentals.TranscriptsListRequest, options?: RequestOptions): ApiPromise<EarningsCallTranscriptsList, ApiError>`
 - **Wire**: `GET /stock/transcripts/list`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `EarningsCallTranscriptsList`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockFundamentals.TranscriptsListRequest` (1):
 

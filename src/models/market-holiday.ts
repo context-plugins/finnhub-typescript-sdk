@@ -3,8 +3,11 @@ import type { Schema } from "../core/validation/schema.js";
 import { marketHolidayDataSchema, type MarketHolidayData } from "./market-holiday-data.js";
 
 export type MarketHoliday = {
+  /** Timezone. */
   timezone?: string;
+  /** Exchange. */
   exchange?: string;
+  /** Array of holidays. */
   data?: MarketHolidayData[];
 };
 

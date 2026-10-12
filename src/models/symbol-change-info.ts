@@ -2,8 +2,11 @@ import * as s from "../core/validation/index.js";
 import type { Schema } from "../core/validation/schema.js";
 
 export type SymbolChangeInfo = {
+  /** Event's date. */
   atDate?: string;
+  /** Old symbol. */
   oldSymbol?: string;
+  /** New symbol. */
   newSymbol?: string;
 };
 

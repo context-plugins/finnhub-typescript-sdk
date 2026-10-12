@@ -3,7 +3,9 @@ import type { Schema } from "../core/validation/schema.js";
 import { etfCountryExposureDataSchema, type EtfCountryExposureData } from "./etf-country-exposure-data.js";
 
 export type EtFsCountryExposure = {
+  /** ETF symbol. */
   symbol?: string;
+  /** Array of countries and and exposure levels. */
   countryExposure?: EtfCountryExposureData[];
 };
 

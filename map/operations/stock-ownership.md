@@ -4,16 +4,16 @@
 
 Accessor: `client.stockOwnership` · Source: `src/resources/stock-ownership.ts` · 12 operations · Request types: namespace `StockOwnership`
 
-**Type sources**: every type an operation names, with the file that declares it and the schema value exported beside it. Import every name from `finnhub-api`; the `Source` path is where to **read** the shape, never what to import. `ResponseError` and the runtime error family are excluded — see sdk-map.md.
+**Type sources**: every type an operation names, with the file that declares it and the schema value exported beside it. Import every name from `finnhub-api`; the `Source` path is where to **read** the shape, never what to import. `ApiError`, the runtime error family and the file vocabulary are excluded — see sdk-map.md.
 
 ### congressionalTrading
 
-- **Signature**: `congressionalTrading(request: StockOwnership.CongressionalTradingRequest, options?: RequestOptions): ApiPromise<CongressionalTrading, ResponseError>`
+- **Signature**: `congressionalTrading(request: StockOwnership.CongressionalTradingRequest, options?: RequestOptions): ApiPromise<CongressionalTrading, ApiError>`
 - **Wire**: `GET /stock/congressional-trading`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `CongressionalTrading`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockOwnership.CongressionalTradingRequest` (3):
 
@@ -29,12 +29,12 @@ Accessor: `client.stockOwnership` · Source: `src/resources/stock-ownership.ts` 
 
 ### fundOwnership
 
-- **Signature**: `fundOwnership(request: StockOwnership.FundOwnershipRequest, options?: RequestOptions): ApiPromise<FundOwnership, ResponseError>`
+- **Signature**: `fundOwnership(request: StockOwnership.FundOwnershipRequest, options?: RequestOptions): ApiPromise<FundOwnership, ApiError>`
 - **Wire**: `GET /stock/fund-ownership`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `FundOwnership`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockOwnership.FundOwnershipRequest` (2):
 
@@ -49,12 +49,12 @@ Accessor: `client.stockOwnership` · Source: `src/resources/stock-ownership.ts` 
 
 ### insiderSentiment
 
-- **Signature**: `insiderSentiment(request: StockOwnership.InsiderSentimentRequest, options?: RequestOptions): ApiPromise<InsiderSentiments, ResponseError>`
+- **Signature**: `insiderSentiment(request: StockOwnership.InsiderSentimentRequest, options?: RequestOptions): ApiPromise<InsiderSentiments, ApiError>`
 - **Wire**: `GET /stock/insider-sentiment`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `InsiderSentiments`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockOwnership.InsiderSentimentRequest` (3):
 
@@ -70,12 +70,12 @@ Accessor: `client.stockOwnership` · Source: `src/resources/stock-ownership.ts` 
 
 ### insiderTransactions
 
-- **Signature**: `insiderTransactions(request: StockOwnership.InsiderTransactionsRequest, options?: RequestOptions): ApiPromise<InsiderTransactions, ResponseError>`
+- **Signature**: `insiderTransactions(request: StockOwnership.InsiderTransactionsRequest, options?: RequestOptions): ApiPromise<InsiderTransactions, ApiError>`
 - **Wire**: `GET /stock/insider-transactions`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `InsiderTransactions`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockOwnership.InsiderTransactionsRequest` (3):
 
@@ -91,12 +91,12 @@ Accessor: `client.stockOwnership` · Source: `src/resources/stock-ownership.ts` 
 
 ### investmentThemes
 
-- **Signature**: `investmentThemes(request: StockOwnership.InvestmentThemesRequest, options?: RequestOptions): ApiPromise<InvestmentThemes, ResponseError>`
+- **Signature**: `investmentThemes(request: StockOwnership.InvestmentThemesRequest, options?: RequestOptions): ApiPromise<InvestmentThemes, ApiError>`
 - **Wire**: `GET /stock/investment-theme`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `InvestmentThemes`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockOwnership.InvestmentThemesRequest` (1):
 
@@ -110,12 +110,12 @@ Accessor: `client.stockOwnership` · Source: `src/resources/stock-ownership.ts` 
 
 ### ownership
 
-- **Signature**: `ownership(request: StockOwnership.OwnershipRequest, options?: RequestOptions): ApiPromise<Ownership, ResponseError>`
+- **Signature**: `ownership(request: StockOwnership.OwnershipRequest, options?: RequestOptions): ApiPromise<Ownership, ApiError>`
 - **Wire**: `GET /stock/ownership`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `Ownership`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockOwnership.OwnershipRequest` (2):
 
@@ -130,12 +130,12 @@ Accessor: `client.stockOwnership` · Source: `src/resources/stock-ownership.ts` 
 
 ### socialSentiment
 
-- **Signature**: `socialSentiment(request: StockOwnership.SocialSentimentRequest, options?: RequestOptions): ApiPromise<SocialSentiment, ResponseError>`
+- **Signature**: `socialSentiment(request: StockOwnership.SocialSentimentRequest, options?: RequestOptions): ApiPromise<SocialSentiment, ApiError>`
 - **Wire**: `GET /stock/social-sentiment`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `SocialSentiment`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockOwnership.SocialSentimentRequest` (3):
 
@@ -151,12 +151,12 @@ Accessor: `client.stockOwnership` · Source: `src/resources/stock-ownership.ts` 
 
 ### stockLobbying
 
-- **Signature**: `stockLobbying(request: StockOwnership.StockLobbyingRequest, options?: RequestOptions): ApiPromise<LobbyingResult, ResponseError>`
+- **Signature**: `stockLobbying(request: StockOwnership.StockLobbyingRequest, options?: RequestOptions): ApiPromise<LobbyingResult, ApiError>`
 - **Wire**: `GET /stock/lobbying`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `LobbyingResult`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockOwnership.StockLobbyingRequest` (3):
 
@@ -172,12 +172,12 @@ Accessor: `client.stockOwnership` · Source: `src/resources/stock-ownership.ts` 
 
 ### stockUsaSpending
 
-- **Signature**: `stockUsaSpending(request: StockOwnership.StockUsaSpendingRequest, options?: RequestOptions): ApiPromise<UsaSpendingResult, ResponseError>`
+- **Signature**: `stockUsaSpending(request: StockOwnership.StockUsaSpendingRequest, options?: RequestOptions): ApiPromise<UsaSpendingResult, ApiError>`
 - **Wire**: `GET /stock/usa-spending`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `UsaSpendingResult`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockOwnership.StockUsaSpendingRequest` (3):
 
@@ -193,12 +193,12 @@ Accessor: `client.stockOwnership` · Source: `src/resources/stock-ownership.ts` 
 
 ### stockUsptoPatent
 
-- **Signature**: `stockUsptoPatent(request: StockOwnership.StockUsptoPatentRequest, options?: RequestOptions): ApiPromise<UsptoPatentResult, ResponseError>`
+- **Signature**: `stockUsptoPatent(request: StockOwnership.StockUsptoPatentRequest, options?: RequestOptions): ApiPromise<UsptoPatentResult, ApiError>`
 - **Wire**: `GET /stock/uspto-patent`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `UsptoPatentResult`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockOwnership.StockUsptoPatentRequest` (3):
 
@@ -214,12 +214,12 @@ Accessor: `client.stockOwnership` · Source: `src/resources/stock-ownership.ts` 
 
 ### stockVisaApplication
 
-- **Signature**: `stockVisaApplication(request: StockOwnership.StockVisaApplicationRequest, options?: RequestOptions): ApiPromise<VisaApplicationResult, ResponseError>`
+- **Signature**: `stockVisaApplication(request: StockOwnership.StockVisaApplicationRequest, options?: RequestOptions): ApiPromise<VisaApplicationResult, ApiError>`
 - **Wire**: `GET /stock/visa-application`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `VisaApplicationResult`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockOwnership.StockVisaApplicationRequest` (3):
 
@@ -235,12 +235,12 @@ Accessor: `client.stockOwnership` · Source: `src/resources/stock-ownership.ts` 
 
 ### supplyChainRelationships
 
-- **Signature**: `supplyChainRelationships(request: StockOwnership.SupplyChainRelationshipsRequest, options?: RequestOptions): ApiPromise<SupplyChainRelationships, ResponseError>`
+- **Signature**: `supplyChainRelationships(request: StockOwnership.SupplyChainRelationshipsRequest, options?: RequestOptions): ApiPromise<SupplyChainRelationships, ApiError>`
 - **Wire**: `GET /stock/supply-chain`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `SupplyChainRelationships`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `StockOwnership.SupplyChainRelationshipsRequest` (1):
 

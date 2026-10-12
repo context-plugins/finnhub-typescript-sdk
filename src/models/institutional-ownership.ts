@@ -6,8 +6,11 @@ import {
 } from "./institutional-ownership-group.js";
 
 export type InstitutionalOwnership = {
+  /** Symbol. */
   symbol?: string;
+  /** Cusip. */
   cusip?: string;
+  /** Array of institutional investors. */
   data?: InstitutionalOwnershipGroup[];
 };
 

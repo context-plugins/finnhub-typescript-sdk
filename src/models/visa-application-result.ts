@@ -3,7 +3,9 @@ import type { Schema } from "../core/validation/schema.js";
 import { visaApplicationSchema, type VisaApplication } from "./visa-application.js";
 
 export type VisaApplicationResult = {
+  /** Symbol. */
   symbol?: string;
+  /** Array of H1b and Permanent visa applications. */
   data?: VisaApplication[];
 };
 

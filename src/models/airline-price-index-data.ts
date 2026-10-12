@@ -3,9 +3,13 @@ import type { Schema } from "../core/validation/schema.js";
 import { airlinePriceIndexSchema, type AirlinePriceIndex } from "./airline-price-index.js";
 
 export type AirlinePriceIndexData = {
+  /** Array of price index. */
   data?: AirlinePriceIndex[];
+  /** Airline name */
   airline?: string;
+  /** From date */
   from?: string;
+  /** To date */
   to?: string;
 };
 

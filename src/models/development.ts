@@ -2,10 +2,15 @@ import * as s from "../core/validation/index.js";
 import type { Schema } from "../core/validation/schema.js";
 
 export type Development = {
+  /** Company symbol. */
   symbol?: string;
+  /** Published time in <code>YYYY-MM-DD HH:MM:SS</code> format. */
   datetime?: string;
+  /** Development headline. */
   headline?: string;
+  /** Development description. */
   description?: string;
+  /** URL. */
   url?: string;
 };
 

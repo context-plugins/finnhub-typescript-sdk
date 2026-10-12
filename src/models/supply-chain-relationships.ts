@@ -3,7 +3,9 @@ import type { Schema } from "../core/validation/schema.js";
 import { keyCustomersSuppliersSchema, type KeyCustomersSuppliers } from "./key-customers-suppliers.js";
 
 export type SupplyChainRelationships = {
+  /** symbol */
   symbol?: string;
+  /** Key customers and suppliers. */
   data?: KeyCustomersSuppliers[];
 };
 

@@ -8,7 +8,7 @@ export type CompanyNewsStatistics = {
 };
 
 export const companyNewsStatisticsSchema: Schema<CompanyNewsStatistics> = s.object<CompanyNewsStatistics>({
-  articlesInLastWeek: s.optional(s.number()),
-  buzz: s.optional(s.number()),
-  weeklyAverage: s.optional(s.number()),
+  articlesInLastWeek: s.optional(s.int()),
+  buzz: s.optional(s.float64()),
+  weeklyAverage: s.optional(s.float64()),
 });

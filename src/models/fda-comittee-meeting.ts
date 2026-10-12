@@ -2,9 +2,13 @@ import * as s from "../core/validation/index.js";
 import type { Schema } from "../core/validation/schema.js";
 
 export type FdaComitteeMeeting = {
+  /** Start time of the event in EST. */
   fromDate?: string;
+  /** End time of the event in EST. */
   toDate?: string;
+  /** Event's description. */
   eventDescription?: string;
+  /** URL. */
   url?: string;
 };
 

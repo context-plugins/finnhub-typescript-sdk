@@ -3,7 +3,9 @@ import type { Schema } from "../core/validation/schema.js";
 import { bankBranchDataSchema, type BankBranchData } from "./bank-branch-data.js";
 
 export type BankBranchRes = {
+  /** Array of branches. */
   data?: BankBranchData[];
+  /** Symbol */
   symbol?: string;
 };
 

@@ -6,8 +6,11 @@ import {
 } from "./pretax-income-estimates-info.js";
 
 export type PretaxIncomeEstimates = {
+  /** List of estimates */
   data?: PretaxIncomeEstimatesInfo[];
+  /** Frequency: annual or quarterly. */
   freq?: string;
+  /** Company symbol. */
   symbol?: string;
 };
 

@@ -2,14 +2,23 @@ import * as s from "../core/validation/index.js";
 import type { Schema } from "../core/validation/schema.js";
 
 export type UsptoPatent = {
+  /** Application Number. */
   applicationNumber?: string;
+  /** Array of companies' name on the patent. */
   companyFilingName?: string[];
+  /** Filing date. */
   filingDate?: string;
+  /** Description. */
   description?: string;
+  /** Filing status. */
   filingStatus?: string;
+  /** Patent number. */
   patentNumber?: string;
+  /** Publication date. */
   publicationDate?: string;
+  /** Patent's type. */
   patentType?: string;
+  /** URL of the original article. */
   url?: string;
 };
 

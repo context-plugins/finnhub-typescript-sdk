@@ -6,7 +6,9 @@ import {
 } from "./congressional-transaction.js";
 
 export type CongressionalTrading = {
+  /** Symbol of the company. */
   symbol?: string;
+  /** Array of stock trades. */
   data?: CongressionalTransaction[];
 };
 

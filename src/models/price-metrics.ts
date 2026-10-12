@@ -2,7 +2,9 @@ import * as s from "../core/validation/index.js";
 import type { Schema } from "../core/validation/schema.js";
 
 export type PriceMetrics = {
+  /** Symbol of the company. */
   symbol?: string;
+  /** Data date. */
   atDate?: string;
   data?: Record<string, unknown>;
 };

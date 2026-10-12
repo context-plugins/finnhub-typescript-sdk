@@ -3,7 +3,9 @@ import type { Schema } from "../core/validation/schema.js";
 import { sectorMetricDataSchema, type SectorMetricData } from "./sector-metric-data.js";
 
 export type SectorMetric = {
+  /** Region. */
   region?: string;
+  /** Metrics for each sector. */
   data?: SectorMetricData[];
 };
 

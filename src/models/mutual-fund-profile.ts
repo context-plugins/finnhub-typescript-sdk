@@ -3,6 +3,7 @@ import type { Schema } from "../core/validation/schema.js";
 import { mutualFundProfileDataSchema, type MutualFundProfileData } from "./mutual-fund-profile-data.js";
 
 export type MutualFundProfile = {
+  /** Symbol. */
   symbol?: string;
   profile?: MutualFundProfileData;
 };

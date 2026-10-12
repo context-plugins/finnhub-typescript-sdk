@@ -3,8 +3,11 @@ import type { Schema } from "../core/validation/schema.js";
 import { symbolChangeInfoSchema, type SymbolChangeInfo } from "./symbol-change-info.js";
 
 export type SymbolChange = {
+  /** From date. */
   fromDate?: string;
+  /** To date. */
   toDate?: string;
+  /** Array of symbol change events. */
   data?: SymbolChangeInfo[];
 };
 

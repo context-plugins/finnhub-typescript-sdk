@@ -4,6 +4,7 @@ import { indicatorSchema, type Indicator } from "./indicator.js";
 
 export type TechnicalAnalysis = {
   count?: Indicator;
+  /** Aggregate Signal */
   signal?: string;
 };
 

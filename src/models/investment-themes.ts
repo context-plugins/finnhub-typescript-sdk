@@ -6,7 +6,9 @@ import {
 } from "./investment-theme-portfolio.js";
 
 export type InvestmentThemes = {
+  /** Investment theme */
   theme?: string;
+  /** Investment theme portfolio. */
   data?: InvestmentThemePortfolio[];
 };
 

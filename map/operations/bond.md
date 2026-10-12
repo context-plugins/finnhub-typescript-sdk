@@ -4,16 +4,16 @@
 
 Accessor: `client.bond` · Source: `src/resources/bond.ts` · 4 operations · Request types: namespace `Bond`
 
-**Type sources**: every type an operation names, with the file that declares it and the schema value exported beside it. Import every name from `finnhub-api`; the `Source` path is where to **read** the shape, never what to import. `ResponseError` and the runtime error family are excluded — see sdk-map.md.
+**Type sources**: every type an operation names, with the file that declares it and the schema value exported beside it. Import every name from `finnhub-api`; the `Source` path is where to **read** the shape, never what to import. `ApiError`, the runtime error family and the file vocabulary are excluded — see sdk-map.md.
 
 ### bondPrice
 
-- **Signature**: `bondPrice(request: Bond.BondPriceRequest, options?: RequestOptions): ApiPromise<BondCandles, ResponseError>`
+- **Signature**: `bondPrice(request: Bond.BondPriceRequest, options?: RequestOptions): ApiPromise<BondCandles, ApiError>`
 - **Wire**: `GET /bond/price`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `BondCandles`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `Bond.BondPriceRequest` (3):
 
@@ -29,12 +29,12 @@ Accessor: `client.bond` · Source: `src/resources/bond.ts` · 4 operations · Re
 
 ### bondProfile
 
-- **Signature**: `bondProfile(request: Bond.BondProfileRequest, options?: RequestOptions): ApiPromise<BondProfile, ResponseError>`
+- **Signature**: `bondProfile(request: Bond.BondProfileRequest, options?: RequestOptions): ApiPromise<BondProfile, ApiError>`
 - **Wire**: `GET /bond/profile`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `BondProfile`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `Bond.BondProfileRequest` (3):
 
@@ -50,12 +50,12 @@ Accessor: `client.bond` · Source: `src/resources/bond.ts` · 4 operations · Re
 
 ### bondTick
 
-- **Signature**: `bondTick(request: Bond.BondTickRequest, options?: RequestOptions): ApiPromise<BondTickData, ResponseError>`
+- **Signature**: `bondTick(request: Bond.BondTickRequest, options?: RequestOptions): ApiPromise<BondTickData, ApiError>`
 - **Wire**: `GET /bond/tick`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `BondTickData`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `Bond.BondTickRequest` (5):
 
@@ -73,12 +73,12 @@ Accessor: `client.bond` · Source: `src/resources/bond.ts` · 4 operations · Re
 
 ### bondYieldCurve
 
-- **Signature**: `bondYieldCurve(request: Bond.BondYieldCurveRequest, options?: RequestOptions): ApiPromise<BondYieldCurve, ResponseError>`
+- **Signature**: `bondYieldCurve(request: Bond.BondYieldCurveRequest, options?: RequestOptions): ApiPromise<BondYieldCurve, ApiError>`
 - **Wire**: `GET /bond/yield-curve`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `BondYieldCurve`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `Bond.BondYieldCurveRequest` (1):
 

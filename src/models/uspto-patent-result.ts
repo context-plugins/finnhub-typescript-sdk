@@ -3,7 +3,9 @@ import type { Schema } from "../core/validation/schema.js";
 import { usptoPatentSchema, type UsptoPatent } from "./uspto-patent.js";
 
 export type UsptoPatentResult = {
+  /** Symbol. */
   symbol?: string;
+  /** Array of patents. */
   data?: UsptoPatent[];
 };
 

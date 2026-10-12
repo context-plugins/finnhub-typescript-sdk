@@ -4,16 +4,16 @@
 
 Accessor: `client.scan` · Source: `src/resources/scan.ts` · 3 operations · Request types: namespace `Scan`
 
-**Type sources**: every type an operation names, with the file that declares it and the schema value exported beside it. Import every name from `finnhub-api`; the `Source` path is where to **read** the shape, never what to import. `ResponseError` and the runtime error family are excluded — see sdk-map.md.
+**Type sources**: every type an operation names, with the file that declares it and the schema value exported beside it. Import every name from `finnhub-api`; the `Source` path is where to **read** the shape, never what to import. `ApiError`, the runtime error family and the file vocabulary are excluded — see sdk-map.md.
 
 ### aggregateIndicator
 
-- **Signature**: `aggregateIndicator(request: Scan.AggregateIndicatorRequest, options?: RequestOptions): ApiPromise<AggregateIndicators, ResponseError>`
+- **Signature**: `aggregateIndicator(request: Scan.AggregateIndicatorRequest, options?: RequestOptions): ApiPromise<AggregateIndicators, ApiError>`
 - **Wire**: `GET /scan/technical-indicator`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `AggregateIndicators`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `Scan.AggregateIndicatorRequest` (2):
 
@@ -28,12 +28,12 @@ Accessor: `client.scan` · Source: `src/resources/scan.ts` · 3 operations · Re
 
 ### patternRecognition
 
-- **Signature**: `patternRecognition(request: Scan.PatternRecognitionRequest, options?: RequestOptions): ApiPromise<PatternRecognition, ResponseError>`
+- **Signature**: `patternRecognition(request: Scan.PatternRecognitionRequest, options?: RequestOptions): ApiPromise<PatternRecognition, ApiError>`
 - **Wire**: `GET /scan/pattern`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `PatternRecognition`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `Scan.PatternRecognitionRequest` (2):
 
@@ -48,12 +48,12 @@ Accessor: `client.scan` · Source: `src/resources/scan.ts` · 3 operations · Re
 
 ### supportResistance
 
-- **Signature**: `supportResistance(request: Scan.SupportResistanceRequest, options?: RequestOptions): ApiPromise<SupportResistance, ResponseError>`
+- **Signature**: `supportResistance(request: Scan.SupportResistanceRequest, options?: RequestOptions): ApiPromise<SupportResistance, ApiError>`
 - **Wire**: `GET /scan/support-resistance`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `SupportResistance`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `Scan.SupportResistanceRequest` (2):
 

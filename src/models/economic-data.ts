@@ -3,7 +3,9 @@ import type { Schema } from "../core/validation/schema.js";
 import { economicDataInfoSchema, type EconomicDataInfo } from "./economic-data-info.js";
 
 export type EconomicData = {
+  /** Array of economic data for requested code. */
   data?: EconomicDataInfo[];
+  /** Finnhub economic code */
   code?: string;
 };
 

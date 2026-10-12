@@ -3,7 +3,9 @@ import type { Schema } from "../core/validation/schema.js";
 import { insiderSentimentsDataSchema, type InsiderSentimentsData } from "./insider-sentiments-data.js";
 
 export type InsiderSentiments = {
+  /** Symbol of the company. */
   symbol?: string;
+  /** Array of sentiment data. */
   data?: InsiderSentimentsData[];
 };
 

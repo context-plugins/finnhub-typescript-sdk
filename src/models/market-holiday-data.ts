@@ -2,8 +2,11 @@ import * as s from "../core/validation/index.js";
 import type { Schema } from "../core/validation/schema.js";
 
 export type MarketHolidayData = {
+  /** Holiday's name. */
   eventName?: string;
+  /** Date. */
   atDate?: string;
+  /** Trading hours for this day if the market is partially closed only. */
   tradingHour?: string;
 };
 

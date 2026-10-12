@@ -3,7 +3,9 @@ import type { Schema } from "../core/validation/schema.js";
 import { lobbyingDataSchema, type LobbyingData } from "./lobbying-data.js";
 
 export type LobbyingResult = {
+  /** Symbol. */
   symbol?: string;
+  /** Array of lobbying activities. */
   data?: LobbyingData[];
 };
 

@@ -6,7 +6,9 @@ import {
 } from "./mutual-fund-sector-exposure-data.js";
 
 export type MutualFundSectorExposure = {
+  /** Mutual symbol. */
   symbol?: string;
+  /** Array of sector and exposure levels. */
   sectorExposure?: MutualFundSectorExposureData[];
 };
 

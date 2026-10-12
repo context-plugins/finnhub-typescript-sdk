@@ -4,16 +4,16 @@
 
 Accessor: `client.globalFilings` · Source: `src/resources/global-filings.ts` · 4 operations · Request types: namespace `GlobalFilings`
 
-**Type sources**: every type an operation names, with the file that declares it and the schema value exported beside it. Import every name from `finnhub-api`; the `Source` path is where to **read** the shape, never what to import. `ResponseError` and the runtime error family are excluded — see sdk-map.md.
+**Type sources**: every type an operation names, with the file that declares it and the schema value exported beside it. Import every name from `finnhub-api`; the `Source` path is where to **read** the shape, never what to import. `ApiError`, the runtime error family and the file vocabulary are excluded — see sdk-map.md.
 
 ### globalFilingsDownload
 
-- **Signature**: `globalFilingsDownload(request: GlobalFilings.GlobalFilingsDownloadRequest, options?: RequestOptions): ApiPromise<undefined, ResponseError>`
+- **Signature**: `globalFilingsDownload(request: GlobalFilings.GlobalFilingsDownloadRequest, options?: RequestOptions): ApiPromise<undefined, ApiError>`
 - **Wire**: `GET /global-filings/download`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `undefined` — the operation resolves to nothing
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `GlobalFilings.GlobalFilingsDownloadRequest` (1):
 
@@ -23,12 +23,13 @@ Accessor: `client.globalFilings` · Source: `src/resources/global-filings.ts` ·
 
 ### globalFilingsSearch
 
-- **Signature**: `globalFilingsSearch(request: GlobalFilings.GlobalFilingsSearchRequest, options?: RequestOptions): ApiPromise<SearchResponse, ResponseError>`
+- **Signature**: `globalFilingsSearch(request: GlobalFilings.GlobalFilingsSearchRequest, options?: RequestOptions): ApiPromise<SearchResponse, ApiError>`
 - **Wire**: `POST /global-filings/search`
 - **Auth**: `apiKey`
-- **Request body**: `application/json` — the `body` field
+- **Request body**: `application/json` — the `body` field. **Optional**: omit it and the request carries no body and no `Content-Type` header at all
+- **SDK-sent**: `header Idempotency-Key` (minted per call)
 - **Returns**: `SearchResponse`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `GlobalFilings.GlobalFilingsSearchRequest` (1):
 
@@ -43,12 +44,12 @@ Accessor: `client.globalFilings` · Source: `src/resources/global-filings.ts` ·
 
 ### globalFilingsSearchFilter
 
-- **Signature**: `globalFilingsSearchFilter(request: GlobalFilings.GlobalFilingsSearchFilterRequest, options?: RequestOptions): ApiPromise<SearchFilter, ResponseError>`
+- **Signature**: `globalFilingsSearchFilter(request: GlobalFilings.GlobalFilingsSearchFilterRequest, options?: RequestOptions): ApiPromise<SearchFilter, ApiError>`
 - **Wire**: `GET /global-filings/filter`
 - **Auth**: `apiKey`
 - **Request body**: none — no `Content-Type` header is sent
 - **Returns**: `SearchFilter`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `GlobalFilings.GlobalFilingsSearchFilterRequest` (2):
 
@@ -63,12 +64,13 @@ Accessor: `client.globalFilings` · Source: `src/resources/global-filings.ts` ·
 
 ### searchInFiling
 
-- **Signature**: `searchInFiling(request: GlobalFilings.SearchInFilingRequest, options?: RequestOptions): ApiPromise<InFilingResponse, ResponseError>`
+- **Signature**: `searchInFiling(request: GlobalFilings.SearchInFilingRequest, options?: RequestOptions): ApiPromise<InFilingResponse, ApiError>`
 - **Wire**: `POST /global-filings/search-in-filing`
 - **Auth**: `apiKey`
-- **Request body**: `application/json` — the `body` field
+- **Request body**: `application/json` — the `body` field. **Optional**: omit it and the request carries no body and no `Content-Type` header at all
+- **SDK-sent**: `header Idempotency-Key` (minted per call)
 - **Returns**: `InFilingResponse`
-- **Error**: `ResponseError` — untyped, `payload.kind` always `"undeclared"`
+- **Error**: `FinnhubApiError` with `kind: "api"` — untyped, `payload.kind` always `"undeclared"`
 
 **Fields** — `GlobalFilings.SearchInFilingRequest` (1):
 
